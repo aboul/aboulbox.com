@@ -2,12 +2,18 @@ build:
 	docker compose build --pull --no-cache
 
 up:
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+up-build:
 	docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
-up-local-prod: 
-	docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+up-build-local-prod: 
+	docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build --force-recreate
 
 up-prod:
+	docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+up-build-prod:
 	docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --force-recreate
 
 down:
@@ -16,5 +22,12 @@ down:
 logs:
 	docker compose logs -f
 
-restart:
-	docker compose restart
+restart: down up
+
+restart-build: down up-build
+
+restart-local-prod: down up-build-local-prod
+
+restart-prod: down up-prod
+
+restart-build-prod: down up-build-prod

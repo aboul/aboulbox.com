@@ -1,7 +1,7 @@
-name: Deploy website (after git pull)
-on: [push]
+name: Build and deploy website
+on: [workflow_dispatch]
 jobs:
-  deploy:
+  reload:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +31,6 @@ jobs:
           script: |
             set -e
             cd /home/aboul/www/aboulbox.com
-            git pull
             export SERVER_NAME=$SERVER_NAME
             export MAILGUN_APIKEY=$MAILGUN_APIKEY
             export MAILGUN_DOMAIN=$MAILGUN_DOMAIN
@@ -46,4 +45,4 @@ jobs:
             export ALTCHA_HMAC_KEY=$ALTCHA_HMAC_KEY
             export DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/umami"
             export UMAMI_WEBSITE_CODE=$UMAMI_WEBSITE_CODE
-            make restart-prod
+            make restart-build-prod
