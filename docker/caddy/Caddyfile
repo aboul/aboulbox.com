@@ -1,0 +1,139 @@
+{
+	{$CADDY_GLOBAL_OPTIONS}
+
+	order authenticate before respond
+	order authorize before reverse_proxy
+
+	security {
+		local identity store localdb {
+			realm local
+			path /data/caddy/.local/users.json
+		}
+
+		authentication portal myportal {
+			enable identity store localdb
+			crypto default token lifetime 86400
+			cookie lifetime 86400
+			crypto key verify from file /etc/gatekeeper/auth/jwt/sign_key.pem
+
+			ui {
+				links {
+					"Dashboard" https://dashy.{$SERVER_NAME:localhost}
+					#"Monitoring" https://monitor.{$SERVER_NAME:localhost}
+					"Wiki" https://wiki.{$SERVER_NAME:localhost}
+					"Analytics" https://umami.{$SERVER_NAME:localhost}
+					#"Tandoor" https://tandoor.{$SERVER_NAME:localhost}
+				}
+			}
+		}
+
+		authorization policy users_policy {
+			set auth url https://auth.{$SERVER_NAME:localhost}
+			bypass uri exact /api/send
+			bypass uri prefix /script.js
+
+			# Verify signed key
+			crypto key sign-verify from file /etc/gatekeeper/auth/jwt/verify_key.pem
+
+			## Inject header to downstream
+			inject headers with claims
+			inject header "X-JWT-Assertion" from {http.request.cookie.access_token}
+			allow roles authp/admin authp/user
+		}
+	}
+}
+
+(main) {
+	log {
+		output file /var/log/caddy/access.log
+		format json {
+			time_format wall
+		}
+	}
+}
+
+(static) {
+	@static {
+		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.json *.tsx
+	}
+	header @static ?Cache-Control "public, max-age=432000, must-revalidate"
+}
+
+(no-robots) {
+	handle /robots.txt {
+		respond 200 {
+			body "User-agent: *
+			Disallow: /
+
+			User-agent: AdsBot-Google
+			Disallow: /
+
+			User-agent: AdsBot-Google-Mobile
+			Disallow: /"
+			close
+		}
+	}
+}
+
+(security) {
+	header {
+		# enable HSTS
+		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		# disable clients from sniffing the media type
+		X-Content-Type-Options nosniff
+		# keep referrer data off of HTTP connections
+		Referrer-Policy no-referrer-when-downgrade
+	}
+}
+
+https://{$SERVER_NAME:localhost} {
+	import main
+	encode zstd gzip
+
+	handle /api* {
+		import security
+		reverse_proxy backend:3001
+	}
+
+	handle {
+		import security
+		import static
+		redir /404/ /404
+		reverse_proxy frontend:8080 {
+			@404 status 404
+			handle_response @404 {
+				rewrite * /{err.status_code}
+				reverse_proxy frontend:8080 {
+					handle_response {
+						copy_response {
+							status 404
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+https://auth.{$SERVER_NAME:localhost} {
+	import no-robots
+	authenticate with myportal
+}
+
+https://umami.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	authorize with users_policy
+	reverse_proxy umami:3000
+}
+
+https://dashy.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy dashy:8080
+}
+
+https://wiki.{$SERVER_NAME:localhost} {
+	import no-robots
+	reverse_proxy docusaurus:3000
+}

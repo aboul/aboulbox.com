@@ -1,0 +1,337 @@
+pageInfo:
+  title: Aboulbox
+  description: Discrete dashy
+  navLinks:
+    - title: GitHub
+      path: https://github.com/aboul
+      target: newtab
+  footerText: Welcome to home!
+appConfig:
+  theme: dracula
+  layout: auto
+  iconSize: medium
+  startingView: default
+  defaultOpeningMethod: newtab
+  statusCheck: false
+  statusCheckInterval: 0
+  faviconApi: allesedv
+  routingMode: history
+  enableMultiTasking: false
+  widgetsAlwaysUseProxy: false
+  webSearch:
+    disableWebSearch: false
+    searchEngine: duckduckgo
+    openingMethod: newtab
+    searchBangs: {}
+  enableFontAwesome: true
+  enableMaterialDesignIcons: false
+  hideComponents:
+    hideHeading: false
+    hideNav: true
+    hideSearch: false
+    hideSettings: false
+    hideFooter: false
+  auth:
+    enableGuestAccess: true
+    users:
+      - user: abel-admin
+        hash: b366705ed7fdceeb2c4b8f38ff0eba0964392993e1d8848b71bcd6d4441f2c68
+        type: admin
+    enableOidc: false
+    enableHeaderAuth: false
+    headerAuth:
+      userHeader: REMOTE_USER
+      proxyWhitelist: []
+    enableKeycloak: false
+  showSplashScreen: false
+  preventWriteToDisk: false
+  preventLocalSave: false
+  disableConfiguration: false
+  disableConfigurationForNonAdmin: false
+  allowConfigEdit: true
+  enableServiceWorker: false
+  disableContextMenu: false
+  disableUpdateChecks: false
+  disableSmartSort: false
+  enableErrorReporting: false
+sections:
+  - name: Aboulbox.com
+    icon: fas fa-rocket
+    items:
+      - title: Aboubox.com
+        description: My personal site
+        icon: favicon-iconhorse
+        url: https://aboulbox.com/
+        target: newtab
+        statusCheck: true
+        id: 0_1193_abouboxcom
+      - title: Monitoring
+        description: Grafana monitoring dash
+        icon: hl-grafana
+        url: https://monitor.aboulbox.com
+        id: 1_1193_monitoring
+      - title: Wiki
+        description: Wiki & Docs
+        icon: favicon
+        url: https://wiki.aboulbox.com
+        provider: Aboulbox
+        id: 2_1193_wiki
+      - title: Analytics
+        description: Analytics for my sites
+        icon: hl-umami-light
+        url: https://analytics.aboulbox.com
+        id: 3_1193_analytics
+      - title: Photos
+        description: Photos & Videos
+        icon: hl-immich
+        url: https://gallery.aboulbox.com
+        id: 4_1193_photos
+      - title: Tandoor recipes
+        description: Personal cookbook and recipes
+        icon: hl-tandoor-recipes
+        url: https://tandoor.aboulbox.com
+        id: 5_1193_tandoorrecipes
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: true
+  - name: For coding
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Github
+        description: My Github
+        icon: https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png
+        url: https://github.com/aboul
+        target: newtab
+        id: 0_955_github
+      - title: Digital Ocean
+        description: My droplet
+        icon: favicon
+        url: https://cloud.digitalocean.com/droplets
+        target: newtab
+        id: 1_955_digitalocean
+      - title: Gandi domains
+        icon: https://id.gandi.net/assets/img/favicon/favicon.ico
+        url: https://admin.gandi.net/domain/
+        target: newtab
+        id: 2_955_gandidomains
+      - title: Mailgun
+        icon: favicon
+        url: https://app.eu.mailgun.com/
+        target: newtab
+        id: 3_955_mailgun
+      - title: ChatGPT
+        icon: fas fa-radiation-alt
+        url: https://chatgpt.com/
+        target: newtab
+        statusCheckAcceptCodes: '403'
+        id: 4_955_chatgpt
+      - title: Netlify
+        icon: favicon
+        url: https://app.netlify.com/teams/aboul/sites
+        target: newtab
+        id: 5_955_netlify
+    icon: fas fa-code
+  - name: Du social
+    icon: fas fa-sparkles
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Discord
+        icon: favicon
+        url: https://discord.com/channels/
+        target: newtab
+        id: 0_852_discord
+      - icon: favicon
+        url: https://www.youtube.com/@abelbrien
+        target: newtab
+        id: 1_852_youtubechannel
+        title: Youtube channel
+      - title: Facebook
+        icon: favicon
+        url: https://facebook.com
+        target: newtab
+        id: 2_852_facebook
+      - title: Reddit
+        icon: favicon
+        url: https://www.reddit.com/r/france
+        target: newtab
+        statusCheck: false
+        id: 3_852_reddit
+  - name: Today
+    icon: fas fa-sun
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    widgets:
+      - type: clock
+        options:
+          format: fr-FR
+          customCityName: Toulouse
+        id: 0_513_clock
+      - type: public-ip
+        id: 1_513_publicip
+  - name: Nice self-hosted repos
+    icon: fab fa-github-alt
+    displayData:
+      collapsed: false
+      itemSize: small
+      sectionLayout: grid
+      itemCountX: 1
+      sortBy: default
+      rows: 1
+      cols: 1
+      hideForGuests: false
+    items:
+      - title: Selft-Hosted Apps
+        icon: generative
+        url: https://github.com/awesome-selfhosted/awesome-selfhosted
+        target: newtab
+        id: 0_2118_selfthostedapps
+      - title: Selft-Hosted Sysadmin
+        icon: generative
+        url: https://github.com/awesome-foss/awesome-sysadmin
+        id: 1_2118_selfthostedsysadmin
+      - title: Awesome Datasets
+        icon: generative
+        url: https://github.com/awesomedata/awesome-public-datasets
+        target: newtab
+        id: 2_2118_awesomedatasets
+  - name: Search
+    icon: fas fa-search
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    widgets:
+      - type: custom-search
+        options:
+          placeholder: Search something?
+          engines:
+            - title: Brave
+              url: https://search.brave.com/search?q=
+            - title: Google
+              url: https://www.google.com/search?q=
+            - title: Google Maps
+              url: https://maps.google.com/?q=
+            - title: FontAwesome
+              url: https://fontawesome.com/v6/icons?q=
+        id: 0_598_customsearch
+  - name: Icons for Services
+    icon: fas fa-icons
+    displayData:
+      collapsed: false
+      itemSize: small
+      sectionLayout: grid
+      itemCountX: 1
+      sortBy: default
+      rows: 1
+      cols: 1
+      hideForGuests: false
+    items:
+      - title: Dashboard icons
+        url: https://github.com/walkxcode/dashboard-icons/blob/main/ICONS.md
+        icon: generative
+        id: 0_1735_dashboardicons
+      - title: Font Awesome v6
+        url: https://fontawesome.com/v6/icons
+        icon: hl-fontawesome
+        id: 1_1735_fontawesomev
+      - title: Font Awesome v5
+        url: https://fontawesome.com/v5/search
+        icon: hl-fontawesome
+        id: 2_1735_fontawesomev
+      - title: Material Design Icons
+        url: https://pictogrammers.com/library/mdi/
+        icon: generative
+        id: 3_1735_materialdesignicons
+      - title: Simple Icons
+        url: https://simpleicons.org/
+        icon: generative
+        id: 4_1735_simpleicons
+      - title: EmojiPedia
+        url: https://emojipedia.org/
+        icon: generative
+        id: 5_1735_emojipedia
+  - name: Github Me
+    icon: fas fa-hurricane
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: true
+      hideForGuests: false
+    widgets:
+      - type: github-profile-stats
+        options:
+          username: aboul
+          repos:
+            - aboul/TodoApp
+            - aboul/vite-personal-site
+        id: 0_821_githubprofilestats
+      - type: code-stats
+        options:
+          username: aboul
+        id: 1_821_codestats
+  - name: Config Helpers
+    icon: fas fa-wrench
+    displayData:
+      collapsed: true
+      itemSize: small
+      sectionLayout: grid
+      itemCountX: 2
+    items:
+      - title: Schema Example
+        url: >-
+          https://json-schema.app/view/%23?url=https%3A%2F%2Fraw.githubusercontent.com%2FLissy93%2Fdashy%2Fmaster%2Fsrc%2Futils%2FConfigSchema.json
+        icon: generative
+        id: 0_1353_schemaexample
+      - title: Config Validator
+        url: https://www.jsonschemavalidator.net/s/JFUj7X9J
+        icon: generative
+        id: 1_1353_configvalidator
+      - title: JSON to YAML
+        url: https://jsonformatter.org/json-to-yaml
+        icon: generative
+        id: 2_1353_jsontoyaml
+      - title: YAML to JSON
+        url: https://jsonformatter.org/yaml-to-json
+        icon: generative
+        id: 3_1353_yamltojson
+      - title: Example Configs
+        url: https://gist.github.com/Lissy93/000f712a5ce98f212817d20bc16bab10
+        icon: generative
+        id: 4_1353_exampleconfigs
+      - title: Config Docs
+        url: https://dashy.to/docs/configuring
+        icon: generative
+        id: 5_1353_configdocs
+  - name: ':D'
+    icon: fas fa-meh-blank
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    widgets:
+      - type: joke
+        options:
+          language: fr
+        id: 0_126_joke

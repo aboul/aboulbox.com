@@ -1,0 +1,129 @@
+services:
+  caddy:
+    build:
+      dockerfile: docker/caddy/Dockerfile
+    image: caddy-portfolio
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - caddy-config:/config
+      - caddy-data:/data
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /var/log/caddy:/var/log/caddy
+      - ./docker/caddy/data/auth/:/etc/gatekeeper/auth
+    networks:
+      - portfolio-net
+    depends_on:
+      - frontend
+      - docusaurus
+
+  frontend:
+    build:
+      target: install-frontend
+      dockerfile: docker/frontend/Dockerfile
+    image: react-portfolio
+    container_name: frontend
+    restart: unless-stopped
+    environment:
+      - TZ='Europe/Paris'
+    depends_on:
+      - backend
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
+    networks:
+      - portfolio-net
+
+  backend:
+    build:
+      context: .
+      target: build-backend
+      dockerfile: docker/backend/Dockerfile
+    image: express-portfolio
+    container_name: backend
+    restart: unless-stopped
+    environment:
+      - TZ='Europe/Paris'
+    depends_on:
+      - db
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - portfolio-net
+
+  docusaurus:
+    build:
+      context: .
+      target: build-docusaurus
+      dockerfile: docker/docusaurus/Dockerfile
+    image: docusaurus-portfolio
+    container_name: docusaurus
+    restart: unless-stopped
+    environment:
+      - TZ='Europe/Paris'
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./docusaurus/Wiki:/app
+      - /app/node_modules
+      - ./docs/personal-site:/app/docs/personal-site
+    networks:
+      - portfolio-net
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    container_name: umami
+    environment:
+      DATABASE_TYPE: postgresql
+    restart: unless-stopped
+    depends_on:
+      - db
+      - caddy
+    labels:
+      org.label-schema.group: "analytics"
+    networks:
+      - portfolio-net
+  dashy:
+    image: lissy93/dashy
+    container_name: dashy
+    restart: unless-stopped
+    volumes:
+      - ./docker/dashy/user-data:/app/user-data
+    depends_on:
+      - caddy
+    networks:
+      - portfolio-net
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami"
+      POSTGRES_USER: ${POSTGRES_USER:-myuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mypassword}
+      TZ: "Europe/Paris"
+    ports:
+      - 5432:5432
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/pgsql/init.sh:/docker-entrypoint-initdb.d/init.sh
+    networks:
+      - portfolio-net
+
+volumes:
+  pgdata:
+  caddy-config:
+  caddy-data:
+
+networks:
+  portfolio-net:
+    driver: bridge

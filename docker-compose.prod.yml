@@ -1,0 +1,35 @@
+services:
+  caddy:
+    environment:
+      SERVER_NAME: ${SERVER_NAME}
+      CADDY_GLOBAL_OPTIONS: |
+        grace_period 10s
+        default_sni ${SERVER_NAME}
+        acme_dns digitalocean ${DIGITALOCEAN_ACCESS_TOKEN}
+  frontend:
+    build:
+      target: production
+      args:
+        - SERVER_NAME=${SERVER_NAME}
+        - UMAMI_WEBSITE_CODE=${UMAMI_WEBSITE_CODE}
+  backend:
+    environment:
+      - MAILGUN_APIKEY=${MAILGUN_APIKEY}
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_FROM_WHO=${MAILGUN_FROM_WHO}
+      - MAILGUN_TO_WHO_NAME=${MAILGUN_TO_WHO_NAME}
+      - MAILGUN_TO_WHO=${MAILGUN_TO_WHO}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - ALTCHA_HMAC_KEY=${ALTCHA_HMAC_KEY}
+      - SERVER_NAME=${SERVER_NAME}
+    command: node app.js
+  umami:
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+  docusaurus:
+    command: >
+      sh -c "npm run clear && npm run build && npm run serve -- --host 0.0.0.0 --no-open"
