@@ -5,7 +5,7 @@ up:
 	docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 up-build:
-	docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build --force-recreate
 
 up-build-local-prod: 
 	docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build --force-recreate

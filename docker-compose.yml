@@ -61,7 +61,7 @@ services:
   docusaurus:
     build:
       context: .
-      target: build-docusaurus
+      target: install-docusaurus
       dockerfile: docker/docusaurus/Dockerfile
     image: aboulbox-docusaurus
     container_name: docusaurus
@@ -71,10 +71,6 @@ services:
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
-    volumes:
-      - ./docusaurus/Wiki:/app
-      - /app/node_modules
-      - ./docs/personal-site:/app/docs/personal-site
     networks:
       - portfolio-net
   umami:

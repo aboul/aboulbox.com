@@ -31,5 +31,6 @@ services:
     environment:
       - DATABASE_URL=${DATABASE_URL}
   docusaurus:
-    command: >
-      sh -c "npm run clear && npm run build && npm run serve -- --host 0.0.0.0 --no-open"
+    build:
+      target: production
+    command: npm run serve -- --host 0.0.0.0
