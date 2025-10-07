@@ -8,7 +8,7 @@ function create_database_grant_privilege() {
         echo "  Creating database '$database' and granting privileges to '$POSTGRES_USER'"
         psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
             CREATE DATABASE $database;
-            GRANT ALL PRIVILEGES ON DATABASE $database TO $POSTGRES_USER;
+            GRANT ALL PRIVILEGES ON DATABASE $database TO "$POSTGRES_USER";
 EOSQL
 
     if [[ $database != 'umami' ]]; then   
