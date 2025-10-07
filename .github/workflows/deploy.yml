@@ -23,10 +23,10 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
           ALTCHA_HMAC_KEY: ${{ secrets.ALTCHA_HMAC_KEY }}
-          UMAMI_WEBSITE_CODE: ${{ secrets.UMAMI_WEBSITE_CODE }}
+          UMAMI_WEBSITE_CODE: ${{ env.UMAMI_WEBSITE_CODE }}
         uses: appleboy/ssh-action@v1.2.2
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.DIGITALOCEAN_HOST }}
           username: ${{ secrets.DIGITALOCEAN_USERNAME }}
           key: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
           command_timeout: 10m
