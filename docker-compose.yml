@@ -2,7 +2,7 @@ services:
   caddy:
     build:
       dockerfile: docker/caddy/Dockerfile
-    image: caddy-portfolio
+    image: aboulbox-caddy
     container_name: caddy
     restart: unless-stopped
     ports:
@@ -24,7 +24,7 @@ services:
     build:
       target: install-frontend
       dockerfile: docker/frontend/Dockerfile
-    image: react-portfolio
+    image: aboulbox-frontend
     container_name: frontend
     restart: unless-stopped
     environment:
@@ -42,7 +42,7 @@ services:
       context: .
       target: build-backend
       dockerfile: docker/backend/Dockerfile
-    image: express-portfolio
+    image: aboulbox-backend
     container_name: backend
     restart: unless-stopped
     environment:
@@ -63,7 +63,7 @@ services:
       context: .
       target: build-docusaurus
       dockerfile: docker/docusaurus/Dockerfile
-    image: docusaurus-portfolio
+    image: aboulbox-docusaurus
     container_name: docusaurus
     restart: unless-stopped
     environment:
