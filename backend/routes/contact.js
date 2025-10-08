@@ -17,24 +17,32 @@ export const contactValidation = [
     .notEmpty()
     .withMessage("Name is required")
     .isLength({ max: 50 })
-    .withMessage("Name must be under 50 characters"),
+    .withMessage("Name must be under 50 characters")
+    .escape(),
   body("email")
     .trim()
     .notEmpty()
     .isEmail()
     .withMessage("Valid email is required")
-    .normalizeEmail(),
-  body("phone").trim().isMobilePhone().withMessage("Valid phone is required"),
+    .normalizeEmail()
+    .escape(),
+  body("phone")
+    .trim()
+    .isMobilePhone()
+    .withMessage("Valid phone is required")
+    .escape(),
   body("subject")
     .trim()
     .isLength({ max: 128 })
-    .withMessage("Subject must be under 128 characters"),
+    .withMessage("Subject must be under 128 characters")
+    .escape(),
   body("message")
     .trim()
     .notEmpty()
     .withMessage("Message is required")
     .isLength({ min: 10, max: 500 })
-    .withMessage("Message must be 10–500 characters long"),
+    .withMessage("Message must be 10–500 characters long")
+    .escape(),
 ];
 
 export async function contactHandler(req, res) {
