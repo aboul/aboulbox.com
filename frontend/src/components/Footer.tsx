@@ -44,6 +44,26 @@ const Footer: React.FC = () => {
         >
           Tailwind CSS
         </a>
+        . This website runs on{" "}
+        <a
+          href="https://www.digitalocean.com/"
+          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Digital Ocean (opens in a new tab)"
+        >
+          Digital Ocean
+        </a>{" "}
+        droplet with a custom docker stack and is served by{" "}
+        <a
+          href="https://caddyserver.com/"
+          className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
+          target="_blank"
+          rel="noreferrer noopener"
+          aria-label="Caddy Server (opens in a new tab)"
+        >
+          Caddy server
+        </a>
         .
       </p>
     </footer>
