@@ -32,7 +32,7 @@ services:
       - DATABASE_URL=${DATABASE_URL}
   homepage:
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS=${SERVER_NAME}
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
   docusaurus:
     build:
       target: production
