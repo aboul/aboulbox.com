@@ -1,6 +1,6 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
-
+	admin 0.0.0.0:2019
 	order authenticate before respond
 	order authorize before reverse_proxy
 
@@ -130,8 +130,16 @@ https://umami.{$SERVER_NAME:localhost} {
 https://dashy.{$SERVER_NAME:localhost} {
 	import main
 	import no-robots
-	reverse_proxy dashy:8080
+	authorize with users_policy
+	reverse_proxy homepage:3000
 }
+
+# https://dashy.{$SERVER_NAME:localhost} {
+# 	import main
+# 	import no-robots
+#	authorize with users_policy
+# 	reverse_proxy dashy:8080
+# }
 
 https://wiki.{$SERVER_NAME:localhost} {
 	import no-robots

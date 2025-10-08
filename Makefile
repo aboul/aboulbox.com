@@ -22,6 +22,9 @@ down:
 logs:
 	docker compose logs -f
 
+bash: 
+	docker compose exec caddy sh
+
 restart: down up
 
 restart-build: down up-build

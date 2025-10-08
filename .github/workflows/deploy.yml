@@ -20,7 +20,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
           ALTCHA_HMAC_KEY: ${{ secrets.ALTCHA_HMAC_KEY }}
-          UMAMI_WEBSITE_CODE: ${{ env.UMAMI_WEBSITE_CODE }}
+          UMAMI_WEBSITE_CODE: ${{ vars.UMAMI_WEBSITE_CODE }}
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.DIGITALOCEAN_HOST }}

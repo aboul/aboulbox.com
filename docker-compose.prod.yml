@@ -30,6 +30,9 @@ services:
   umami:
     environment:
       - DATABASE_URL=${DATABASE_URL}
+  homepage:
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=${SERVER_NAME}
   docusaurus:
     build:
       target: production

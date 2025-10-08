@@ -86,18 +86,31 @@ services:
       org.label-schema.group: "analytics"
     networks:
       - portfolio-net
-  dashy:
-    image: lissy93/dashy
-    container_name: dashy
-    restart: unless-stopped
+  # dashy:
+  #   image: lissy93/dashy
+  #   container_name: dashy
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./docker/dashy/user-data:/app/user-data
+  #   depends_on:
+  #     - caddy
+  #   networks:
+  #     - portfolio-net
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
     volumes:
-      - ./docker/dashy/user-data:/app/user-data
-    depends_on:
-      - caddy
+      - ./docker/homepage/config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      PUID: 1000
+      PGID: 999
+      TZ: Europe/Paris
     networks:
       - portfolio-net
   db:
     image: postgres:16-alpine
+    container_name: db
     restart: unless-stopped
     environment:
       POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami"

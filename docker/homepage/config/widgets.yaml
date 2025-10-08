@@ -1,0 +1,35 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/info-widgets/
+
+- logo:
+      icon: https://aboulbox.com/favicon.svg
+
+- resources:
+      cpu: true
+      memory: true
+      disk: /
+      refresh: 15000
+      diskUnits: bytes
+      network: true
+
+- search:
+      provider: brave
+      target: _blank
+
+- openmeteo:
+      label: Toulouse # optional
+      latitude: 43.408944
+      longitude: 1.468473
+      timezone: Europe/Paris # optional
+      units: metric # or imperial
+      cache: 60 # Time in minutes to cache API responses, to stay within limits
+      format: # optional, Intl.NumberFormat options
+          maximumFractionDigits: 1
+
+- datetime:
+      locale: fr
+      text_size: 3xl
+      format:
+          dateStyle: short
+          timeStyle: short

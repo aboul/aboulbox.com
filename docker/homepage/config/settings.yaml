@@ -1,0 +1,23 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+title: Aboublox Dash
+favicon: https://aboulbox.com/favicon.svg
+color: slate
+theme: dark
+fullWidth: true
+maxGroupColumns: 8
+headerStyle: boxed
+language: fr
+target: _blank
+hideVersion: true
+showStats: true
+statusStyle: "dot"
+instanceName: aboulbox
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: google

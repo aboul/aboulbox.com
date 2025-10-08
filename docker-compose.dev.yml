@@ -23,8 +23,12 @@ services:
 
   umami:
     env_file: ".env.dev"
-  dashy:
+  # dashy:
+  #   env_file: ".env.dev"
+  homepage:
     env_file: ".env.dev"
+    volumes:
+      - .env.dev:/app/.env
   docusaurus:
     env_file: ".env.dev"
     environment:
