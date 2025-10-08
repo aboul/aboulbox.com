@@ -33,6 +33,8 @@ services:
   homepage:
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
+      - PUID=1000
+      - PGID=987
   docusaurus:
     build:
       target: production

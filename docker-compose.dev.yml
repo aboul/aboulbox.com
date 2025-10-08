@@ -27,6 +27,9 @@ services:
   #   env_file: ".env.dev"
   homepage:
     env_file: ".env.dev"
+    environment:
+      - PUID=1000
+      - PGID=999
     volumes:
       - .env.dev:/app/.env
   docusaurus:

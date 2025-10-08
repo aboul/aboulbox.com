@@ -103,8 +103,6 @@ services:
       - ./docker/homepage/config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      PUID: 1000
-      PGID: 999
       TZ: Europe/Paris
     networks:
       - portfolio-net
