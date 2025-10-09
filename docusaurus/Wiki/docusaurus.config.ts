@@ -64,7 +64,7 @@ const config: Config = {
                 }
                 
                 doc.frontMatter = { ...doc.frontMatter, ...newFrontMatter };
-                console.log(doc);
+                //console.log(doc);
                 return doc;
               }),
               ...args,
