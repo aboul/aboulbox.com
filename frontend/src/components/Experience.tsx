@@ -1,4 +1,5 @@
 import React from "react";
+import { FileInput } from "lucide-react";
 
 const Experience: React.FC = () => {
   return (
@@ -12,6 +13,15 @@ const Experience: React.FC = () => {
         </h2>
       </div>
       <div>
+        <div className="mb-12 md:mb-18 lg:mb-24">
+          <a
+            href="CV2025.pdf"
+            target="_blank"
+            className="hover:text-lime-700 focus-visible:text-lime-700 text-xl hover:underline"
+          >
+            View My Resume <FileInput className="inline-block ml-2" />
+          </a>
+        </div>
         <ol className="group/list">
           <li className="mb-12">
             <div className="group relative grid pb-1 transition-all duration-300 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:opacity-100! lg:group-hover/list:opacity-50">
@@ -26,7 +36,7 @@ const Experience: React.FC = () => {
                 <h3 className="font-medium leading-snug text-slate-200">
                   <div>
                     <a
-                      className="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-lime-700 focus-visible:text-lime-700  group/link text-base"
+                      className="inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-lime-700 focus-visible:text-lime-700 group/link text-base"
                       href="https://www.datasolution.fr"
                       target="_blank"
                       rel="noreferrer noopener"
