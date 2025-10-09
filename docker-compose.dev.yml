@@ -23,6 +23,11 @@ services:
 
   umami:
     env_file: ".env.dev"
+    environment:
+      DEBUG: umami:*
+      DISABLE_TELEMETRY: 1
+      DISABLE_LOGIN: 1
+      LOG_QUERY: 1
   # dashy:
   #   env_file: ".env.dev"
   homepage:
