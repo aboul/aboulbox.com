@@ -74,7 +74,7 @@ services:
     networks:
       - portfolio-net
   umami:
-    image: ghcr.io/umami-software/umami:postgresql-latest # v2.19.0
+    image: ghcr.io/umami-software/umami:postgresql-v2 # v2.19.0
     container_name: umami
     environment:
       DATABASE_TYPE: postgresql
@@ -97,7 +97,7 @@ services:
   #   networks:
   #     - portfolio-net
   homepage:
-    image: ghcr.io/gethomepage/homepage:latest #v1.5.0
+    image: ghcr.io/gethomepage/homepage:v1 #v1.5.0
     container_name: homepage
     volumes:
       - ./docker/homepage/config:/app/config # Make sure your local config directory exists
