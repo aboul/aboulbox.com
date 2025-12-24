@@ -75,7 +75,7 @@ services:
     networks:
       - portfolio-net
   umami:
-    image: ghcr.io/umami-software/umami:postgresql-v2 # v2.19.0
+    image: ghcr.io/umami-software/umami:postgresql-3.0.0 # v3.0.0
     container_name: umami
     environment:
       DATABASE_TYPE: postgresql
