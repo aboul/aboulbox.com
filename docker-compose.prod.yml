@@ -5,7 +5,6 @@ services:
       CADDY_GLOBAL_OPTIONS: |
         grace_period 10s
         default_sni ${SERVER_NAME}
-        acme_dns digitalocean ${DIGITALOCEAN_ACCESS_TOKEN}
   frontend:
     build:
       target: production
