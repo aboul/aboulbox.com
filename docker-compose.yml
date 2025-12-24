@@ -14,6 +14,7 @@ services:
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - /var/log/caddy:/var/log/caddy
       - ./docker/caddy/data/auth/:/etc/gatekeeper/auth
+      - ./docker/caddy/data/users.json:/data/caddy/.local/users.json
     networks:
       - portfolio-net
     depends_on:

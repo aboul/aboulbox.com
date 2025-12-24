@@ -5,9 +5,8 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Digital Ocean droplet via SSH action
+      - name: Deploy to Aboul server via SSH action
         env:
-          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           SERVER_NAME: ${{ secrets.SERVER_NAME }}
           MAILGUN_APIKEY: ${{ secrets.MAILGUN_APIKEY }}
           MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
@@ -21,13 +20,16 @@ jobs:
           POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
           ALTCHA_HMAC_KEY: ${{ secrets.ALTCHA_HMAC_KEY }}
           UMAMI_WEBSITE_CODE: ${{ vars.UMAMI_WEBSITE_CODE }}
+          CADDY_SIGN_KEY: ${{ secrets.CADDY_SIGN_KEY }}
+          CADDY_VERIFY_KEY: ${{ secrets.CADDY_VERIFY_KEY }}
+          CADDY_USERS: ${{ secrets.CADDY_USERS }}
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.RASP_HOST }}
           username: ${{ secrets.RASP_USERNAME }}
           key: ${{ secrets.RASP_SSH_KEY }}
           command_timeout: 10m
-          envs: DIGITALOCEAN_ACCESS_TOKEN,SERVER_NAME,MAILGUN_APIKEY,MAILGUN_DOMAIN,MAILGUN_FROM_WHO,MAILGUN_TO_WHO_NAME,MAILGUN_TO_WHO,POSTGRES_USER,POSTGRES_HOST,POSTGRES_DB,POSTGRES_PASSWORD,POSTGRES_PORT,ALTCHA_HMAC_KEY,UMAMI_WEBSITE_CODE
+          envs: SERVER_NAME,MAILGUN_APIKEY,MAILGUN_DOMAIN,MAILGUN_FROM_WHO,MAILGUN_TO_WHO_NAME,MAILGUN_TO_WHO,POSTGRES_USER,POSTGRES_HOST,POSTGRES_DB,POSTGRES_PASSWORD,POSTGRES_PORT,ALTCHA_HMAC_KEY,UMAMI_WEBSITE_CODE,CADDY_SIGN_KEY,CADDY_VERIFY_KEY,CADDY_USERS
           script: |
             set -e
             cd /home/aboulbox/www/aboulbox.com
