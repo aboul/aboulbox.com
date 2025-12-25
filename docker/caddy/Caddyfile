@@ -145,3 +145,8 @@ https://wiki.{$SERVER_NAME:localhost} {
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
+
+https://photo.{$SERVER_NAME:localhost} {
+	import no-robots
+	reverse_proxy immich:2283
+}

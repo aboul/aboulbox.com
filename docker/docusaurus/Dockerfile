@@ -1,17 +1,23 @@
 # Stage 1: Base image.
 ## Start with a base image containing NodeJS so we can build Docusaurus.
 FROM node:lts-alpine AS base
-## Disable colour output from yarn to make logs easier to read.
+
 ## Enable corepack.
 RUN corepack enable
+
+USER node
 ## Set the working directory to `/opt/docusaurus`.
-WORKDIR /opt/docusaurus
+WORKDIR /home/node/app
+# Copy the source code over
+COPY --chown=node:node ./docusaurus/Wiki /home/node/app/
 
 # Stage 2a: Development mode.
 FROM base AS install-docusaurus
 ## Set the working directory to `/opt/docusaurus`.
-WORKDIR /opt/docusaurus
-COPY /docusaurus/Wiki .
+WORKDIR /home/node/app
+# Copy the source code over
+COPY --chown=node:node ./docusaurus/Wiki /home/node/app/
+COPY --chown=node:node ./docs/personal-site /home/node/app/docs/personal-site/
 ## Run the development server.
 RUN npm install
 
@@ -20,8 +26,8 @@ FROM base AS production
 ## Set the working directory to `/opt/docusaurus`.
 WORKDIR /opt/docusaurus
 ## Copy over the source code.
-COPY /docusaurus/Wiki /opt/docusaurus/
-COPY /docs/personal-site /opt/docusaurus/docs/personal-site/
+COPY --chown=node:node /docusaurus/Wiki /opt/docusaurus/
+COPY --chown=node:node /docs/personal-site /opt/docusaurus/docs/personal-site/
 ## Install dependencies with `--immutable` to ensure reproducibility.
 RUN npm ci
 

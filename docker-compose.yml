@@ -74,6 +74,7 @@ services:
       - host.docker.internal:host-gateway
     networks:
       - portfolio-net
+
   umami:
     image: ghcr.io/umami-software/umami:postgresql-3.0.0 # v3.0.0
     container_name: umami
@@ -87,6 +88,7 @@ services:
       org.label-schema.group: "analytics"
     networks:
       - portfolio-net
+
   # dashy:
   #   image: lissy93/dashy
   #   container_name: dashy
@@ -97,6 +99,7 @@ services:
   #     - caddy
   #   networks:
   #     - portfolio-net
+
   homepage:
     image: ghcr.io/gethomepage/homepage:v1 #v1.5.0
     container_name: homepage
@@ -107,12 +110,29 @@ services:
       TZ: Europe/Paris
     networks:
       - portfolio-net
+
+  immich:
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    container_name: immich
+    restart: unless-stopped
+    environment: 
+      TZ: "Europe/Paris"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - redis
+      - db
+    networks:
+      - portfolio-net
+
   db:
-    image: postgres:16-alpine
+    build:
+      context: .
+      dockerfile: docker/pgsql/Dockerfile
     container_name: db
     restart: unless-stopped
     environment:
-      POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami"
+      POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami, immich"
       POSTGRES_USER: ${POSTGRES_USER:-myuser}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mypassword}
       TZ: "Europe/Paris"
@@ -124,6 +144,15 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./docker/pgsql/init.sh:/docker-entrypoint-initdb.d/init.sh
+    networks:
+      - portfolio-net
+
+  redis:
+    container_name: immich_redis
+    image: docker.io/valkey/valkey:9@sha256:fb8d272e529ea567b9bf1302245796f21a2672b8368ca3fcb938ac334e613c8f
+    restart: unless-stopped
+    healthcheck:
+      test: redis-cli ping || exit 1
     networks:
       - portfolio-net
 

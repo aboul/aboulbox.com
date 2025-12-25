@@ -34,7 +34,7 @@ services:
     env_file: ".env.dev"
     environment:
       - PUID=1000
-      - PGID=999
+      - PGID=127
     volumes:
       - .env.dev:/app/.env
   docusaurus:
@@ -44,4 +44,11 @@ services:
     volumes:
       - ./docusaurus/Wiki:/opt/docusaurus
       - ./docs/personal-site:/opt/docusaurus/docs/personal-site
-    command: npm start -- --host 0.0.0.0 --poll 1000
+    command: npm run start -- --host 0.0.0.0 --poll 1000
+  immich:
+    env_file: ".env.dev"
+    environment:
+      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
+    volumes:
+      - .env.dev:/app/.env
+      - ./immich/library:/data

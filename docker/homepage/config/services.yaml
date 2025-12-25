@@ -29,6 +29,11 @@
             server: my-docker
             container: docusaurus
             href: https://wiki.aboulbox.com/
+      - Immich:
+            icon: sh-immich-light.svg
+            server: my-docker
+            container: immich
+            href: https://photo.aboulbox.com/
       - Database:
             icon: sh-postgresql-light.svg
             server: my-docker

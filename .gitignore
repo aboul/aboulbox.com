@@ -28,3 +28,4 @@ docker/caddy/data
 bin/act
 .env.dev
 .env.prod
+immich/library/*

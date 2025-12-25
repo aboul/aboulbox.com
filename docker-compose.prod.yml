@@ -38,3 +38,10 @@ services:
     build:
       target: production
     command: npm run serve -- --host 0.0.0.0
+  immich:
+    env_file: ".env.prod"
+    environment:
+      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
+    volumes:
+      - .env.prod:/app/.env
+      - ./immich/library:/data
