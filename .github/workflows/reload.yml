@@ -51,5 +51,5 @@ jobs:
             export DB_HOSTNAME="db"
             export DB_PASSWORD=$POSTGRES_PASSWORD
             export DB_USERNAME=$POSTGRES_USER
-            export DB_DATABASE_NAME=immich
+            export DB_DATABASE_NAME="immich"
             make restart-prod
