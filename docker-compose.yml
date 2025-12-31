@@ -115,10 +115,12 @@ services:
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
     container_name: immich
     restart: unless-stopped
-    environment: 
+    environment:
       TZ: "Europe/Paris"
+      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - ${UPLOAD_LOCATION}:/data
     depends_on:
       - redis
       - db

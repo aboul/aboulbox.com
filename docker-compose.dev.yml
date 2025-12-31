@@ -47,8 +47,6 @@ services:
     command: npm run start -- --host 0.0.0.0 --poll 1000
   immich:
     env_file: ".env.dev"
-    environment:
-      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
     volumes:
       - .env.dev:/app/.env
-      - ./immich/library:/data
+      - ${UPLOAD_LOCATION}:/data
