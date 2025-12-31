@@ -54,4 +54,5 @@ jobs:
             export DB_PASSWORD=$POSTGRES_PASSWORD
             export DB_USERNAME=$POSTGRES_USER
             export DB_DATABASE_NAME="immich"
+            yes| cp -rf .env.prod .env
             make restart-build-prod

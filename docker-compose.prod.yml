@@ -39,7 +39,5 @@ services:
       target: production
     command: npm run serve -- --host 0.0.0.0
   immich:
-    env_file: ".env.prod"
     volumes:
-      - .env.prod:/app/.env
       - ${UPLOAD_LOCATION}:/data
