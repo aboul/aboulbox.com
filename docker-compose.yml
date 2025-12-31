@@ -117,10 +117,8 @@ services:
     restart: unless-stopped
     environment:
       TZ: "Europe/Paris"
-      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${UPLOAD_LOCATION}:/data
     depends_on:
       - redis
       - db
