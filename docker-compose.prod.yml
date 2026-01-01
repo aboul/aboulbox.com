@@ -34,7 +34,8 @@ services:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
       - PUID=1000
       - PGID=985
-  docusaurus:
+    volumes:
+      - /media/storage:/mnt/storage
     build:
       target: production
     command: npm run serve -- --host 0.0.0.0
