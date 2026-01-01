@@ -122,6 +122,14 @@ services:
     depends_on:
       - redis
       - db
+    deploy:
+      resources:
+        limits:
+          cpus: "3.5"
+          memory: 3G
+        reservations:
+          cpus: "2"
+          memory: 2G
     networks:
       - portfolio-net
 
