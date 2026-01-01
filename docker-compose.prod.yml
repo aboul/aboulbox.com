@@ -34,10 +34,10 @@ services:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
       - PUID=1000
       - PGID=985
-    volumes:
-      - /media/storage:/mnt/storage
     build:
       target: production
+    volumes:
+      - /media/storage:/mnt/storage
     command: npm run serve -- --host 0.0.0.0
   immich:
     env_file: ".env.prod"
