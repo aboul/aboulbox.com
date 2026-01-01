@@ -41,7 +41,7 @@ services:
   immich:
     env_file: ".env.prod"
     environment:
-      UPLOAD_LOCATION: /media/storage
+      - UPLOAD_LOCATION:/media/storage
     volumes:
       - .env.prod:/app/.env
       - /media/storage:/data

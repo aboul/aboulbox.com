@@ -48,7 +48,7 @@ services:
   immich:
     env_file: ".env.dev"
     environment:
-      UPLOAD_LOCATION: ${UPLOAD_LOCATION}
+      - UPLOAD_LOCATION:./immich/library
     volumes:
       - .env.dev:/app/.env
       - ./immich/library:/data
