@@ -103,6 +103,7 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:v1 #v1.5.0
     container_name: homepage
+    restart: unless-stopped
     volumes:
       - ./docker/homepage/config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock
