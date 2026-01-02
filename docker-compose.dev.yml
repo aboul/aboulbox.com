@@ -6,7 +6,7 @@ services:
       CADDY_GLOBAL_OPTIONS: |
         debug
         local_certs
-        
+
   frontend:
     volumes:
       - ./frontend:/app
@@ -47,6 +47,7 @@ services:
       - ./docusaurus/Wiki:/opt/docusaurus
       - ./docs/personal-site:/opt/docusaurus/docs/personal-site
     command: npm run start -- --host 0.0.0.0 --poll 1000
+    
   immich:
     env_file: ".env.dev"
     environment:

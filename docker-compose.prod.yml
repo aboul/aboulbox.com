@@ -5,12 +5,14 @@ services:
       CADDY_GLOBAL_OPTIONS: |
         grace_period 10s
         default_sni ${SERVER_NAME}
+        
   frontend:
     build:
       target: production
       args:
         - SERVER_NAME=${SERVER_NAME}
         - UMAMI_WEBSITE_CODE=${UMAMI_WEBSITE_CODE}
+
   backend:
     environment:
       - MAILGUN_APIKEY=${MAILGUN_APIKEY}
@@ -26,9 +28,11 @@ services:
       - ALTCHA_HMAC_KEY=${ALTCHA_HMAC_KEY}
       - SERVER_NAME=${SERVER_NAME}
     command: node app.js
+
   umami:
     environment:
       - DATABASE_URL=${DATABASE_URL}
+
   homepage:
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
@@ -36,10 +40,12 @@ services:
       - PGID=985
     volumes:
       - /media/storage:/mnt/storage
+
   docusaurus:
     build:
       target: production
     command: npm run serve -- --host 0.0.0.0
+
   immich:
     env_file: ".env.prod"
     environment:
@@ -48,6 +54,7 @@ services:
       - .env.prod:/app/.env
       - /media/storage:/data
       - /media/storage/external-library:/mnt/photos
+
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
     container_name: immich_machine_learning

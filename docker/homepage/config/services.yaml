@@ -29,11 +29,21 @@
         icon: sh-wikipedia-light.svg
         server: my-docker
         container: docusaurus
-        href: https://wiki.aboulbox.com/
+    # - Directus:
+    #     icon: sh-directus-light.svg
+    #     server: my-docker
+    #     container: docusaurus
+    #     href: https://wiki.aboulbox.com/
     - Immich:
         icon: sh-immich-light.svg
         server: my-docker
         container: immich
+        href: https://photo.aboulbox.com/
+        showStats: true
+    - Immich Machine Learning:
+        icon: sh-immich-light.svg
+        server: my-docker
+        container: immich_machine_learning
         href: https://photo.aboulbox.com/
         showStats: true
     - Database:
