@@ -48,3 +48,24 @@ services:
       - .env.prod:/app/.env
       - /media/storage:/data
       - /media/storage/external-library:/mnt/photos
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
+    container_name: immich_machine_learning
+    restart: unless-stopped
+    volumes:
+      - model-cache:/cache
+    env_file: ".env.prod"
+    cpus: "2"
+    cpu_percent: 50
+    mem_limit: 2g
+    mem_reservation: 1.5g
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2g
+        reservations:
+          cpus: "2"
+          memory: 1.5g
+    networks:
+      - portfolio-net

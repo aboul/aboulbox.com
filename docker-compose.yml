@@ -89,17 +89,6 @@ services:
     networks:
       - portfolio-net
 
-  # dashy:
-  #   image: lissy93/dashy
-  #   container_name: dashy
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./docker/dashy/user-data:/app/user-data
-  #   depends_on:
-  #     - caddy
-  #   networks:
-  #     - portfolio-net
-
   homepage:
     image: ghcr.io/gethomepage/homepage:v1 #v1.5.0
     container_name: homepage
@@ -123,17 +112,21 @@ services:
     depends_on:
       - redis
       - db
+    cpus: "2"
+    cpu_percent: 50
+    mem_limit: 1.75g
+    mem_reservation: 1.5g
     deploy:
       resources:
         limits:
-          cpus: "3.5"
-          memory: 3G
+          cpus: "2"
+          memory: 1.75g
         reservations:
           cpus: "2"
-          memory: 2G
+          memory: 1.5g
     networks:
       - portfolio-net
-
+      
   db:
     build:
       context: .
@@ -169,6 +162,7 @@ volumes:
   pgdata:
   caddy-config:
   caddy-data:
+  model-cache:
 
 networks:
   portfolio-net:
