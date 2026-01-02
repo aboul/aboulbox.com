@@ -54,7 +54,7 @@
 }
 
 (fail2ban-logging) {
-	log {args[0]} {
+	log {
 		include http.log.access.{args[0]}
 		output file /var/log/caddy/fail2ban.log
 		format transform `{ts} {request>headers>X-Forwarded-For>[0]:request>remote_ip} {request>host} {request>method} {request>uri} {status}` {
