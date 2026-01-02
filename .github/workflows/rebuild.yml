@@ -28,7 +28,7 @@ jobs:
           host: ${{ secrets.RASP_HOST }}
           username: ${{ secrets.RASP_USERNAME }}
           key: ${{ secrets.RASP_SSH_KEY }}
-          command_timeout: 10m
+          command_timeout: 25m
           envs: SERVER_NAME,MAILGUN_APIKEY,MAILGUN_DOMAIN,MAILGUN_FROM_WHO,MAILGUN_TO_WHO_NAME,MAILGUN_TO_WHO,POSTGRES_USER,POSTGRES_HOST,POSTGRES_DB,POSTGRES_PASSWORD,POSTGRES_PORT,ALTCHA_HMAC_KEY,UMAMI_WEBSITE_CODE,CADDY_SIGN_KEY,CADDY_VERIFY_KEY,CADDY_USERS
           script: |
             set -e
