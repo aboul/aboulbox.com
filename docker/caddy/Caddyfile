@@ -54,8 +54,8 @@
 }
 
 (fail2ban-logging) {
-	log {
-		include http.log.access.fail2ban-log
+	log {args[0]} {
+		include http.log.access.{args[0]}
 		output file /var/log/caddy/fail2ban.log
 		format transform `{ts} {request>headers>X-Forwarded-For>[0]:request>remote_ip} {request>host} {request>method} {request>uri} {status}` {
 			time_format "02/Jan/2006:15:04:05"
@@ -99,7 +99,7 @@
 
 https://{$SERVER_NAME:localhost} {
 	import main
-	import fail2ban-logging
+	import fail2ban-logging aboulbox
 	encode zstd gzip
 
 	handle /api* {
@@ -128,14 +128,14 @@ https://{$SERVER_NAME:localhost} {
 }
 
 https://auth.{$SERVER_NAME:localhost} {
-	import fail2ban-logging
+	import fail2ban-logging auth
 	import no-robots
 	authenticate with myportal
 }
 
 https://umami.{$SERVER_NAME:localhost} {
 	import main
-	import fail2ban-logging
+	import fail2ban-logging umami
 	import no-robots
 	authorize with users_policy
 	reverse_proxy umami:3000
@@ -143,20 +143,20 @@ https://umami.{$SERVER_NAME:localhost} {
 
 https://home.{$SERVER_NAME:localhost} {
 	import main
-	import fail2ban-logging
+	import fail2ban-logging home
 	import no-robots
 	authorize with users_policy
 	reverse_proxy homepage:3000
 }
 
 https://wiki.{$SERVER_NAME:localhost} {
-	import fail2ban-logging
+	import fail2ban-logging wiki
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
 
 https://photo.{$SERVER_NAME:localhost} {
-	import fail2ban-logging
+	import fail2ban-logging photo
 	import no-robots
 	reverse_proxy immich:2283
 }
