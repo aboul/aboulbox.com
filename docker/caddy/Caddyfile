@@ -18,7 +18,7 @@
 
 			ui {
 				links {
-					"Dashboard" https://dashy.{$SERVER_NAME:localhost}
+					"Dashboard" https://home.{$SERVER_NAME:localhost}
 					#"Monitoring" https://monitor.{$SERVER_NAME:localhost}
 					"Wiki" https://wiki.{$SERVER_NAME:localhost}
 					"Analytics" https://umami.{$SERVER_NAME:localhost}
@@ -44,10 +44,21 @@
 }
 
 (main) {
+	log_skip /assets*
 	log {
-		output file /var/log/caddy/access.log
+		output file /var/log/caddy/access.json
 		format json {
 			time_format wall
+		}
+	}
+}
+
+(fail2ban-logging) {
+	log {
+		include http.log.access.fail2ban-log
+		output file /var/log/caddy/fail2ban.log
+		format transform `{ts} {request>headers>X-Forwarded-For>[0]:request>remote_ip} {request>host} {request>method} {request>uri} {status}` {
+			time_format "02/Jan/2006:15:04:05"
 		}
 	}
 }
@@ -88,6 +99,7 @@
 
 https://{$SERVER_NAME:localhost} {
 	import main
+	import fail2ban-logging
 	encode zstd gzip
 
 	handle /api* {
@@ -116,37 +128,35 @@ https://{$SERVER_NAME:localhost} {
 }
 
 https://auth.{$SERVER_NAME:localhost} {
+	import fail2ban-logging
 	import no-robots
 	authenticate with myportal
 }
 
 https://umami.{$SERVER_NAME:localhost} {
 	import main
+	import fail2ban-logging
 	import no-robots
 	authorize with users_policy
 	reverse_proxy umami:3000
 }
 
-https://dashy.{$SERVER_NAME:localhost} {
+https://home.{$SERVER_NAME:localhost} {
 	import main
+	import fail2ban-logging
 	import no-robots
 	authorize with users_policy
 	reverse_proxy homepage:3000
 }
 
-# https://dashy.{$SERVER_NAME:localhost} {
-# 	import main
-# 	import no-robots
-#	authorize with users_policy
-# 	reverse_proxy dashy:8080
-# }
-
 https://wiki.{$SERVER_NAME:localhost} {
+	import fail2ban-logging
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
 
 https://photo.{$SERVER_NAME:localhost} {
+	import fail2ban-logging
 	import no-robots
 	reverse_proxy immich:2283
 }
