@@ -5,7 +5,7 @@ services:
       CADDY_GLOBAL_OPTIONS: |
         grace_period 10s
         default_sni ${SERVER_NAME}
-        
+
   frontend:
     build:
       target: production
@@ -62,6 +62,8 @@ services:
     volumes:
       - model-cache:/cache
     env_file: ".env.prod"
+    expose:
+      - "3003"
     cpus: "2"
     cpu_percent: 50
     mem_limit: 2g
