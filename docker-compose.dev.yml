@@ -1,6 +1,5 @@
 services:
   caddy:
-    env_file: ".env.dev"
     environment:
       SERVER_NAME: ${SERVER_NAME:-abel-brien.localhost}
       CADDY_GLOBAL_OPTIONS: |
@@ -16,7 +15,6 @@ services:
     command: npm run dev
 
   backend:
-    env_file: ".env.dev"
     volumes:
       - .env.dev:/app/.env
     environment:
@@ -24,7 +22,6 @@ services:
     command: node --watch app.js
 
   umami:
-    env_file: ".env.dev"
     environment:
       DEBUG: umami:*
       DISABLE_TELEMETRY: 1
@@ -32,7 +29,6 @@ services:
       LOG_QUERY: 1
 
   homepage:
-    env_file: ".env.dev"
     environment:
       - PUID=1000
       - PGID=127
@@ -40,7 +36,6 @@ services:
       - .env.dev:/app/.env
 
   docusaurus:
-    env_file: ".env.dev"
     environment:
       DEBUG: search-local:*
     volumes:
@@ -55,3 +50,6 @@ services:
     volumes:
       - .env.dev:/app/.env
       - ./immich/library:/data
+
+  directus:
+    env_file: ".env.dev"

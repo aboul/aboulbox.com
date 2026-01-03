@@ -48,6 +48,18 @@ services:
     restart: unless-stopped
     environment:
       - TZ='Europe/Paris'
+      - MAILGUN_APIKEY=${MAILGUN_APIKEY}
+      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
+      - MAILGUN_FROM_WHO=${MAILGUN_FROM_WHO}
+      - MAILGUN_TO_WHO_NAME=${MAILGUN_TO_WHO_NAME}
+      - MAILGUN_TO_WHO=${MAILGUN_TO_WHO}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - ALTCHA_HMAC_KEY=${ALTCHA_HMAC_KEY}
+      - SERVER_NAME=${SERVER_NAME}
     depends_on:
       - db
     extra_hosts:
@@ -80,6 +92,7 @@ services:
     container_name: umami
     environment:
       DATABASE_TYPE: postgresql
+      DATABASE_URL: ${DATABASE_URL}
     restart: unless-stopped
     depends_on:
       - db
@@ -155,6 +168,35 @@ services:
     restart: unless-stopped
     healthcheck:
       test: redis-cli ping || exit 1
+    networks:
+      - portfolio-net
+
+  directus:
+    image: directus/directus:latest
+    container_name: directus_app
+    restart: unless-stopped
+    env_file: ".env.dev"
+    environment:
+      KEY: "a_random_secret_key"
+      SECRET: "another_secret_value"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "password"
+      DB_CLIENT: "pg"
+      DB_HOST: ${POSTGRES_HOST}
+      DB_PORT: ${POSTGRES_PORT}
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      WEBSOCKETS_ENABLED: "true"
+      CORS_ENABLED: "true"
+    depends_on:
+      - db
+    volumes:
+      - ./directus:/directus
+      - /directus/node_modules
+    working_dir: /directus
+    command: >
+      sh -c "npm install && npx directus bootstrap && npx directus start"
     networks:
       - portfolio-net
 

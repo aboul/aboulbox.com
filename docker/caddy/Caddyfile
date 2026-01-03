@@ -59,7 +59,6 @@
 		format transform "{common_log}"
 	}
 }
-}
 
 (static) {
 	@static {
@@ -148,13 +147,23 @@ https://home.{$SERVER_NAME:localhost} {
 }
 
 https://wiki.{$SERVER_NAME:localhost} {
+	import main
 	import fail2ban-logging wiki
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
 
 https://photo.{$SERVER_NAME:localhost} {
+	import main
 	import fail2ban-logging photo
 	import no-robots
 	reverse_proxy immich:2283
+}
+
+https://admin.{$SERVER_NAME:localhost} {
+	import main
+	import fail2ban-logging wiki
+	import no-robots
+	authorize with users_policy
+	reverse_proxy directus_app:8055
 }
