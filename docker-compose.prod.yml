@@ -70,6 +70,7 @@ services:
     env_file: ".env.prod"
 
   navidrome:
+    user: 1000:985 # should be owner of volumes
     volumes:
       - ./navidrome/data:/data
       - ./navidrome/music:/music:ro

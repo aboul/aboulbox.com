@@ -197,7 +197,6 @@ services:
     image: deluan/navidrome:0.59.0
     container_name: navidrome
     restart: unless-stopped
-    user: 1000:1000 # should be owner of volumes
     expose:
       - "4533"
     networks:

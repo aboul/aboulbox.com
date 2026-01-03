@@ -60,6 +60,7 @@ services:
       sh -c "npm install && npx directus bootstrap && npx directus start"
 
   navidrome:
+    user: 1000:1000
     volumes:
       - ./navidrome/data:/data
       - ./navidrome/music:/music:ro
