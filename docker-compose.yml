@@ -202,9 +202,6 @@ services:
       - "4533"
     networks:
       - portfolio-net
-    volumes:
-      - ./navidrome/data:/data
-      - ./navidrome/music:/music:ro"
 
 volumes:
   pgdata:
