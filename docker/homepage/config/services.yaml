@@ -29,11 +29,11 @@
         icon: sh-wikipedia-light.svg
         server: my-docker
         container: docusaurus
-    # - Directus:
-    #     icon: sh-directus-light.svg
-    #     server: my-docker
-    #     container: docusaurus
-    #     href: https://wiki.aboulbox.com/
+    - Directus:
+        icon: sh-directus-light.svg
+        server: my-docker
+        container: docusaurus
+        href: https://admin.aboulbox.com/
     - Immich:
         icon: sh-immich-light.svg
         server: my-docker

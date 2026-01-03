@@ -19,10 +19,9 @@
 			ui {
 				links {
 					"Dashboard" https://home.{$SERVER_NAME:localhost}
-					#"Monitoring" https://monitor.{$SERVER_NAME:localhost}
+					"Admin" https://admin.{$SERVER_NAME:localhost}
 					"Wiki" https://wiki.{$SERVER_NAME:localhost}
-					"Analytics" https://umami.{$SERVER_NAME:localhost}
-					#"Tandoor" https://tandoor.{$SERVER_NAME:localhost}
+					"Umami" https://umami.{$SERVER_NAME:localhost}
 				}
 			}
 		}

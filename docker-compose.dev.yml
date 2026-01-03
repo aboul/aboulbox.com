@@ -53,3 +53,9 @@ services:
 
   directus:
     env_file: ".env.dev"
+    volumes:
+      - ./directus:/directus
+      - /directus/node_modules
+    working_dir: /directus
+    command: >
+      sh -c "npm install && npx directus bootstrap && npx directus start"
