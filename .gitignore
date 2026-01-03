@@ -29,3 +29,161 @@ bin/act
 .env.dev
 .env.prod
 immich/library/*
+navidrome/data/navidrome.db
+navidrome/data/navidrome.db-shm
+navidrome/data/navidrome.db-wal
+navidrome/data/cache/backgrounds/8c/7b/8c7b3c8b2244a8c4a88e0fbef7fe59d734cd8d25
+navidrome/data/cache/backgrounds/a3/ca/a3cabaf985ac4d3ef01ea74bd61100bb27ab8179
+navidrome/data/cache/images/01/e2/01e211acef426a94e07f7f64b2f4f71384b0d895
+navidrome/data/cache/images/1f/8c/1f8cd7a4e18e87d0913effdc3353091883109bea
+navidrome/data/cache/images/2c/bc/2cbc2ac5f911e3381357eafb4d670d6dc3a35c24
+navidrome/data/cache/images/30/a5/30a55bf2afb0829662668274bfafd7176942a108
+navidrome/data/cache/images/34/10/3410bb789b7e82b4e62a490a06a2c3e026d6c077
+navidrome/data/cache/images/35/cd/35cd89cac0476b2057eeeae2d762cb41d5b9e705
+navidrome/data/cache/images/48/87/4887de2f3db3e74ff1a272ebaaed4efc29610a9e
+navidrome/data/cache/images/4b/84/4b8486f0e64a51317ff211b160bfbc104994732f
+navidrome/data/cache/images/71/df/71df477200eafcb2be10444662649132cef5c6ff
+navidrome/data/cache/images/78/b7/78b70b9fa6b3cf6de414d91f8e087594671b7a28
+navidrome/data/cache/images/ad/7c/ad7c02e332979c3eecba8b649f85c424e37f4e5d
+navidrome/data/cache/images/b9/4d/b94d7b485b82b5631ffa0a2f6fd3a69b6296417e
+navidrome/data/cache/images/be/ac/beac77962892ece53b93b128f76841b58a5f3408
+navidrome/data/cache/images/cb/e5/cbe5463802089b1fe8139f8f89266e6510536c18
+navidrome/data/cache/images/cd/d3/cdd334b8b57aa8c8ce1cea90ba0236cbcc70753d
+navidrome/data/cache/images/e6/8a/e68af66d648224cc1e3009225a12269758068774
+navidrome/data/cache/transcoding/21/0d/210d59385c4ecf0014f88e15a3b853accfb8f7a9
+navidrome/data/cache/transcoding/f7/ff/f7ff0e986906eff76b0a89d0c1678cbffeb9664e
+navidrome/data/cache/transcoding/fd/76/fd76c3de8a7a9d1cf8f85f8a2bc2dcef3300d676
+navidrome/music/Ekova/Heaven's Dust/01 Starlight in Daden.wma
+navidrome/music/Ekova/Heaven's Dust/02 Chant of Diem.wma
+navidrome/music/Ekova/Heaven's Dust/03 Todosim.wma
+navidrome/music/Ekova/Heaven's Dust/04 Temoine.wma
+navidrome/music/Ekova/Heaven's Dust/05 Ditama.wma
+navidrome/music/Ekova/Heaven's Dust/06 Sebrendita.wma
+navidrome/music/Ekova/Heaven's Dust/07 Sabura.wma
+navidrome/music/Ekova/Heaven's Dust/08 La Nef des Fous.wma
+navidrome/music/Ekova/Heaven's Dust/09 Sister.wma
+navidrome/music/Ekova/Heaven's Dust/10 In My Prime.wma
+navidrome/music/Ekova/Heaven's Dust/11 Taksim.wma
+navidrome/music/Ekova/Heaven's Dust/12 Helas and Reason.wma
+navidrome/music/Ekova/Heaven's Dust/13 Venus and One.wma
+navidrome/music/Ekova/Heaven's Dust/AlbumArt_{5AF38748-EBBD-4826-92C5-CEED0B11B00B}_Large.jpg
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/01 Steel Bird.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/02 How Sweet Mal.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/03 Aurora's Flight.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/04 Moon Beseeched.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/05 In the Kitchen.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/06 Siip Siie.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/07 Son Sourrit Pale.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/08 Interlude.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/09 The Chase.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/10 A Soul's Delight.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/11 Idem Soit Done.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/12 The Storm.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/13 Cruel Sister.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/14 In the Garden.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/15 Piste 15.wma
+navidrome/music/Ekova/Space Lullabies and Other Fantasmagore/AlbumArt_{CFCB9BA4-FF52-42F1-8D27-B8BACB09FC8F}_Large.jpg
+navidrome/music/Guano apes/Thumbs.db
+navidrome/music/Guano apes/1997 - Proud like a god/01-Open your eyes.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/02-Maria.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/03-Rain.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/04-Lord of the boards.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/05-Crossing the deadline.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/06-We use the pain.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/07-Never born.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/08-Wash it down.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/09-Scape goat.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/10-Get busy.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/11-Suzie.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/12-Tribute.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/13-Move a little closer.mp3
+navidrome/music/Guano apes/1997 - Proud like a god/AlbumArtSmall.jpg
+navidrome/music/Guano apes/1997 - Proud like a god/folder.jpg
+navidrome/music/Guano apes/2000 - Don't give me names/01-Innocent greed.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/02-No speech.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/03-Big in japan.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/04-Money and milk.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/05-Living in a lie.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/06-Dödel up.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/07-I want it.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/08-Heaven.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/09-Mine all mine.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/10-Too close to live.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/11-Gogan.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/12-Anne claire.mp3
+navidrome/music/Guano apes/2000 - Don't give me names/AlbumArt_{953266C6-63BA-452C-90DB-5C82E65BC422}_Large.jpg
+navidrome/music/Guano apes/2000 - Don't give me names/AlbumArt_{953266C6-63BA-452C-90DB-5C82E65BC422}_Small.jpg
+navidrome/music/Guano apes/2000 - Don't give me names/AlbumArtSmall.jpg
+navidrome/music/Guano apes/2000 - Don't give me names/desktop.ini
+navidrome/music/Guano apes/2000 - Don't give me names/folder.jpg
+navidrome/music/Guano apes/2003 - Walking on a thin line/01-You can't stop me.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/02-Cick.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/03-Kiss the dawn.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/04-Pretty in scarlet.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/05-Diokan.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/06-Electric nights.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/07-Quietly.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/08-High.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/09-Sing that song.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/10-Scratch the pitch.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/11-Plastic mouth.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/12-Counting the days.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/13-Storm.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/14-Sugar skin.mp3
+navidrome/music/Guano apes/2003 - Walking on a thin line/AlbumArtSmall.jpg
+navidrome/music/Guano apes/2003 - Walking on a thin line/folder.jpg
+navidrome/music/Iggy pop/Thumbs.db
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/01-1969.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/02-No fun.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/03-I wanna be your dog.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/04-Down on the street.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/05-I got a right.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/06-Gimme some skin.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/07-I'm sick of you.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/08-Search and destroy.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/09-Gimme danger.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/10-Raw power.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/11-Kill city.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/12-Nightclubbing.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/13-Funtime.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/14-China girl.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/15-Sister midnight.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/16-Tonight.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/17-Success.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/18-Lust for life.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/19-The passenger.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/AlbumArt_{A959E745-FDDA-4B89-9C67-F992B242B706}_Large.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/AlbumArt_{A959E745-FDDA-4B89-9C67-F992B242B706}_Small.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/AlbumArt_{B59B3181-0BDF-4DEC-824E-862A8305C345}_Large.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/AlbumArt_{B59B3181-0BDF-4DEC-824E-862A8305C345}_Small.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/AlbumArt_{F1648831-F9CA-4364-85EB-B1775F8A4703}_Large.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/AlbumArt_{F1648831-F9CA-4364-85EB-B1775F8A4703}_Small.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/AlbumArtSmall.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/desktop.ini
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/Folder.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD1/Thumbs.db
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/01-Some weird sin.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/02-I'm bored.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/03-I need more.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/04-Pleasure.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/05-Run like a villain.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/06-Cry for love.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/07-Real wild child.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/08-Cold metal.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/09-Home.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/10-Candy.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/11-Well did you evah.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/12-Wild america.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/13-TV eye.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/14-Loose.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/15-Away.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/16-Corruption.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/17-I felt the luxury.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/18-Mask.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/19-Skull ring.mp3
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/AlbumArt_{F1648831-F9CA-4364-85EB-B1775F8A4703}_Large.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/AlbumArt_{F1648831-F9CA-4364-85EB-B1775F8A4703}_Small.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/AlbumArtSmall.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/desktop.ini
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/Folder.jpg
+navidrome/music/Iggy pop/2005 - A million in prizes the Iggy pop anthology - CD2/Thumbs.db

@@ -36,11 +36,11 @@ services:
   immich:
     env_file: ".env.prod"
     environment:
-      - UPLOAD_LOCATION:/media/storage
+      - UPLOAD_LOCATION:/media/storage/photos
     volumes:
       - .env.prod:/app/.env
-      - /media/storage:/data
-      - /media/storage/external-library:/mnt/photos
+      - /media/storage/photo:/data
+      - /media/storage/photos/external-library:/mnt/photos
 
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
@@ -68,3 +68,8 @@ services:
 
   directus:
     env_file: ".env.prod"
+
+  navidrome:
+    volumes:
+      - ./navidrome/data:/data
+      - ./navidrome/music:/music:ro

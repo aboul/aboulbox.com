@@ -25,6 +25,9 @@ logs:
 bash: 
 	docker compose exec caddy sh
 
+reload-caddy:
+	docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
+
 restart: down up
 
 restart-build: down up-build

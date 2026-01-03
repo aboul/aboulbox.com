@@ -46,6 +46,11 @@
         container: immich_machine_learning
         href: https://photo.aboulbox.com/
         showStats: true
+    - Navidrome:
+        icon: sh-navidrome-light.svg
+        server: my-docker
+        container: navidrome
+        href: https://music.aboulbox.com/
     - Database:
         icon: sh-postgresql-light.svg
         server: my-docker
