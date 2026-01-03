@@ -39,7 +39,7 @@ services:
       - UPLOAD_LOCATION:/media/storage/photos
     volumes:
       - .env.prod:/app/.env
-      - /media/storage/photo:/data
+      - /media/storage/photos:/data
       - /media/storage/photos/external-library:/mnt/photos
 
   immich-machine-learning:
