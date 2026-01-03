@@ -72,8 +72,5 @@ services:
   navidrome:
     user: 1000:985 # should be owner of volumes
     volumes:
-      - navidrome_data:/data
-      - ./navidrome/music:/music:ro
-
-volumes:
-  navidrome_data:
+      - /media/storage/navidrome/data:/data
+      - /media/storage/navidrome/music:/music:ro
