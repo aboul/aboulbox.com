@@ -56,10 +56,9 @@
 (fail2ban-logging) {
 	log {
 		output file /var/log/caddy/fail2ban.log
-		format transform `{ts} {request>headers>X-Forwarded-For>[0]:request>remote_ip} {request>host} {request>method} {request>uri} {status}` {
-			time_format "02/Jan/2006:15:04:05"
-		}
+		format transform "{common_log}"
 	}
+}
 }
 
 (static) {
