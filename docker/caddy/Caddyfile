@@ -18,10 +18,11 @@
 
 			ui {
 				links {
-					"Dashboard" https://home.{$SERVER_NAME:localhost}
-					"Admin" https://admin.{$SERVER_NAME:localhost}
-					"Wiki" https://wiki.{$SERVER_NAME:localhost}
-					"Umami" https://umami.{$SERVER_NAME:localhost}
+					"Dashboard" https://home.{$SERVER_NAME:localhost} icon "las la-address-card"
+					"Admin" https://admin.{$SERVER_NAME:localhost} icon "las la-table"
+					"Wiki" https://wiki.{$SERVER_NAME:localhost} icon "las la-question"
+					"Umami" https://umami.{$SERVER_NAME:localhost} icon "las la-chart-pie"
+					"My Identity" "/whoami" icon "las la-user"
 				}
 			}
 		}
