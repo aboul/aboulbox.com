@@ -71,6 +71,9 @@ services:
 
   navidrome:
     user: 1000:985 # should be owner of volumes
+    environment:
+      - ND_LASTFM_APIKEY=${ND_LASTFM_APIKEY}
+      - ND_LASTFM_SECRET=${ND_LASTFM_SECRET}
     volumes:
       - /media/storage/navidrome/data:/data
       - /media/storage/navidrome/music:/music:ro
