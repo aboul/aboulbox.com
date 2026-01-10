@@ -11,10 +11,6 @@ services:
     volumes:
       - caddy-config:/config
       - caddy-data:/data
-      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - /var/log/caddy:/var/log/caddy
-      - ./docker/caddy/data/auth/:/etc/gatekeeper/auth
-      - ./docker/caddy/data/users.json:/data/caddy/.local/users.json
     networks:
       - portfolio-net
     depends_on:
@@ -147,7 +143,7 @@ services:
     container_name: db
     restart: unless-stopped
     environment:
-      POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami, immich"
+      POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami, immich, audiomusedb"
       POSTGRES_USER: ${POSTGRES_USER:-myuser}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mypassword}
       TZ: "Europe/Paris"
@@ -206,7 +202,6 @@ volumes:
   pgdata:
   caddy-config:
   caddy-data:
-  model-cache:
 
 networks:
   portfolio-net:

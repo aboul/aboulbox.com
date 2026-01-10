@@ -1,0 +1,124 @@
+{
+	{$CADDY_GLOBAL_OPTIONS}
+	admin 0.0.0.0:2019
+}
+
+(main) {
+	log_skip /assets*
+	log {
+		output file /var/log/caddy/access.json
+		format json {
+			time_format wall
+		}
+	}
+}
+
+(static) {
+	@static {
+		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.json *.tsx
+	}
+	header @static ?Cache-Control "public, max-age=432000, must-revalidate"
+}
+
+(no-robots) {
+	handle /robots.txt {
+		respond 200 {
+			body "User-agent: *
+			Disallow: /
+
+			User-agent: AdsBot-Google
+			Disallow: /
+
+			User-agent: AdsBot-Google-Mobile
+			Disallow: /"
+			close
+		}
+	}
+}
+
+(security) {
+	header {
+		# enable HSTS
+		Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		# disable clients from sniffing the media type
+		X-Content-Type-Options nosniff
+		# keep referrer data off of HTTP connections
+		Referrer-Policy no-referrer-when-downgrade
+	}
+}
+
+https://{$SERVER_NAME:localhost} {
+	import main
+	encode zstd gzip
+
+	handle /api* {
+		import security
+		reverse_proxy backend:3001
+	}
+
+	handle {
+		import static
+		redir /404/ /404
+		reverse_proxy frontend:8080 {
+			@404 status 404
+			handle_response @404 {
+				rewrite * /{err.status_code}
+				reverse_proxy frontend:8080 {
+					handle_response {
+						copy_response {
+							status 404
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+https://umami.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy umami:3000
+}
+
+https://home.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy homepage:3000
+}
+
+https://wiki.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy docusaurus:3000
+}
+
+https://photo.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy immich:2283
+}
+
+https://admin.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy directus_app:8055
+}
+
+https://music.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy navidrome:4533
+}
+
+https://audiomuse.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy audiomuse-ai-flask:8000
+}
+
+https://ollama.{$SERVER_NAME:localhost} {
+	import main
+	import no-robots
+	reverse_proxy ollama-webui:8080
+}

@@ -5,6 +5,8 @@ services:
       CADDY_GLOBAL_OPTIONS: |
         debug
         local_certs
+    volumes:
+      - ./docker/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
 
   frontend:
     volumes:
@@ -31,9 +33,10 @@ services:
   homepage:
     environment:
       - PUID=1000
-      - PGID=127
+      - PGID=999
     volumes:
       - .env.dev:/app/.env
+      - ./docker/homepage/config/services.dev.yaml:/app/config/services.yaml:ro
 
   docusaurus:
     environment:
@@ -63,4 +66,101 @@ services:
     user: 1000:1000
     volumes:
       - ./navidrome/data:/data
-      - ./navidrome/music:/music:ro
+      - /media/HOME/Music/Classée:/music:ro
+
+  audiomuse-ai-flask:
+    image: ghcr.io/neptunehub/audiomuse-ai:latest-nvidia
+    container_name: audiomuse-ai-flask-app
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    environment:
+      SERVICE_TYPE: "flask"
+      MEDIASERVER_TYPE: "navidrome"
+      NAVIDROME_URL: "${NAVIDROME_URL}"
+      NAVIDROME_USER: "${NAVIDROME_USER}"
+      NAVIDROME_PASSWORD: "${NAVIDROME_PASSWORD}"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-audiomusedb}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      REDIS_URL: "${AUDIOMUSE_REDIS_URL}"
+      AI_MODEL_PROVIDER: "${AI_MODEL_PROVIDER:-NONE}"
+      OLLAMA_SERVER_URL: "${OLLAMA_SERVER_URL}"
+      OLLAMA_MODEL_NAME: "${OLLAMA_MODEL_NAME:-mistral-small3.2:latest}"
+      CLAP_ENABLED: "${CLAP_ENABLED:-true}" # Enable CLAP text search (set to false for slower systems)
+      TEMP_DIR: "/app/temp_audio"
+      PER_SONG_MODEL_RELOAD: "${PER_SONG_MODEL_RELOAD:-true}"
+    volumes:
+      - audiomuse-temp-audio-flask:/app/temp_audio
+    depends_on:
+      - audiomuse-redis
+      - db
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+    networks:
+      - portfolio-net
+
+  # AudioMuse-AI RQ Worker service
+  audiomuse-ai-worker:
+    image: ghcr.io/neptunehub/audiomuse-ai:latest-nvidia
+    container_name: audiomuse-ai-worker-instance
+    restart: unless-stopped
+    environment:
+      SERVICE_TYPE: "worker"
+      MEDIASERVER_TYPE: "navidrome"
+      NAVIDROME_URL: "${NAVIDROME_URL}"
+      NAVIDROME_USER: "${NAVIDROME_USER}"
+      NAVIDROME_PASSWORD: "${NAVIDROME_PASSWORD}"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-audiomusedb}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      REDIS_URL: "${AUDIOMUSE_REDIS_URL}"
+      AI_MODEL_PROVIDER: "${AI_MODEL_PROVIDER:-NONE}"
+      OLLAMA_SERVER_URL: "${OLLAMA_SERVER_URL}"
+      OLLAMA_MODEL_NAME: "${OLLAMA_MODEL_NAME:-mistral-small3.2:latest}"
+      CLAP_ENABLED: "${CLAP_ENABLED:-true}" # Enable CLAP text search (set to false for slower systems)
+      TEMP_DIR: "/app/temp_audio"
+      NVIDIA_VISIBLE_DEVICES: "${NVIDIA_VISIBLE_DEVICES}"
+      NVIDIA_DRIVER_CAPABILITIES: "${NVIDIA_DRIVER_CAPABILITIES}"
+      USE_GPU_CLUSTERING: "${USE_GPU_CLUSTERING:-false}"
+      PER_SONG_MODEL_RELOAD: "${PER_SONG_MODEL_RELOAD:-true}"
+      
+    volumes:
+      - audiomuse-temp-audio-worker:/app/temp_audio
+    depends_on:
+      - audiomuse-redis
+      - db
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+    networks:
+      - portfolio-net
+
+  audiomuse-redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    container_name: audiomuse-redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379" # Expose Redis port to the host
+    volumes:
+      - audiomuse-redis-data:/data # Persistent storage for Redis data
+    networks:
+      - portfolio-net
+
+volumes:
+  audiomuse-temp-audio-flask:
+  audiomuse-temp-audio-worker:
+  audiomuse-redis-data:

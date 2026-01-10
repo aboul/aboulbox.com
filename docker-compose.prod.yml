@@ -5,6 +5,11 @@ services:
       CADDY_GLOBAL_OPTIONS: |
         grace_period 10s
         default_sni ${SERVER_NAME}
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /var/log/caddy:/var/log/caddy
+      - ./docker/caddy/data/auth/:/etc/gatekeeper/auth
+      - ./docker/caddy/data/users.json:/data/caddy/.local/users.json
 
   frontend:
     build:
@@ -77,3 +82,6 @@ services:
     volumes:
       - /media/storage/navidrome/data:/data
       - /media/storage/navidrome/music:/music:ro
+
+volumes:
+  model-cache:
