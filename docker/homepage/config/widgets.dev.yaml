@@ -23,8 +23,9 @@
     diskUnits: bytes
 
 - search:
-    provider: [brave, google]
+    provider: [brave, google, custom]
     target: _blank
+    url: https://search.aboulai.localhost:8086/search?q=
 
 - openmeteo:
     label: Toulouse # optional

@@ -37,6 +37,7 @@ services:
     volumes:
       - .env.dev:/app/.env
       - ./docker/homepage/config/services.dev.yaml:/app/config/services.yaml:ro
+      - ./docker/homepage/config/widgets.dev.yaml:/app/config/widgets.yaml:ro
 
   docusaurus:
     environment:
