@@ -17,6 +17,8 @@ services:
       args:
         - SERVER_NAME=${SERVER_NAME}
         - UMAMI_WEBSITE_CODE=${UMAMI_WEBSITE_CODE}
+    volumes:
+      - ./frontend/public/CV2025.pdf:/app/CV2025.pdf:ro
 
   backend:
     command: node app.js
