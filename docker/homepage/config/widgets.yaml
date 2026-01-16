@@ -3,14 +3,15 @@
 # https://gethomepage.dev/configs/info-widgets/
 
 - glances:
-    url: http://glances:61208/10
+    url: http://glances:61208
     version: 4 # required only if running glances v4 or higher, defaults to 3
     cputemp: true # disabled by default
     uptime: true # disabled by default
-    disk: true # disabled by default, use mount point of disk(s) in glances. Can also be a list (see below)
+    disk: 
+        - /rootfs
+        - /ssd  
     diskUnits: bytes # optional, bytes (default) or bbytes. Only applies to disk
     expanded: true # show the expanded view
-    label: MyMachine # optional
 
 - search:
     provider: [brave, google]
