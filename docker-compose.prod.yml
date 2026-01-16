@@ -85,5 +85,11 @@ services:
       - /media/storage/navidrome/data:/data
       - /media/storage/navidrome/music:/music:ro
 
+  glances:
+    volumes:
+      - ./docker/glances/conf/glances.conf:/etc/glances/glances.conf:ro
+      - /media/storage:/ssd:ro
+      - /:/rootfs:ro
+
 volumes:
   model-cache:

@@ -2,6 +2,38 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 
+- Ressources: 
+
+    - Info:
+        widget:
+            type: glances
+            url: http://glances:61208
+            version: 4
+            metric: info
+    
+    - Top Processes:
+        widget:
+            type: glances
+            url: http://glances:61208
+            version: 4
+            metric: process
+
+    - WAN:
+        widget:
+            type: glances
+            url: http://glances:61208
+            version: 4
+            metric: network:eth0
+            refreshInterval: 1000
+
+    - LAN:
+        widget:
+            type: glances
+            url: http://glances:61208
+            version: 4
+            metric: network:lo
+            refreshInterval: 1000
+
 - Aboulbox:
     - Caddy:
         icon: sh-caddy.svg
@@ -9,8 +41,8 @@
         container: caddy
         showStats: true
         widget:
-          type: caddy
-          url: http://caddy:2019
+            type: caddy
+            url: http://caddy:2019
     - Frontend:
         icon: https://aboulbox.com/favicon.svg
         server: my-docker
@@ -29,11 +61,17 @@
         icon: sh-wikipedia-light.svg
         server: my-docker
         container: docusaurus
+        href: https://wiki.aboulbox.com/
     - Directus:
         icon: sh-directus-light.svg
         server: my-docker
         container: docusaurus
         href: https://admin.aboulbox.com/
+    - Navidrome:
+        icon: sh-navidrome-light.svg
+        server: my-docker
+        container: navidrome
+        href: https://music.aboulbox.com/
     - Immich:
         icon: sh-immich-light.svg
         server: my-docker
@@ -46,86 +84,88 @@
         container: immich_machine_learning
         href: https://photo.aboulbox.com/
         showStats: true
-    - Navidrome:
-        icon: sh-navidrome-light.svg
-        server: my-docker
-        container: navidrome
-        href: https://music.aboulbox.com/
     - Database:
         icon: sh-postgresql-light.svg
         server: my-docker
         container: db
+    - Glances:
+        icon: sh-glances-light.svg
+        server: my-docker
+        container: glances
+        href: http://monitor.aboulbox.com/
 
-- For coding:
-    - Github:
-        icon: sh-github-light.svg
-        href: https://github.com/aboul
-    - Digital Ocean:
-        icon: sh-digitalocean-light.svg
-        href: https://cloud.digitalocean.com/droplets
-    - Gandi domains:
-        icon: sh-gandi-light.svg
-        href: https://admin.gandi.net/domain/
-    - Mailgun:
-        icon: si-mailgun-#ffffff
-        href: https://app.eu.mailgun.com/
-    - ChatGPT:
-        icon: sh-chatgpt-light.svg
-        href: https://chatgpt.com/
-    - Netlify:
-        icon: sh-netlify-light.svg
-        href: https://app.netlify.com/teams/aboul/sites
 
-- Du social:
-    - Discord:
-        icon: sh-discord-light.svg
-        href: https://discord.com/channels/
-    - Youtube channel:
-        icon: sh-youtube-light.svg
-        href: https://www.youtube.com/@abelbrien
-    - Facebook:
-        icon: sh-facebook-light.svg
-        href: https://facebook.com
-    - Reddit:
-        icon: sh-reddit-light.svg
-        href: https://www.reddit.com/r/francenew
-    - Instagram:
-        icon: sh-instagram-light.svg
-        href: https://www.instagram.com/
+- Useful links:
+    - For coding:
+        - Github:
+            icon: sh-github-light.svg
+            href: https://github.com/aboul
+        - Digital Ocean:
+            icon: sh-digitalocean-light.svg
+            href: https://cloud.digitalocean.com/droplets
+        - Gandi domains:
+            icon: sh-gandi-light.svg
+            href: https://admin.gandi.net/domain/
+        - Mailgun:
+            icon: si-mailgun-#ffffff
+            href: https://app.eu.mailgun.com/
+        - ChatGPT:
+            icon: sh-chatgpt-light.svg
+            href: https://chatgpt.com/
+        - Netlify:
+            icon: sh-netlify-light.svg
+            href: https://app.netlify.com/teams/aboul/sites
 
-- Nice self-hosted repos:
-    - Self-hosted awesome:
-        href: https://github.com/awesome-selfhosted/awesome-selfhosted
-    - Self-hosted Sysadmin:
-        href: https://github.com/awesome-foss/awesome-sysadmin
-    - Awesome Datasets:
-        href: hhttps://github.com/awesomedata/awesome-public-datasets
+    - Du social:
+        - Discord:
+            icon: sh-discord-light.svg
+            href: https://discord.com/channels/
+        - Youtube channel:
+            icon: sh-youtube-light.svg
+            href: https://www.youtube.com/@abelbrien
+        - Facebook:
+            icon: sh-facebook-light.svg
+            href: https://facebook.com
+        - Reddit:
+            icon: sh-reddit-light.svg
+            href: https://www.reddit.com/r/francenew
+        - Instagram:
+            icon: sh-instagram-light.svg
+            href: https://www.instagram.com/
 
-- Icons for Services:
-    - Dashboard icons:
-        icon: dashboard-icons-dark.svg
-        href: https://github.com/walkxcode/dashboard-icons/blob/main/ICONS.md
-    - Font Awesome v6:
-        icon: si-fontawesome-#ffffff
-        href: https://fontawesome.com/v6/icons
-    - Selfh.st:
-        icon: sh-selfh-st-light.svg
-        href: https://selfh.st/icons/
-    - Material Design Icons:
-        icon: si-materialdesignicons-#ffffff
-        href: https://pictogrammers.com/library/mdi
-    - Simple Icons:
-        icon: si-simpleicons-#ffffff
-        href: https://simpleicons.org
-    - 😋😋 EmojiPedia:
-        href: https://emojipedia.org
+    - Nice self-hosted repos:
+        - Self-hosted awesome:
+            href: https://github.com/awesome-selfhosted/awesome-selfhosted
+        - Self-hosted Sysadmin:
+            href: https://github.com/awesome-foss/awesome-sysadmin
+        - Awesome Datasets:
+            href: hhttps://github.com/awesomedata/awesome-public-datasets
 
-- Config Helpers:
-    - JSON Schema Example:
-        href: https://json-schema.app/view/%23?url=https%3A%2F%2Fjson.schemastore.org%2Fpackage
-    - JSON Config Validator:
-        href: https://www.jsonschemavalidator.net/s/JFUj7X9J
-    - JSON to YAML:
-        href: https://jsonformatter.org/json-to-yaml
-    - YAML to JSON:
-        href: https://jsonformatter.org/yaml-to-json
+    - Icons for Services:
+        - Dashboard icons:
+            icon: dashboard-icons-dark.svg
+            href: https://github.com/walkxcode/dashboard-icons/blob/main/ICONS.md
+        - Font Awesome v6:
+            icon: si-fontawesome-#ffffff
+            href: https://fontawesome.com/v6/icons
+        - Selfh.st:
+            icon: sh-selfh-st-light.svg
+            href: https://selfh.st/icons/
+        - Material Design Icons:
+            icon: si-materialdesignicons-#ffffff
+            href: https://pictogrammers.com/library/mdi
+        - Simple Icons:
+            icon: si-simpleicons-#ffffff
+            href: https://simpleicons.org
+        - 😋😋 EmojiPedia:
+            href: https://emojipedia.org
+
+    - Config Helpers:
+        - JSON Schema Example:
+            href: https://json-schema.app/view/%23?url=https%3A%2F%2Fjson.schemastore.org%2Fpackage
+        - JSON Config Validator:
+            href: https://www.jsonschemavalidator.net/s/JFUj7X9J
+        - JSON to YAML:
+            href: https://jsonformatter.org/json-to-yaml
+        - YAML to JSON:
+            href: https://jsonformatter.org/yaml-to-json

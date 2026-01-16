@@ -159,8 +159,8 @@ services:
       - portfolio-net
 
   redis:
-    container_name: immich_redis
     image: docker.io/valkey/valkey:9@sha256:fb8d272e529ea567b9bf1302245796f21a2672b8368ca3fcb938ac334e613c8f
+    container_name: immich_redis
     restart: unless-stopped
     healthcheck:
       test: redis-cli ping || exit 1
@@ -195,6 +195,22 @@ services:
     restart: unless-stopped
     expose:
       - "4533"
+    networks:
+      - portfolio-net
+
+  glances:
+    image: nicolargo/glances:4.4.1
+    container_name: glances
+    restart: unless-stopped
+    pid: host
+    expose:
+      - "61208"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/os-release:/etc/os-release:ro
+    environment:
+      - "GLANCES_OPT=-w"
+      - "TZ=Europe/Paris"
     networks:
       - portfolio-net
 

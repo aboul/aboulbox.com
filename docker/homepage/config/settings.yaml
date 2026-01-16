@@ -21,3 +21,27 @@ quicklaunch:
   showSearchSuggestions: true
   hideVisitURL: true
   provider: google
+useEqualHeights: true
+background: 
+  image: /images/oiseau.png
+  blur: xs
+  brightness: 50
+  opacity: 50
+cardBlur: md
+iconStyle: theme
+disableCollapse: true
+layout:
+  Ressources:
+    header: false
+    style: row
+    columns: 4
+    tab: Monitor
+  Aboulbox:
+    style: row
+    columns: 3
+    tab: Monitor
+  Useful links:
+    header: false
+    style: row
+    columns: 3
+    tab: Usefull links
