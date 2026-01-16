@@ -31,12 +31,20 @@ cardBlur: md
 iconStyle: theme
 disableCollapse: true
 layout:
+  Daily:
+    header: false
+    style: row
+    columns: 4
+    tab: Daily
+    Calendar:
+      header: false
   Ressources:
     header: false
     style: row
     columns: 4
     tab: Monitor
   Aboulbox:
+    icon: /images/logo-blanc.svg
     style: row
     columns: 3
     tab: Monitor
@@ -45,3 +53,13 @@ layout:
     style: row
     columns: 3
     tab: Usefull links
+    For coding:
+      icon: mdi-code-braces.svg
+    Du social: 
+      icon: mdi-social-distance-6-feet.svg
+    Nice self-hosted repos:
+      icon: mdi-github.svg
+    Icons for Services:
+      icon: mdi-emoticon-excited-outline.svg
+    Config Helpers: 
+      icon: mdi-wrench-outline.svg

@@ -2,7 +2,18 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 
-- Ressources: #<-- section title - referenced in settings.yaml for display order
+- Daily:
+    - Calendar:
+        widget:
+            type: calendar
+            view: monthly # optional - possible values monthly, agenda
+            showTime: true
+            integrations: 
+            -   type: ical
+                url: {{HOMEPAGE_VAR_ICAL_URL}}
+                color: green
+
+- Ressources:
     - Info:
         widget:
             type: glances
@@ -32,7 +43,7 @@
 
 - Aboulbox:
     - Caddy:
-        icon: sh-caddy.svg
+        icon: sh-caddy-light.svg
         server: my-docker
         container: caddy
         showStats: true
@@ -40,12 +51,12 @@
             type: caddy
             url: http://caddy:2019
     - Frontend:
-        icon: https://aboulbox.com/favicon.svg
+        icon: mdi-react.svg
         server: my-docker
         container: frontend
         href: https://aboulbox.com/
     - Backend:
-        icon: https://aboulbox.com/favicon.svg
+        icon: mdi-cog.svg
         server: my-docker
         container: backend
     - Umami:

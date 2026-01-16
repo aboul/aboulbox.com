@@ -56,7 +56,7 @@ text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), -1px -1px 1px rgba(0, 0, 0, 0.6),
 }
 
 .service-card:hover .service-name {
-    color: orange !important;
+    color: #ff6600 !important;
     font-weight: bold !important;
     text-shadow: none !important;
     transition: color 0.4s ease;
@@ -65,5 +65,5 @@ text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), -1px -1px 1px rgba(0, 0, 0, 0.6),
 
 .service-card:hover .service-title .service-name,
 .service-card:hover .service-title-text .service-name {
-    color: orange !important;
+    color: #ff6600 !important;
 }
