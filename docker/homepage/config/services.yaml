@@ -100,9 +100,6 @@
         - Github:
             icon: sh-github-light.svg
             href: https://github.com/aboul
-        - Digital Ocean:
-            icon: sh-digitalocean-light.svg
-            href: https://cloud.digitalocean.com/droplets
         - Gandi domains:
             icon: sh-gandi-light.svg
             href: https://admin.gandi.net/domain/
