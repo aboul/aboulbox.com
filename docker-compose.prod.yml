@@ -32,6 +32,7 @@ services:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
       - PUID=1000
       - PGID=985
+      - HOMEPAGE_VAR_ICAL_URL=${HOMEPAGE_VAR_ICAL_URL}
     volumes:
       - /media/storage:/mnt/storage
 
