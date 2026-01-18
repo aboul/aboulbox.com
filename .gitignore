@@ -22,11 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Project specific
 .env
-.history/
 docker/caddy/data
 bin/act
 .env.dev
 .env.prod
-immich/library/*
-navidrome
+docker/immich
+docker/navidrome
