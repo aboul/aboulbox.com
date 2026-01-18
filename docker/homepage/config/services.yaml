@@ -9,9 +9,9 @@
             view: monthly # optional - possible values monthly, agenda
             showTime: true
             integrations: 
-            -   type: ical
-                url: {{HOMEPAGE_VAR_ICAL_URL}}
-                color: green
+                -   type: ical
+                    url: {{HOMEPAGE_VAR_ICAL_URL}}
+                    color: green
 
 - Ressources: 
     - Info:

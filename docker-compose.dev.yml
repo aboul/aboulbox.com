@@ -38,8 +38,6 @@ services:
       - .env.dev:/app/.env
       - ./docker/homepage/config/services.dev.yaml:/app/config/services.yaml:ro
       - ./docker/homepage/config/widgets.dev.yaml:/app/config/widgets.yaml:ro
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker/homepage/images:/app/public/images
 
   docusaurus:
     environment:

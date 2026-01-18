@@ -105,6 +105,7 @@ services:
     volumes:
       - ./docker/homepage/config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker/homepage/images:/app/public/images
     environment:
       TZ: Europe/Paris
     networks:
