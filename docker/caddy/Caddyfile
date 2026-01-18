@@ -178,7 +178,7 @@ https://admin.{$SERVER_NAME} {
 	import fail2ban-logging admin
 	import no-robots
 	authorize with users_policy
-	reverse_proxy directus_app:8055
+	reverse_proxy directus:8055
 }
 
 https://music.{$SERVER_NAME:localhost} {

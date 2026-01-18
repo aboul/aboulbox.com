@@ -16,6 +16,8 @@
 - search:
     provider: [brave, google]
     target: _blank
+    focus: true
+    showSearchSuggestions: true
 
 - openmeteo:
     label: Toulouse # optional

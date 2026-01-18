@@ -12,12 +12,15 @@
         - /ssd  
         - /backups
     diskUnits: bytes # optional, bytes (default) or bbytes. Only applies to disk
+    refreshInterval: 10000
     expanded: true # show the expanded view
 
 - search:
     provider: [brave, google, custom]
     target: _blank
     url: https://search.aboulai.localhost:8086/search?q=
+    focus: true
+    showSearchSuggestions: true
 
 - openmeteo:
     label: Toulouse # optional
@@ -31,7 +34,7 @@
 
 - datetime:
     locale: fr
-    text_size: 3xl
+    text_size: 2xl
     format:
         dateStyle: short
         timeStyle: short

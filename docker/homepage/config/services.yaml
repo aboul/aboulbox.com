@@ -147,11 +147,11 @@
 
     - Icons for Services:
         - Dashboard icons:
-            icon: dashboard-icons-dark.svg
-            href: https://github.com/walkxcode/dashboard-icons/blob/main/ICONS.md
-        - Font Awesome v6:
+            icon: mdi-view-dashboard.svg
+            href: https://dashboardicons.com/
+        - Font Awesome:
             icon: si-fontawesome-#ffffff
-            href: https://fontawesome.com/v6/icons
+            href: https://fontawesome.com/icons
         - Selfh.st:
             icon: sh-selfh-st-light.svg
             href: https://selfh.st/icons/
@@ -161,7 +161,8 @@
         - Simple Icons:
             icon: si-simpleicons-#ffffff
             href: https://simpleicons.org
-        - 😋😋 EmojiPedia:
+        - EmojiPedia:
+            icon: mdi-panda.svg
             href: https://emojipedia.org
 
     - Config Helpers:

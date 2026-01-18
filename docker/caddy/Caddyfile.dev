@@ -102,7 +102,7 @@ https://photo.{$SERVER_NAME:localhost} {
 https://admin.{$SERVER_NAME:localhost} {
 	import main
 	import no-robots
-	reverse_proxy directus_app:8055
+	reverse_proxy directus:8055
 }
 
 https://music.{$SERVER_NAME:localhost} {
