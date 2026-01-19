@@ -48,6 +48,7 @@ services:
     command: npm run start -- --host 0.0.0.0 --poll 1000
     
   immich:
+    env_file: ".env"
     environment:
       - UPLOAD_LOCATION:./docker/immich/library
     volumes:
@@ -55,9 +56,6 @@ services:
       - ./docker/immich/library:/data
 
   directus:
-    volumes:
-      - ./docker/directus:/directus
-      - /directus/node_modules
     command: >
       sh -c "npm install && npx directus bootstrap && npx directus start"
 

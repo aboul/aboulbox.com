@@ -113,6 +113,7 @@ services:
     restart: unless-stopped
     environment:
       TZ: "Europe/Paris"
+      DB_DATABASE_NAME: ${DB_DATABASE_NAME}
     volumes:
       - /etc/localtime:/etc/localtime:ro
     depends_on:

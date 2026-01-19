@@ -2,10 +2,10 @@ build:
 	docker compose build --pull --no-cache
 
 up:
-	docker compose --env-file .env.dev -f docker-compose.yml -f docker-compose.dev.yml up -d
+	docker compose --env-file .env -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 up-build:
-	docker compose --env-file .env.dev -f docker-compose.yml -f docker-compose.dev.yml up -d --build --force-recreate
+	docker compose --env-file .env -f docker-compose.yml -f docker-compose.dev.yml up -d --build --force-recreate
 
 up-build-local-prod: 
 	docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build --force-recreate
