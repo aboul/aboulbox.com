@@ -106,8 +106,8 @@ services:
       - /proc:/proc
       - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
       - /home/aboulbox/www/aboulbox.com:/home/aboulbox/www/aboulbox.com
-    expose:
-      - 8120
+    ports:
+      - 8120:8120
     networks:
       - portfolio-net
 
