@@ -195,3 +195,10 @@ https://monitor.{$SERVER_NAME} {
 	authorize with users_policy
 	reverse_proxy glances:61208
 }
+
+https://agent.{$SERVER_NAME} {
+	import main
+	import fail2ban-logging agent
+	import no-robots
+	reverse_proxy periphery:8120
+}

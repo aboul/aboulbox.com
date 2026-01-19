@@ -88,5 +88,5 @@ jobs:
             export DIRECTUS_ADMIN_PASSWORD=$DIRECTUS_ADMIN_PASSWORD
             export ND_LASTFM_APIKEY=$ND_LASTFM_APIKEY
             export ND_LASTFM_SECRET=$ND_LASTFM_SECRET
-            export PERIPHERY_PASSKEYS
+            export PERIPHERY_PASSKEYS=$PERIPHERY_PASSKEYS
             make restart-prod
