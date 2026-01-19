@@ -13,12 +13,12 @@ services:
       - ./frontend:/app
       - /app/node_modules
       - /app/dist
-      - .env.dev:/app/.env
+      - .env:/app/.env
     command: npm run dev
 
   backend:
     volumes:
-      - .env.dev:/app/.env
+      - .env:/app/.env
     environment:
       DEBUG: express:*
     command: node --watch app.js
@@ -48,15 +48,13 @@ services:
     command: npm run start -- --host 0.0.0.0 --poll 1000
     
   immich:
-    env_file: ".env.dev"
     environment:
       - UPLOAD_LOCATION:./docker/immich/library
     volumes:
-      - .env.dev:/app/.env
+      - .env:/app/.env
       - ./docker/immich/library:/data
 
   directus:
-    env_file: ".env.dev"
     volumes:
       - ./docker/directus:/directus
       - /directus/node_modules
