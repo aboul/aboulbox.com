@@ -101,6 +101,7 @@ services:
       PERIPHERY_DISABLE_TERMINALS: false
       PERIPHERY_INCLUDE_DISK_MOUNTS: /etc/hostname
       PERIPHERY_STACK_DIR: /home/aboulbox/www/aboulbox.com
+      PERIPHERY_ALLOWED_IPS: "[90.1.168.15]"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc:/proc
