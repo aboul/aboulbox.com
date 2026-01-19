@@ -55,12 +55,7 @@ services:
       - .env:/app/.env
       - ./docker/immich/library:/data
 
-  directus:
-    command: >
-      sh -c "npm install && npx directus bootstrap && npx directus start"
-
   navidrome:
-    user: 1000:1000
     volumes:
       - ./docker/navidrome/data:/data
       - /media/HOME/Music/Classée:/music:ro
