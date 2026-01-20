@@ -176,12 +176,12 @@ services:
       - portfolio-net
 
   directus:
-    image: directus/directus:11.12.0
+    image: directus/directus:11
     container_name: directus
     restart: unless-stopped
     environment:
-      KEY: ${DIRECTUS_KEY:-a_random_secret_key}
-      SECRET: ${DIRECTUS_SECRET:-another_secret_value}
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
       ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
       DB_CLIENT: "pg"
@@ -192,6 +192,9 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       WEBSOCKETS_ENABLED: "true"
       CORS_ENABLED: "true"
+    volumes: 
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
     depends_on:
       - db
     networks:
