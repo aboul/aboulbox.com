@@ -87,31 +87,6 @@ services:
       - /media/storage/navidrome/data:/data
       - /media/storage/navidrome/music:/music:ro
 
-  periphery:
-    image: ghcr.io/moghtech/komodo-periphery:${COMPOSE_KOMODO_IMAGE_TAG:-latest}
-    container_name: periphery
-    labels:
-      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
-    restart: unless-stopped
-    ## https://komo.do/docs/connect-servers#configuration
-    environment:
-      PERIPHERY_ROOT_DIRECTORY: /media/storage/komodo
-      PERIPHERY_PASSKEYS: ${PERIPHERY_PASSKEYS}
-      PERIPHERY_SSL_ENABLED: true
-      PERIPHERY_DISABLE_TERMINALS: false
-      PERIPHERY_INCLUDE_DISK_MOUNTS: /etc/hostname
-      PERIPHERY_STACK_DIR: /home/aboulbox/www/aboulbox.com
-      PERIPHERY_ALLOWED_IPS: "[90.1.168.15]"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /proc:/proc
-      - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
-      - /home/aboulbox/www/aboulbox.com:/home/aboulbox/www/aboulbox.com
-    ports:
-      - 8120:8120
-    networks:
-      - portfolio-net
-
   glances:
     volumes:
       - /media/storage:/ssd:ro
