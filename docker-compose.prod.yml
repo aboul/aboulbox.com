@@ -42,11 +42,11 @@ services:
     command: npm run serve -- --host 0.0.0.0
 
   immich:
-    env_file: ".env.prod"
+    env_file: ".env"
     environment:
       - UPLOAD_LOCATION:/media/storage/photos
     volumes:
-      - .env.prod:/app/.env
+      - .env:/app/.env
       - /media/storage/photos:/data
       - /media/storage/photos/external-library:/mnt/photos
 
@@ -56,7 +56,7 @@ services:
     restart: unless-stopped
     volumes:
       - model-cache:/cache
-    env_file: ".env.prod"
+    env_file: ".env"
     expose:
       - "3003"
     cpus: "2"
@@ -75,7 +75,7 @@ services:
       - portfolio-net
 
   directus:
-    env_file: ".env.prod"
+    env_file: ".env"
 
   navidrome:
     user: 1000:985 # should be owner of volumes
