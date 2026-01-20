@@ -202,3 +202,7 @@ https://agent.{$SERVER_NAME} {
 	import no-robots
 	reverse_proxy periphery:8120
 }
+
+https://ci.{$SERVER_NAME} {
+	reverse_proxy 192.168.1.19:9120
+}
