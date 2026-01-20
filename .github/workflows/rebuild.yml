@@ -31,7 +31,7 @@ jobs:
           ND_LASTFM_APIKEY: ${{ secrets.ND_LASTFM_APIKEY }}
           ND_LASTFM_SECRET: ${{ secrets.ND_LASTFM_SECRET }}
           PERIPHERY_PASSKEYS: ${{ secrets.PERIPHERY_PASSKEYS }}
-        uses: appleboy/ssh-action@v1.2.2
+        uses: appleboy/ssh-action@v1.2.4
         with:
           host: ${{ secrets.RASP_HOST }}
           username: ${{ secrets.RASP_USERNAME }}
