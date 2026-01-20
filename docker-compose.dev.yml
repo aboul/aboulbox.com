@@ -6,7 +6,7 @@ services:
         debug
         local_certs
     volumes:
-      - ./docker/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
+      - ${STORAGE_BASE_PATH}/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
 
   frontend:
     volumes:
@@ -33,8 +33,8 @@ services:
   homepage:
     volumes:
       - .env.dev:/app/.env
-      - ./docker/homepage/config/services.dev.yaml:/app/config/services.yaml:ro
-      - ./docker/homepage/config/widgets.dev.yaml:/app/config/widgets.yaml:ro
+      - ${STORAGE_BASE_PATH}/homepage/config/services.dev.yaml:/app/config/services.yaml:ro
+      - ${STORAGE_BASE_PATH}/homepage/config/widgets.dev.yaml:/app/config/widgets.yaml:ro
 
   docusaurus:
     environment:
@@ -46,7 +46,7 @@ services:
 
   glances:
     volumes:
-      - ./docker/glances/conf/glances.dev.conf:/etc/glances/glances.conf:ro
+      - ${STORAGE_BASE_PATH}/glances/conf/glances.dev.conf:/etc/glances/glances.conf:ro
       - /media/HOME:/ssd:ro
       - /media/HOMEBACK:/backups:ro
     environment:
