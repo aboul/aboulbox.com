@@ -7,33 +7,16 @@ up:
 up-build:
 	docker compose --env-file .env -f docker-compose.yml -f docker-compose.dev.yml up -d --build --force-recreate
 
-up-build-local-prod: 
-	docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build --force-recreate
-
-up-prod:
-	docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-
-up-build-prod:
-	docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --force-recreate
-
 down:
-	docker compose down --remove-orphans
+	docker compose --env-file .env -f docker-compose.yml -f docker-compose.dev.yml down --remove-orphans
 
 logs:
-	docker compose logs -f
+	docker compose --env-file .env -f docker-compose.yml -f docker-compose.dev.yml logs -f
 
 bash: 
-	docker compose exec caddy sh
+	docker compose --env-file .env -f docker-compose.yml -f docker-compose.dev.yml exec caddy sh
 
 reload-caddy:
-	docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
+	docker compose --env-file .env -f docker-compose.yml -f docker-compose.dev.yml exec caddy caddy reload --config /etc/caddy/Caddyfile
 
 restart: down up
-
-restart-build: down up-build
-
-restart-local-prod: down up-build-local-prod
-
-restart-prod: down up-prod
-
-restart-build-prod: down up-build-prod
