@@ -23,7 +23,7 @@ services:
     container_name: frontend
     restart: unless-stopped
     environment:
-      - TZ='Europe/Paris'
+      TZ: ${TZ}
     depends_on:
       - backend
     extra_hosts:
@@ -40,19 +40,19 @@ services:
     container_name: backend
     restart: unless-stopped
     environment:
-      - TZ='Europe/Paris'
-      - MAILGUN_APIKEY=${MAILGUN_APIKEY}
-      - MAILGUN_DOMAIN=${MAILGUN_DOMAIN}
-      - MAILGUN_FROM_WHO=${MAILGUN_FROM_WHO}
-      - MAILGUN_TO_WHO_NAME=${MAILGUN_TO_WHO_NAME}
-      - MAILGUN_TO_WHO=${MAILGUN_TO_WHO}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_PORT=${POSTGRES_PORT}
-      - ALTCHA_HMAC_KEY=${ALTCHA_HMAC_KEY}
-      - SERVER_NAME=${SERVER_NAME}
+      TZ: ${TZ}
+      MAILGUN_APIKEY: ${MAILGUN_APIKEY}
+      MAILGUN_DOMAIN: ${MAILGUN_DOMAIN}
+      MAILGUN_FROM_WHO: ${MAILGUN_FROM_WHO}
+      MAILGUN_TO_WHO_NAME: ${MAILGUN_TO_WHO_NAME}
+      MAILGUN_TO_WHO: ${MAILGUN_TO_WHO}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      ALTCHA_HMAC_KEY: ${ALTCHA_HMAC_KEY}
+      SERVER_NAME: ${SERVER_NAME}
     depends_on:
       - db
     extra_hosts:
@@ -72,7 +72,7 @@ services:
     container_name: docusaurus
     restart: unless-stopped
     environment:
-      - TZ='Europe/Paris'
+      TZ: ${TZ}
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
@@ -103,7 +103,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./docker/homepage/images:/app/public/images
     environment:
-      TZ: Europe/Paris
+      TZ: ${TZ}
+      PUID: ${HOMEPAGE_PUID}
+      PGID: ${HOMEPAGE_PGID}
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
+      HOMEPAGE_VAR_ICAL_URL: ${HOMEPAGE_VAR_ICAL_URL}
     networks:
       - portfolio-net
 
@@ -112,10 +116,16 @@ services:
     container_name: immich
     restart: unless-stopped
     environment:
-      TZ: "Europe/Paris"
-      DB_DATABASE_NAME: ${DB_DATABASE_NAME}
+      TZ: ${TZ}
+      UPLOAD_LOCATION: ${IMMICH_UPLOAD_LOCATION}
+      DB_DATA_LOCATION: ${IMMICH_DB_DATA_LOCATION}
+      DB_HOSTNAME: ${IMMICH_POSTGRES_HOST}
+      DB_PASSWORD: ${IMMICH_DB_PASSWORD}
+      DB_USERNAME: ${IMMICH_DB_USERNAME}
+      DB_DATABASE_NAME: ${IMMICH_DB_DATABASE_NAME}
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - ${IMMICH_UPLOAD_LOCATION}:/data
     depends_on:
       - redis
       - db
@@ -142,9 +152,9 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami, immich, audiomusedb"
-      POSTGRES_USER: ${POSTGRES_USER:-myuser}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mypassword}
-      TZ: "Europe/Paris"
+      POSTGRES_USER: ${POSTGRES_USER:}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: ${TZ}
     ports:
       - 5432:5432
     extra_hosts:
@@ -193,6 +203,12 @@ services:
     restart: unless-stopped
     expose:
       - "4533"
+    environment:
+      - ND_LASTFM_APIKEY=${ND_LASTFM_APIKEY}
+      - ND_LASTFM_SECRET=${ND_LASTFM_SECRET}
+    volumes:
+      - ${ND_STORAGE_DATA}:/data
+      - ${ND_STORAGE_MUSIC}:/music:ro
     networks:
       - portfolio-net
 
@@ -209,7 +225,7 @@ services:
       - /:/rootfs:ro
     environment:
       - "GLANCES_OPT=-w"
-      - "TZ=Europe/Paris"
+      - TZ=${TZ}
     networks:
       - portfolio-net
 

@@ -1,7 +1,7 @@
 services:
   caddy:
     environment:
-      SERVER_NAME: ${SERVER_NAME:-abel-brien.localhost}
+      SERVER_NAME: ${SERVER_NAME}
       CADDY_GLOBAL_OPTIONS: |
         debug
         local_certs
@@ -31,9 +31,6 @@ services:
       LOG_QUERY: 1
 
   homepage:
-    environment:
-      - PUID=1000
-      - PGID=999
     volumes:
       - .env.dev:/app/.env
       - ./docker/homepage/config/services.dev.yaml:/app/config/services.yaml:ro
@@ -46,19 +43,6 @@ services:
       - ./docusaurus/Wiki:/opt/docusaurus
       - ./docs/personal-site:/opt/docusaurus/docs/personal-site
     command: npm run start -- --host 0.0.0.0 --poll 1000
-    
-  immich:
-    env_file: ".env"
-    environment:
-      - UPLOAD_LOCATION:./docker/immich/library
-    volumes:
-      - .env:/app/.env
-      - ./docker/immich/library:/data
-
-  navidrome:
-    volumes:
-      - ./docker/navidrome/data:/data
-      - /media/HOME/Music/Classée:/music:ro
 
   glances:
     volumes:

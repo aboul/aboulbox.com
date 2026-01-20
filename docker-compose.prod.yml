@@ -15,8 +15,8 @@ services:
     build:
       target: production
       args:
-        - SERVER_NAME=${SERVER_NAME}
-        - UMAMI_WEBSITE_CODE=${UMAMI_WEBSITE_CODE}
+        SERVER_NAME: ${SERVER_NAME}
+        UMAMI_WEBSITE_CODE: ${UMAMI_WEBSITE_CODE}
     volumes:
       - ./frontend/public/CV2025.pdf:/app/CV2025.pdf:ro
 
@@ -24,13 +24,8 @@ services:
     command: node app.js
 
   homepage:
-    environment:
-      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
-      - PUID=1000
-      - PGID=985
-      - HOMEPAGE_VAR_ICAL_URL=${HOMEPAGE_VAR_ICAL_URL}
     volumes:
-      - /media/storage:/mnt/storage
+      - ${STORAGE_BASE_PATH}:/mnt/storage
 
   docusaurus:
     build:
@@ -38,13 +33,8 @@ services:
     command: npm run serve -- --host 0.0.0.0
 
   immich:
-    env_file: ".env"
-    environment:
-      - UPLOAD_LOCATION:/media/storage/photos
     volumes:
-      - .env:/app/.env
-      - /media/storage/photos:/data
-      - /media/storage/photos/external-library:/mnt/photos
+      - ${IMMICH_UPLOAD_LOCATION}/external-library:/mnt/photos
 
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
@@ -52,7 +42,6 @@ services:
     restart: unless-stopped
     volumes:
       - model-cache:/cache
-    env_file: ".env"
     expose:
       - "3003"
     cpus: "2"
@@ -70,22 +59,12 @@ services:
     networks:
       - portfolio-net
 
-  directus:
-    env_file: ".env"
-
   navidrome:
     user: 1000:985 # should be owner of volumes
-    environment:
-      - ND_LASTFM_APIKEY=${ND_LASTFM_APIKEY}
-      - ND_LASTFM_SECRET=${ND_LASTFM_SECRET}
-    volumes:
-      - ./docker/glances/conf/glances.conf:/etc/glances/glances.conf:ro
-      - /media/storage/navidrome/data:/data
-      - /media/storage/navidrome/music:/music:ro
 
   glances:
     volumes:
-      - /media/storage:/ssd:ro
+      - ${STORAGE_BASE_PATH}:/ssd:ro
 
 volumes:
   model-cache:
