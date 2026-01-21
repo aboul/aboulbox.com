@@ -194,9 +194,6 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       WEBSOCKETS_ENABLED: "true"
       CORS_ENABLED: "true"
-    volumes: 
-      - ./uploads:/directus/uploads
-      - ./extensions:/directus/extensions
     depends_on:
       - db
     networks:
