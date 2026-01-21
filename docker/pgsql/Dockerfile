@@ -1,4 +1,4 @@
-FROM postgres:16.11
+FROM postgres:18.1
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
