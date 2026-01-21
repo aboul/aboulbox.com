@@ -37,7 +37,6 @@ services:
     expose:
       - "3003"
     cpus: "2"
-    cpu_percent: 50
     mem_limit: 2g
     mem_reservation: 1.5g
     deploy:
@@ -49,7 +48,7 @@ services:
           cpus: "2"
           memory: 1.5g
     networks:
-      - portfolio-net
+      - immich-network
 
   navidrome:
     user: 1000:985 # should be owner of volumes

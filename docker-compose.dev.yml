@@ -81,7 +81,10 @@ services:
   #             device_ids: ["0"]
   #             capabilities: [gpu]
   #   networks:
-  #     - portfolio-net
+  #     - proxy-network
+  #     - database-network
+  #     - navidrome-network
+  #     - audiomuse-network 
 
   # # AudioMuse-AI RQ Worker service
   # audiomuse-ai-worker:
@@ -123,7 +126,9 @@ services:
   #             device_ids: ["0"]
   #             capabilities: [gpu]
   #   networks:
-  #     - portfolio-net
+  #     - database-network
+  #     - navidrome-network
+  #     - audiomuse-network 
 
   # audiomuse-redis:
   #   image: redis:7-alpine
@@ -134,9 +139,16 @@ services:
   #   volumes:
   #     - audiomuse-redis-data:/data # Persistent storage for Redis data
   #   networks:
-  #     - portfolio-net
+  #     - audiomuse-network 
 
 volumes:
   audiomuse-temp-audio-flask:
   audiomuse-temp-audio-worker:
   audiomuse-redis-data:
+
+networks:
+  audiomuse-network:
+    driver: bridge
+  navidrome-network:
+    driver: bridge
+  
