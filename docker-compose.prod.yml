@@ -12,25 +12,17 @@ services:
       - ./docker/caddy/data/users.json:/data/caddy/.local/users.json
 
   frontend:
-    build:
-      target: production
-      args:
-        SERVER_NAME: ${SERVER_NAME}
-        UMAMI_WEBSITE_CODE: ${UMAMI_WEBSITE_CODE}
-    volumes:
-      - ./frontend/public/CV2025.pdf:/app/CV2025.pdf:ro
+    command: sh -c "npm ci && npm run build-production && serve -s dist"
 
   backend:
-    command: node app.js
+    command: sh -c "npm install && node app.js"
 
   homepage:
     volumes:
       - ${STORAGE_BASE_PATH}:/mnt/storage
 
   docusaurus:
-    build:
-      target: production
-    command: npm run serve -- --host 0.0.0.0 --no-open
+    command: sh -c "npm ci && npm run build && npm run serve -- --host 0.0.0.0 --no-open" 
 
   immich:
     volumes:

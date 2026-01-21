@@ -12,18 +12,23 @@ services:
       - caddy-data:/data
     networks:
       - portfolio-net
-    depends_on:
-      - frontend
-      - docusaurus
 
   frontend:
     build:
       target: install-frontend
       dockerfile: docker/frontend/Dockerfile
+      args:
+        SERVER_NAME: ${SERVER_NAME}
+        UMAMI_WEBSITE_CODE: ${UMAMI_WEBSITE_CODE}
     container_name: frontend
     restart: unless-stopped
     environment:
       TZ: ${TZ}
+    volumes:
+      - .env:/app/.env
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/dist
     depends_on:
       - backend
     extra_hosts:
@@ -67,7 +72,6 @@ services:
   docusaurus:
     build:
       context: .
-      target: install-docusaurus
       dockerfile: docker/docusaurus/Dockerfile
     container_name: docusaurus
     restart: unless-stopped

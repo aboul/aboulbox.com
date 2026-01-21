@@ -121,11 +121,11 @@ https://{$SERVER_NAME} {
 		import security
 		import static
 		redir /404/ /404
-		reverse_proxy frontend:8080 {
+		reverse_proxy frontend:3000 {
 			@404 status 404
 			handle_response @404 {
 				rewrite * /{err.status_code}
-				reverse_proxy frontend:8080 {
+				reverse_proxy frontend:3000 {
 					handle_response {
 						copy_response {
 							status 404

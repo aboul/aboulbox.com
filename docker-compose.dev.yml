@@ -9,19 +9,14 @@ services:
       - ${STORAGE_BASE_PATH}/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
 
   frontend:
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/dist
-      - .env:/app/.env
-    command: npm run dev
+    command: sh -c "npm install && npm run dev"
 
   backend:
     volumes:
       - .env:/app/.env
     environment:
       DEBUG: express:*
-    command: node --watch app.js
+    command: sh -c "npm install && node --watch app.js"
 
   umami:
     environment:
@@ -39,10 +34,7 @@ services:
   docusaurus:
     environment:
       DEBUG: search-local:*
-    volumes:
-      - ./docusaurus/Wiki:/opt/docusaurus
-      - ./docs/personal-site:/opt/docusaurus/docs/personal-site
-    command: npm run start -- --host 0.0.0.0 --poll 1000
+    command: sh -c "npm install && npm run start -- --host 0.0.0.0 --poll 1000"
 
   glances:
     volumes:
