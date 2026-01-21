@@ -86,7 +86,7 @@ export async function sendMail(contact) {
       from: name + "<" + MG_FROM_WHO + ">",
       to: [MG_TO_WHO_NAME + "<" + MG_TO_WHO + ">"],
       subject: subject,
-      text: email + "\n" + message,
+      text: email + "\n" + "\n" + message,
     })
     .then((msg) => {
       isMailDelivered = true;
