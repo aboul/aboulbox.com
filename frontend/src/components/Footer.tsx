@@ -46,15 +46,15 @@ const Footer: React.FC = () => {
         </a>
         . This website runs on{" "}
         <a
-          href="https://www.digitalocean.com/"
+          href="https://www.raspberrypi.com/"
           className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
           target="_blank"
           rel="noreferrer noopener"
-          aria-label="Digital Ocean (opens in a new tab)"
+          aria-label="Raspberry Pi (opens in a new tab)"
         >
-          Digital Ocean
+          My personal Raspberry Pi 5 server
         </a>{" "}
-        droplet with a custom docker stack and is served by{" "}
+        with a custom docker stack and is served by{" "}
         <a
           href="https://caddyserver.com/"
           className="font-medium text-slate-400 hover:text-teal-300 focus-visible:text-teal-300"
