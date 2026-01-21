@@ -20,7 +20,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
     "framer-motion": "^12.23.22",
-    "lucide-react": "^0.344.0",
+    "lucide-react": "^0.562.0",
     "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
