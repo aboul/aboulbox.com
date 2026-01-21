@@ -5,7 +5,6 @@ FROM base AS install-frontend
 WORKDIR /app
 COPY /frontend/package*.json .
 RUN npm install
-COPY /frontend .
 
 RUN npm install -g serve
 
