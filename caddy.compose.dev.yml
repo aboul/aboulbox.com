@@ -1,0 +1,16 @@
+services:
+  caddy:
+    environment:
+      CADDY_GLOBAL_OPTIONS: |
+        debug
+        local_certs
+    volumes:
+      - ${STORAGE_BASE_PATH}/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
+
+volumes:
+  caddy-config:
+  caddy-data:
+
+networks:
+  proxy-network:
+    driver: bridge

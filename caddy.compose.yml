@@ -1,0 +1,24 @@
+services:
+  caddy:
+    build:
+      dockerfile: docker/caddy/Dockerfile
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      SERVER_NAME: ${SERVER_NAME}
+    volumes:
+      - caddy-config:/config
+      - caddy-data:/data
+    networks:
+      - proxy-network
+
+volumes:
+  caddy-config:
+  caddy-data:
+
+networks:
+  proxy-network:
+    driver: bridge

@@ -1,18 +1,4 @@
 services:
-  caddy:
-    build:
-      dockerfile: docker/caddy/Dockerfile
-    container_name: caddy
-    restart: unless-stopped
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - caddy-config:/config
-      - caddy-data:/data
-    networks:
-      - proxy-network
-
   frontend:
     build:
       target: install-frontend
@@ -99,7 +85,7 @@ services:
       - database-network
 
   homepage:
-    image: ghcr.io/gethomepage/homepage:v1.9.0 #v1.8.0
+    image: ghcr.io/gethomepage/homepage:v1.9.0 #v1.9.0
     container_name: homepage
     restart: unless-stopped
     volumes:
@@ -238,12 +224,8 @@ services:
 
 volumes:
   pgdata:
-  caddy-config:
-  caddy-data:
 
 networks:
-  proxy-network:
-    driver: bridge
   database-network:
     driver: bridge
   immich-network:

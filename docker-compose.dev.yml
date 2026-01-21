@@ -1,7 +1,6 @@
 services:
   caddy:
     environment:
-      SERVER_NAME: ${SERVER_NAME}
       CADDY_GLOBAL_OPTIONS: |
         debug
         local_certs
