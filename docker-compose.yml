@@ -29,8 +29,6 @@ services:
       - ./frontend:/app
       - /app/node_modules
       - /app/dist
-    depends_on:
-      - backend
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
