@@ -5,7 +5,7 @@ services:
         grace_period 10s
         default_sni ${SERVER_NAME}
     volumes:
-      - .docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - /var/log/caddy:/var/log/caddy
       - ./docker/caddy/data/auth/:/etc/gatekeeper/auth
       - ./docker/caddy/data/users.json:/data/caddy/.local/users.json
