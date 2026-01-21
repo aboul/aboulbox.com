@@ -20,5 +20,5 @@ volumes:
   caddy-data:
 
 networks:
-  proxy-network:
-    driver: bridge
+  aboulboxcom_proxy-network:
+    external: true
