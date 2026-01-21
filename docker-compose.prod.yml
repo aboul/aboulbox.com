@@ -30,7 +30,7 @@ services:
   docusaurus:
     build:
       target: production
-    command: npm run serve -- --host 0.0.0.0
+    command: npm run serve -- --host 0.0.0.0 --no-open
 
   immich:
     volumes:
