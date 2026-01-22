@@ -18,7 +18,7 @@ services:
 
   homepage:
     volumes:
-      - .env.dev:/app/.env
+      - .env:/app/.env
       - ${STORAGE_BASE_PATH}/homepage/config/services.dev.yaml:/app/config/services.yaml:ro
       - ${STORAGE_BASE_PATH}/homepage/config/widgets.dev.yaml:/app/config/widgets.yaml:ro
 
