@@ -20,5 +20,5 @@ volumes:
   caddy-data:
 
 networks:
-  aboulboxcom_proxy-network:
+  caddy_proxy-network:
     external: true
