@@ -77,7 +77,6 @@ services:
     restart: unless-stopped
     depends_on:
       - db
-      - caddy
     labels:
       org.label-schema.group: "analytics"
     networks:
