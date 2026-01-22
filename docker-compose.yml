@@ -226,6 +226,9 @@ volumes:
   pgdata:
 
 networks:
+  proxy-network:
+    driver: bridge
+    name: caddy_proxy-network
   database-network:
     driver: bridge
   immich-network:
