@@ -20,5 +20,6 @@ volumes:
   caddy-data:
 
 networks:
-  caddy_proxy-network:
-    external: true
+  proxy-network:
+    driver: bridge
+    name: caddy_proxy-network
