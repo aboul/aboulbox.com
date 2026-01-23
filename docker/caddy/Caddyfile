@@ -144,12 +144,12 @@ https://{$SERVER_NAME:localhost} {
 			redir @not_404 /404
 		}
 
-		reverse_proxy @404 frontend:8080 {
+		reverse_proxy @404 frontend:3000 {
 			replace_status 404
 		}
 	}
 
-	reverse_proxy frontend:8080
+	reverse_proxy frontend:3000
 }
 
 https://auth.{$SERVER_NAME} {
