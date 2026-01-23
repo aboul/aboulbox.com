@@ -24,7 +24,6 @@ export default defineConfig(({ mode }) => {
   } 
 
   // Enable env variables in index.html
-
   const htmlPlugin = () => {
       return {
           name: "html-transform",
@@ -48,18 +47,18 @@ export default defineConfig(({ mode }) => {
       exclude: ['lucide-react'],
     },
     preview: {
-      port: 8080,
+      port: 3000,
       strictPort: true,
     },
     server: {
-      port: 8080,
+      port: 3000,
       strictPort: true,
       host: true,
-      origin: "https://localhost:" + 8080,
+      origin: "https://localhost:" + 3000,
       hmr: hmr,
       watch: {
         usePolling: true
-      }
+      },
     },
     resolve: {
       alias: {

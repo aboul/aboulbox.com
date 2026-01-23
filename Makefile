@@ -14,9 +14,9 @@ logs:
 	docker compose --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml -f docker-compose.yml -f docker-compose.dev.yml logs -f
 
 bash: 
-	docker compose --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml -f docker-compose.yml -f docker-compose.dev.yml exec caddy sh
+	docker compose -p caddy --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml exec caddy sh
 
 reload-caddy:
-	docker compose --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml -f docker-compose.yml -f docker-compose.dev.yml exec caddy caddy reload --config /etc/caddy/Caddyfile
+	docker compose -p caddy --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml exec caddy caddy reload --config /etc/caddy/Caddyfile
 
 restart: down up

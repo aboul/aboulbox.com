@@ -75,7 +75,7 @@ services:
   #     - proxy-network
   #     - database-network
   #     - navidrome-network
-  #     - audiomuse-network 
+  #     - audiomuse-network
 
   # # AudioMuse-AI RQ Worker service
   # audiomuse-ai-worker:
@@ -103,7 +103,7 @@ services:
   #     NVIDIA_DRIVER_CAPABILITIES: "${NVIDIA_DRIVER_CAPABILITIES}"
   #     USE_GPU_CLUSTERING: "${USE_GPU_CLUSTERING:-false}"
   #     PER_SONG_MODEL_RELOAD: "${PER_SONG_MODEL_RELOAD:-true}"
-      
+
   #   volumes:
   #     - audiomuse-temp-audio-worker:/app/temp_audio
   #   depends_on:
@@ -119,7 +119,7 @@ services:
   #   networks:
   #     - database-network
   #     - navidrome-network
-  #     - audiomuse-network 
+  #     - audiomuse-network
 
   # audiomuse-redis:
   #   image: redis:7-alpine
@@ -130,7 +130,7 @@ services:
   #   volumes:
   #     - audiomuse-redis-data:/data # Persistent storage for Redis data
   #   networks:
-  #     - audiomuse-network 
+  #     - audiomuse-network
 
 volumes:
   audiomuse-temp-audio-flask:
@@ -142,4 +142,3 @@ networks:
     driver: bridge
   navidrome-network:
     driver: bridge
-  

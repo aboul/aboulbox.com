@@ -1,5 +1,4 @@
 import React from "react";
-import "altcha";
 import {
   Mail,
   Phone,
@@ -12,6 +11,7 @@ import {
 
 import { InputErrorMessage } from "./InputErrorMessage";
 import CopyButton from "./CopyButton";
+import Altcha from "./Altcha";
 
 const Contact: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -22,21 +22,8 @@ const Contact: React.FC = () => {
   }>({});
   const messageDelay = 5000;
 
-  interface captchaPropsInterface {
-    debug?: boolean;
-    test?: boolean;
-  }
-
-  let captchaProps: captchaPropsInterface = {};
-  const captchaDebugProps: captchaPropsInterface = {
-    debug: true,
-    test: true,
-  };
-
-  if (process.env.NODE_ENV === "development") captchaProps = captchaDebugProps;
-
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     setInputErrors((prevErrors) => ({
       ...prevErrors,
@@ -86,7 +73,7 @@ const Contact: React.FC = () => {
                       ...prevErrors,
                       [error.path]: error.msg,
                     }));
-                  }
+                  },
                 );
               }
 
@@ -359,19 +346,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div>
-                <altcha-widget
-                  id="altcha"
-                  style={{
-                    "--altcha-color-border": "var(--color-gray-600)",
-                    "--altcha-color-base": "var(--color-teal-950)",
-                    "--altcha-border-radius": "var(--radius)",
-                    "--altcha-color-text": "var(--color-gray-400)",
-                  }}
-                  hidelogo
-                  hidefooter
-                  challengeurl="api/altcha"
-                  {...captchaProps}
-                ></altcha-widget>
+                <Altcha />
               </div>
 
               <button

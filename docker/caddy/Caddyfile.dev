@@ -44,35 +44,51 @@
 		X-Content-Type-Options nosniff
 		# keep referrer data off of HTTP connections
 		Referrer-Policy no-referrer-when-downgrade
+		# disable FLoC tracking
+		Permissions-Policy interest-cohort=()
+		# Enable cross-site filter (XSS)
+		# and tell browser to block detected attacks
+		#Content-Security-Policy "default-src 'self' *.{$SERVER_NAME} 'nonce-random'; style-src 'self' *.{$SERVER_NAME} 'nonce-random'; script-src 'self' *.{$SERVER_NAME} 'nonce-random'; font-src 'self' 'nonce-random'; img-src 'self' 'nonce-random'; form-action 'self' 'nonce-random'; connect-src 'self' *.{$SERVER_NAME} 'nonce-random'; frame-ancestors 'none'; worker-src 'self' blob:"
+		# prevent clickjacking
+		X-Frame-Options: DENY
 	}
 }
 
 https://{$SERVER_NAME:localhost} {
 	import main
+	import security
+	import static
 	encode zstd gzip
 
+	# Handle API requests
 	handle /api* {
 		import security
 		reverse_proxy backend:3001
 	}
 
-	handle {
-		import static
-		redir /404/ /404
-		reverse_proxy frontend:8080 {
-			@404 status 404
-			handle_response @404 {
-				rewrite * /{err.status_code}
-				reverse_proxy frontend:8080 {
-					handle_response {
-						copy_response {
-							status 404
-						}
-					}
-				}
-			}
+	@not_excluded { 
+		not path *.* /@*
+	}
+
+	@not_404 { 
+		not path /404 /
+	}
+
+	@404 {
+		path /404
+	}
+
+	handle @not_excluded {
+		handle @not_404 {
+			redir @not_404 /404
+		}
+
+		reverse_proxy @404 frontend:3000 {
+			replace_status 404
 		}
 	}
+
+	reverse_proxy frontend:3000
 }
 
 https://umami.{$SERVER_NAME:localhost} {

@@ -1,6 +1,6 @@
 services:
   frontend:
-    command: sh -c "npm ci && npm run build-production && serve -s dist"
+    command: sh -c "npm ci && npm run build && serve -s dist"
 
   backend:
     command: sh -c "npm install && node app.js"
@@ -10,7 +10,7 @@ services:
       - ${STORAGE_BASE_PATH}:/mnt/storage
 
   docusaurus:
-    command: sh -c "npm ci && npm run build && npm run serve -- --host 0.0.0.0 --no-open" 
+    command: sh -c "npm ci && npm run build && npm run serve -- --host 0.0.0.0 --no-open"
 
   immich:
     volumes:
