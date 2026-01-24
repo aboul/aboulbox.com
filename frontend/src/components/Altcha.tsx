@@ -17,8 +17,7 @@ const Altcha: React.FC = () => {
   return (
     <ClientOnly>
       {() => {
-        import("altcha/external");
-        import("altcha/altcha.css");
+        import("altcha");
         return (
           <altcha-widget
             id="altcha"
