@@ -98,6 +98,12 @@ https://{$SERVER_NAME:localhost} {
 	import static
 	encode zstd gzip
 
+	# Handle API requests
+	handle /api* {
+		import security
+		reverse_proxy backend:3001
+	}
+
 	reverse_proxy website:3000
 }
 
