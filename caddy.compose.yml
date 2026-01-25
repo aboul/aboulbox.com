@@ -12,7 +12,7 @@ services:
     volumes:
       - caddy-config:/config
       - caddy-data:/data
-      - aboulbox-dist:/srv/site
+      - aboulbox-dist:/srv/site:ro
     networks:
       - proxy-network
 

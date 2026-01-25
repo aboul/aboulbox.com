@@ -25,7 +25,7 @@ services:
     image: node:lts-alpine
     container_name: website
     working_dir: /app
-    restart: unless-stopped
+    profiles: ["build"]
     environment:
       TZ: ${TZ}
     volumes:
