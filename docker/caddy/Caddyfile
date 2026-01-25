@@ -114,7 +114,7 @@
 	}
 }
 
-https://{$SERVER_NAME:localhost} {
+https://v1.{$SERVER_NAME:localhost} {
 	import main
 	import security
 	import static
@@ -152,7 +152,7 @@ https://{$SERVER_NAME:localhost} {
 	reverse_proxy frontend:3000
 }
 
-https://v2.{$SERVER_NAME:localhost} {
+https://{$SERVER_NAME:localhost} {
 	import main
 	import security
 	import static
