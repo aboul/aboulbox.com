@@ -29,6 +29,7 @@ services:
     environment:
       TZ: ${TZ}
     volumes:
+      - .env:/app/.env
       - ./aboulbox-site:/app
       - aboulbox-dist:/app/dist
     extra_hosts:

@@ -159,7 +159,7 @@ https://v2.{$SERVER_NAME:localhost} {
 	encode zstd gzip
 
 	root * /srv/site
-	try_files {path}.html
+	try_files {path} {path}.html
 
 	handle /404* {
 		root * /srv/site

@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import { BackgroundBeams } from "@/components/ui/shadcn-io/background-beams";
 const { title } = Astro.props;
+const umamiScript =
+  "https://umami." + import.meta.env.SERVER_NAME + "/script.js";
 ---
 
 <!doctype html>
@@ -13,7 +15,7 @@ const { title } = Astro.props;
     <script
       is:inline
       defer
-      src="https://umami.abel-brien.localhost/script.js"
+      src={umamiScript}
       data-website-id="e9b34fca-cb81-4285-8671-e4430d1132f9"></script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
