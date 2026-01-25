@@ -1,11 +1,11 @@
 // @ts-check
-import { defineConfig, envField } from "astro/config";
+import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  base: "",
+  base: "/",
   site: import.meta.env.SERVER_NAME,
   trailingSlash: "never",
   integrations: [react()],
