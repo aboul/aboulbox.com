@@ -26,17 +26,10 @@ services:
     container_name: website
     working_dir: /app
     profiles: ["build"]
-    environment:
-      TZ: ${TZ}
     volumes:
       - .env:/app/.env
       - ./aboulbox-site:/app
       - aboulbox-dist:/app/dist
-    extra_hosts:
-      # Ensure that host.docker.internal is correctly defined on Linux
-      - host.docker.internal:host-gateway
-    networks:
-      - proxy-network
 
   backend:
     build:
