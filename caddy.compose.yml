@@ -12,12 +12,15 @@ services:
     volumes:
       - caddy-config:/config
       - caddy-data:/data
+      - aboulbox-dist:/srv/site
     networks:
       - proxy-network
 
 volumes:
   caddy-config:
   caddy-data:
+  aboulbox-dist:
+    external: true
 
 networks:
   proxy-network:

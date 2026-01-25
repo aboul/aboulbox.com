@@ -21,6 +21,22 @@ services:
     networks:
       - proxy-network
 
+  website:
+    image: node:lts-alpine
+    container_name: website
+    working_dir: /app
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - ./aboulbox-site:/app
+      - aboulbox-dist:/app/dist
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
+    networks:
+      - proxy-network
+
   backend:
     build:
       context: .
@@ -133,7 +149,7 @@ services:
       - proxy-network
       - database-network
       - immich-network
-      
+
   db:
     image: ghcr.io/immich-app/postgres:16-vectorchord0.5.3-pgvector0.8.1
     container_name: db
@@ -153,7 +169,6 @@ services:
       - ./docker/pgsql/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       - database-network
-      
 
   redis:
     image: docker.io/valkey/valkey:9@sha256:fb8d272e529ea567b9bf1302245796f21a2672b8368ca3fcb938ac334e613c8f
@@ -221,6 +236,8 @@ services:
 
 volumes:
   pgdata:
+  aboulbox-dist:
+    external: true
 
 networks:
   proxy-network:

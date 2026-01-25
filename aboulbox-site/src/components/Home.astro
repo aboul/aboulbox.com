@@ -1,0 +1,17 @@
+---
+import Header from "./Header.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import Experience from "../components/Experience.astro";
+---
+
+<div class="lg:flex lg:justify-between lg:gap-4">
+  <Header />
+  <main id="content" class="pt-16 lg:w-[52%] lg:py-24">
+    <About />
+    <Experience />
+    <Contact />
+    <Footer />
+  </main>
+</div>

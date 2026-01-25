@@ -89,6 +89,16 @@ https://{$SERVER_NAME:localhost} {
 	}
 
 	reverse_proxy frontend:3000
+
+}
+
+https://v2.{$SERVER_NAME:localhost} {
+	import main
+	import security
+	import static
+	encode zstd gzip
+
+	reverse_proxy website:3000
 }
 
 https://umami.{$SERVER_NAME:localhost} {

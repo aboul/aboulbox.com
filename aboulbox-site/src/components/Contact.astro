@@ -1,0 +1,92 @@
+---
+import { Mail, Phone, MapPin } from "lucide-react";
+import CopyButton from "./CopyButton";
+import ContactForm from "./ContactForm";
+
+const contactInfo = [
+  {
+    icon: Mail,
+    title: "Email",
+    details: "abel.brien@gmail.com",
+    doCopy: true,
+  },
+  {
+    icon: Phone,
+    title: "Phone",
+    details: "06 75 23 44 62",
+    doCopy: true,
+  },
+  {
+    icon: MapPin,
+    title: "Location",
+    details: "Toulouse, Occitanie, France",
+    doCopy: false,
+  },
+];
+
+const iconComponents: any = {
+  Mail,
+  Phone,
+  MapPin,
+};
+---
+
+<section
+  id="contact"
+  class="mb-12 scroll-mt-16 md:mb-18 lg:mb-24 lg:scroll-mt-24"
+>
+  <div
+    class="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur-sm md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0"
+  >
+    <h2
+      class="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only"
+    >
+      Contact
+    </h2>
+  </div>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto relative z-10">
+      {/* Contact Info */}
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-white mb-6">
+          Let's Start a Conversation
+        </h3>
+        <p class="text-gray-300 mb-8 leading-relaxed">
+          I'm passionate about collaborating on innovative projects that push
+          the boundaries of web development. Whether you have a groundbreaking
+          idea or just want to connect, I'd love to hear from you.
+        </p>
+
+        <div class="space-y-4">
+          {
+            contactInfo.map((info) => {
+              const MyIcon: any = info.icon;
+              return (
+                <div class="group flex items-center space-x-4 p-4 bg-slate-700/50 rounded-xl border border-gray-700 hover:border-blue-500/50 hover:bg-slate-800/30 transition-all duration-300">
+                  <div class="shrink-0">
+                    <MyIcon className={`w-5 h-5 text-white`} />
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-white">{info.title}</h4>
+                    <p class="text-gray-400">{info.details}</p>
+                  </div>
+
+                  {info.doCopy && (
+                    <CopyButton
+                      client:load
+                      textToCopy={info.details.replace(/\s+/g, "")}
+                      iconClassName="w-4 h-4"
+                      className={`overflow-hidden cursor-pointer opacity-0 group-hover:opacity-100 ml-auto p-2 rounded-full bg-slate-700/40 transition-all 
+                    duration-300 hover:scale-120 hover:bg-slate-700/80`}
+                    />
+                  )}
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+      <ContactForm client:only="react" />
+    </div>
+  </div>
+</section>

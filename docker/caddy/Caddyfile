@@ -152,6 +152,37 @@ https://{$SERVER_NAME:localhost} {
 	reverse_proxy frontend:3000
 }
 
+https://v2.{$SERVER_NAME:localhost} {
+	import main
+	import security
+	import static
+	encode zstd gzip
+
+	root * /srv/site
+	try_files {path}.html
+
+	handle /404* {
+		root * /srv/site
+		file_server {
+			status 404
+		}
+	}
+
+	handle {
+		file_server {
+			hide .*
+		}
+	}
+
+	handle_errors {
+		@404 {
+			expression {http.error.status_code} == 404
+		}
+		rewrite @404 /404.html
+		file_server
+	}
+}
+
 https://auth.{$SERVER_NAME} {
 	import fail2ban-logging auth
 	import no-robots
