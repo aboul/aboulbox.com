@@ -234,6 +234,7 @@ volumes:
 
 networks:
   proxy-network:
+    external: true
     driver: bridge
     name: caddy_proxy-network
   database-network:
