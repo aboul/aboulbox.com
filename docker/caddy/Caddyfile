@@ -164,11 +164,11 @@ https://{$SERVER_NAME:localhost} {
 		reverse_proxy backend:3001
 	}
 
-	root * /srv/site
+	root * /srv/site/current
 	try_files {path} {path}.html
 
 	handle /404* {
-		root * /srv/site
+		root * /srv/site/current
 		file_server {
 			status 404
 		}

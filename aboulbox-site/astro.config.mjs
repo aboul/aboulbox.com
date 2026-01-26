@@ -2,6 +2,10 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
+import getFilesOnDisk from "./plugins/build-release";
+
+const buildDir = "dest/release_" + Date.now();
+const outDir = import.meta.env.DEV ? "dist" : "dest/current";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,11 +14,9 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [react()],
   server: { port: 3000, host: true },
-
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), getFilesOnDisk(buildDir)],
   },
-  experimental: {
-    chromeDevtoolsWorkspace: true,
-  },
+
+  outDir: outDir,
 });

@@ -25,11 +25,10 @@ services:
     image: node:lts-alpine
     container_name: website
     working_dir: /app
-    profiles: ["build"]
     volumes:
       - .env:/app/.env
       - ./aboulbox-site:/app
-      - aboulbox-dist:/app/dist
+      - aboulbox-dist:/app/dest:rw
 
   backend:
     build:

@@ -28,3 +28,4 @@ dist-ssr
 docker/caddy/data
 docker/immich
 docker/navidrome
+aboulbox-site/dest
