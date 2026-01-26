@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import getFilesOnDisk from "./plugins/build-release";
 
 const buildDir = "dest/release_" + Date.now();
-const outDir = import.meta.env.DEV ? "dist" : "dest/current";
+const outDir = import.meta.env.DEV ? "dist" : buildDir;
 
 // https://astro.build/config
 export default defineConfig({
