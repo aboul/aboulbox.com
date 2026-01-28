@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@aboulbox/vite-plugin-rolling-release": "^1.0.0",
     "@astrojs/react": "^4.4.2",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/postcss": "^4.1.18",
