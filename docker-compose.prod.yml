@@ -1,7 +1,4 @@
 services:
-  frontend:
-    command: sh -c "npm ci && npm run build && serve -s dist"
-
   website:
     profiles: ["build"]
     command: sh -c "npm ci && npm run build"

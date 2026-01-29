@@ -1,33 +1,11 @@
 services:
-  frontend:
-    build:
-      target: install-frontend
-      dockerfile: docker/frontend/Dockerfile
-      args:
-        SERVER_NAME: ${SERVER_NAME}
-        UMAMI_WEBSITE_CODE: ${UMAMI_WEBSITE_CODE}
-    container_name: frontend
-    restart: unless-stopped
-    environment:
-      TZ: ${TZ}
-    volumes:
-      - .env:/app/.env
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/dist
-    extra_hosts:
-      # Ensure that host.docker.internal is correctly defined on Linux
-      - host.docker.internal:host-gateway
-    networks:
-      - proxy-network
-
   website:
     image: node:lts-alpine
     container_name: website
     working_dir: /app
     volumes:
       - .env:/app/.env
-      - ./aboulbox-site:/app
+      - ./website:/app
       - aboulbox-dist:/app/dest:rw
 
   backend:

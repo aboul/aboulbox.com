@@ -1,7 +1,4 @@
 services:
-  frontend:
-    command: sh -c "npm install && npm run dev"
-
   website:
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
