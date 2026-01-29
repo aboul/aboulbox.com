@@ -5,41 +5,41 @@
 - Daily:
     - Calendar:
         widget:
-            type: calendar
-            view: monthly # optional - possible values monthly, agenda
-            showTime: true
-            integrations: 
-            -   type: ical
-                url: {{HOMEPAGE_VAR_ICAL_URL}}
-                color: green
+          type: calendar
+          view: monthly # optional - possible values monthly, agenda
+          showTime: true
+          integrations:
+            - type: ical
+              url: { { HOMEPAGE_VAR_ICAL_URL } }
+              color: green
 
-- Ressources: 
+- Ressources:
     - Info:
         widget:
-            type: glances
-            url: http://glances:61208
-            version: 4
-            metric: info
+          type: glances
+          url: http://glances:61208
+          version: 4
+          metric: info
     - Top Processes:
         widget:
-            type: glances
-            url: http://glances:61208
-            version: 4
-            metric: process
+          type: glances
+          url: http://glances:61208
+          version: 4
+          metric: process
     - WAN:
         widget:
-            type: glances
-            url: http://glances:61208
-            version: 4
-            metric: network:eth0
-            refreshInterval: 1000
+          type: glances
+          url: http://glances:61208
+          version: 4
+          metric: network:eth0
+          refreshInterval: 1000
     - LAN:
         widget:
-            type: glances
-            url: http://glances:61208
-            version: 4
-            metric: network:lo
-            refreshInterval: 1000
+          type: glances
+          url: http://glances:61208
+          version: 4
+          metric: network:lo
+          refreshInterval: 1000
 
 - Aboulbox:
     - Caddy:
@@ -48,8 +48,8 @@
         container: caddy
         showStats: true
         widget:
-            type: caddy
-            url: http://caddy:2019
+          type: caddy
+          url: http://caddy:2019
     - Frontend:
         icon: mdi-react.svg
         server: my-docker
@@ -101,7 +101,6 @@
         container: glances
         href: http://monitor.aboulbox.com/
 
-
 - Useful links:
     - For coding:
         - Github:
@@ -132,7 +131,7 @@
             href: https://facebook.com
         - Reddit:
             icon: sh-reddit-light.svg
-            href: https://www.reddit.com/r/francenew
+            href: https://www.reddit.com/r/france/new
         - Instagram:
             icon: sh-instagram-light.svg
             href: https://www.instagram.com/
