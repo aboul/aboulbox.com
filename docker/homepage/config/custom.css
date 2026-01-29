@@ -1,69 +1,72 @@
 body {
-    background-position: center !important;
-    background-size: contain !important;
+  background-position: center !important;
+  background-size: contain !important;
 }
 
 /* === Card Shadow (Only for Cards) === */
 .service-card {
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
     /* base drop shadow */ 0 0 2px rgba(255, 255, 255, 0.2),
     /* soft glow or outer ring */ inset 0 0 2px rgba(255, 255, 255, 0.1) !important; /* subtle inner edge */
 }
 
 /* === Light Text Shadow for Readability === */
 * {
-text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), -1px -1px 1px rgba(0, 0, 0, 0.6),
+  text-shadow:
+    1px 1px 1px rgba(0, 0, 0, 0.6),
+    -1px -1px 1px rgba(0, 0, 0, 0.6),
     0px 0px 2px rgba(0, 0, 0, 8);
 }
 
 /* === Optional: Bookmark Styling === */
 .service-card {
-    background-color: rgba(255, 255, 255, 0.07) !important;
-    border: 1px solid rgba(128, 128, 128, 0.35);
+  background-color: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(128, 128, 128, 0.35);
 }
 
 /* ########## #GLANCES COLOR ######### */
 
 /* RX gradient (download) */
 #colorA stop[offset="5%"] {
-    stop-color: #af8df7 !important;
-    stop-opacity: 0.5 !important; /* 80% visible */
+  stop-color: #af8df7 !important;
+  stop-opacity: 0.5 !important; /* 80% visible */
 }
 #colorA stop[offset="95%"] {
-    stop-color: #af8df7 !important;
-    stop-opacity: 0.5 !important; /* 40% visible */
+  stop-color: #af8df7 !important;
+  stop-opacity: 0.5 !important; /* 40% visible */
 }
 
 /* ### color */
 
 /* === CARD DESCRIPTION === */
 .service-description {
-    color: #aaa !important;
-    font-style: italic !important;
-    text-shadow: none !important;
+  color: #aaa !important;
+  font-style: italic !important;
+  text-shadow: none !important;
 }
 
 /* === CARD TITLE === */
 .service-name {
-    color: white !important;
-    text-shadow: none !important;
-    font-weight: normal !important;
-    transition: font-weight 0.4s ease;
+  color: white !important;
+  text-shadow: none !important;
+  font-weight: normal !important;
+  transition: font-weight 0.4s ease;
 }
 
 .service-name:has(.service-description) {
-    color: white !important;
+  color: white !important;
 }
 
 .service-card:hover .service-name {
-    color: #ff6600 !important;
-    font-weight: bold !important;
-    text-shadow: none !important;
-    transition: color 0.4s ease;
-    transition: font-weight 0.4s ease;
+  color: #ff6600 !important;
+  font-weight: bold !important;
+  text-shadow: none !important;
+  transition: color 0.4s ease;
+  transition: font-weight 0.4s ease;
 }
 
 .service-card:hover .service-title .service-name,
 .service-card:hover .service-title-text .service-name {
-    color: #ff6600 !important;
+  color: #ff6600 !important;
 }
