@@ -193,6 +193,7 @@ services:
     environment:
       - ND_LASTFM_APIKEY=${ND_LASTFM_APIKEY}
       - ND_LASTFM_SECRET=${ND_LASTFM_SECRET}
+      - ND_EXTAUTH_TRUSTEDSOURCES=${ND_EXTAUTH_TRUSTEDSOURCES}
     volumes:
       - ${ND_STORAGE_DATA}:/data
       - ${ND_STORAGE_MUSIC}:/music:ro
