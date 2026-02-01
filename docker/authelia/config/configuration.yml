@@ -1,0 +1,113 @@
+# Miscellaneous https://www.authelia.com/configuration/miscellaneous/introduction/
+# Set also AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE
+theme: auto
+
+identity_validation:
+  reset_password:
+    jwt_secret: '{{ secret "/secrets/JWT_SECRET" }}'
+
+# First Factor https://www.authelia.com/configuration/first-factor/file/
+authentication_backend:
+  file:
+    extra_attributes:
+      immich_quota:
+        multi_valued: false
+        value_type: 'string'
+    path: '/secrets/users_database.yml'
+
+# Second Factor https://www.authelia.com/configuration/second-factor/introduction/
+totp:
+  issuer: '{{ env "SERVER_NAME" }}' # Change me!
+
+# Security https://www.authelia.com/configuration/security/access-control/
+access_control:
+  default_policy: 'two_factor'
+
+# Session https://www.authelia.com/configuration/session/introduction/
+# Set also AUTHELIA_SESSION_SECRET_FILE
+session:
+  secret: '{{ secret "/secrets/SESSION_SECRET" }}'
+  cookies:
+    - domain: '{{ env "SERVER_NAME" }}'
+      authelia_url: 'https://auth.{{ env "SERVER_NAME" }}'
+
+  # https://www.authelia.com/configuration/session/redis/
+  # Set also AUTHELIA_SESSION_REDIS_PASSWORD_FILE if appropriate
+  redis:
+    host: redis_authelia
+    port: 6379
+    password: '{{ secret "/secrets/REDIS_PASSWORD" }}'
+
+# Storage https://www.authelia.com/configuration/storage/postgres/
+# Set also AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE
+# Set also AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE
+storage:
+  encryption_key: '{{ secret "/secrets/STORAGE_ENCRYPTION_KEY" }}'
+  postgres:
+    address: tcp://db_authelia:5432
+    database: authelia
+    username: authelia
+    password: '{{ secret "/secrets/STORAGE_PASSWORD" }}'
+
+# SMTP Notifier https://www.authelia.com/configuration/notifications/smtp/
+# Set also AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE
+notifier:
+  smtp:
+    address: smtp://smtp.eu.mailgun.org:587   # Change me!
+    sender: 'Authelia {{ env "SERVER_NAME" }} <{{ env "AUTH_SMTP_USERNAME" }}>'  # Change me!
+    username: '{{ env "AUTH_SMTP_USERNAME" }}'
+    password: '{{ env "AUTH_SMTP_PASSWORD" }}'            # Change me!
+    startup_check_address: '{{ env "AUTH_SMTP_CHECK_EMAIL" }}'
+
+identity_providers:
+  oidc:
+    hmac_secret: '{{ secret "/secrets/OIDC_HMAC_SECRET" }}'
+    jwks:
+      - key: {{ secret "/secrets/OIDC_PRIVATE.key" | mindent 10 "|" | msquote }}
+    discovery_signed_response_key_id: ""
+    cors:
+      endpoints:
+        - "authorization"
+        - "token"
+        - "revocation"
+        - "introspection"
+      allowed_origins:
+        - 'https://photo.{{ env "SERVER_NAME" }}'
+      allowed_origins_from_client_redirect_uris: false
+    claims_policies:
+      immich_policy:
+        custom_claims:
+          immich_quota:
+            attribute: 'immich_quota'
+    scopes:
+      immich_scope:
+        claims:
+          - 'immich_quota'
+    clients:
+      - client_id: 5olbxXnqnqnWnGVumu3~-2qYkz4EOQgYz6vpeD2KjqTDsani.fGj4~qelj1GYIIX1uJsfj.H
+        client_name: Directus OIDC
+        client_secret: '{{ secret "/secrets/OIDC_DIRECTUS_CLIENT_SECRET" }}'
+        public: false
+        scopes:
+          - "openid"
+          - "profile"
+          - "email"
+        redirect_uris:
+          - 'https://admin.{{ env "SERVER_NAME" }}/auth/login/openid/callback'
+        token_endpoint_auth_method: "client_secret_basic"
+      - client_id: 'NxNIVcjmRUqBJPrzXvoIAlKK_OPhqSG9bkWBvIL3z3pdRe4jmnl4hFrpo7X77X35aeyHH39V'
+        client_name: Immich OIDC
+        client_secret: '{{ secret "/secrets/OIDC_IMMICH_CLIENT_SECRET" }}'
+        public: false
+        claims_policy: 'immich_policy'
+        scopes:
+          - "openid"
+          - "profile"
+          - "email"
+          - 'immich_scope'
+        redirect_uris:
+          - 'https://photo.{{ env "SERVER_NAME" }}/auth/login'
+          - 'https://photo.{{ env "SERVER_NAME" }}/user-settings'
+          - 'app.immich:///oauth-callback'
+        userinfo_signed_response_alg: "none"
+        token_endpoint_auth_method: "client_secret_post"

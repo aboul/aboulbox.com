@@ -32,6 +32,22 @@ services:
       DEBUG: search-local:*
     command: sh -c "npm install && npm run start -- --host 0.0.0.0 --poll 1000"
 
+  immich:
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    extra_hosts:
+      - auth.${SERVER_NAME}:host-gateway
+
+  directus:
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    extra_hosts:
+      - auth.${SERVER_NAME}:host-gateway
+
+  navidrome:
+    environment:
+      - ND_EXTAUTH_TRUSTEDSOURCES=172.20.0.8/16
+
   glances:
     volumes:
       - ${STORAGE_BASE_PATH}/glances/conf/glances.dev.conf:/etc/glances/glances.conf:ro

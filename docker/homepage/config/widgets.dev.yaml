@@ -7,10 +7,10 @@
     version: 4 # required only if running glances v4 or higher, defaults to 3
     cputemp: true # disabled by default
     uptime: true # disabled by default
-    disk: 
-        - /rootfs
-        - /ssd  
-        - /backups
+    disk:
+      - /rootfs
+      - /ssd
+      - /backups
     diskUnits: bytes # optional, bytes (default) or bbytes. Only applies to disk
     refreshInterval: 10000
     expanded: true # show the expanded view
@@ -18,7 +18,7 @@
 - search:
     provider: [brave, google, custom]
     target: _blank
-    url: https://search.aboulai.localhost:8086/search?q=
+    url: https://search.aboulai.dev.local:8086/search?q=
     focus: true
     showSearchSuggestions: true
 
@@ -30,11 +30,11 @@
     units: metric # or imperial
     cache: 60 # Time in minutes to cache API responses, to stay within limits
     format: # optional, Intl.NumberFormat options
-        maximumFractionDigits: 1
+      maximumFractionDigits: 1
 
 - datetime:
     locale: fr
     text_size: 2xl
     format:
-        dateStyle: short
-        timeStyle: short
+      dateStyle: short
+      timeStyle: short

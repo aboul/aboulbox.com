@@ -7,8 +7,6 @@ services:
     volumes:
       - ${STORAGE_BASE_PATH}/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - /var/log/caddy:/var/log/caddy
-      - ${STORAGE_BASE_PATH}/caddy/data/auth/:/etc/gatekeeper/auth
-      - ${STORAGE_BASE_PATH}/caddy/data/users.json:/data/caddy/.local/users.json
 
 volumes:
   caddy-config:

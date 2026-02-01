@@ -50,10 +50,10 @@
         widget:
           type: caddy
           url: http://caddy:2019
-    - Frontend:
+    - Website:
         icon: mdi-react.svg
         server: my-docker
-        container: frontend
+        container: caddy
         href: https://aboulbox.com/
     - Backend:
         icon: mdi-cog.svg

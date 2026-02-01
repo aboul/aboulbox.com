@@ -5,8 +5,8 @@ import * as tslib_1 from  "tslib";
 const lodash_1 = tslib_1.__importDefault(require("lodash"));
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-const url = process.env.SERVER_NAME ? 'https://wiki.' + process.env.SERVER_NAME : 'https://wiki.abel-brien.localhost';
-const personal_website_url = process.env.SERVER_NAME ? 'https://' + process.env.SERVER_NAME : 'https://abel-brien.localhost';
+const url = process.env.SERVER_NAME ? 'https://wiki.' + process.env.SERVER_NAME : 'https://wiki.abel-brien.dev.local';
+const personal_website_url = process.env.SERVER_NAME ? 'https://' + process.env.SERVER_NAME : 'https://abel-brien.dev.local';
 
 const config: Config = {
   title: 'Wiki Abel',

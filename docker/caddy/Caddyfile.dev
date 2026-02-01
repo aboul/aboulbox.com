@@ -1,6 +1,5 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
-	admin 0.0.0.0:2019
 }
 
 (main) {
@@ -54,7 +53,18 @@
 	}
 }
 
-https://v1.{$SERVER_NAME:localhost} {
+(secure) {
+	forward_auth {args[0]} authelia:9091 {
+		uri /api/authz/forward-auth
+		copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+	}
+}
+
+https://auth.{$SERVER_NAME} {
+	reverse_proxy authelia:9091
+}
+
+https://v1.{$SERVER_NAME} {
 	import main
 	import security
 	import static
@@ -66,11 +76,11 @@ https://v1.{$SERVER_NAME:localhost} {
 		reverse_proxy backend:3001
 	}
 
-	@not_excluded { 
+	@not_excluded {
 		not path *.* /@*
 	}
 
-	@not_404 { 
+	@not_404 {
 		not path /404 /
 	}
 
@@ -89,10 +99,9 @@ https://v1.{$SERVER_NAME:localhost} {
 	}
 
 	reverse_proxy frontend:3000
-
 }
 
-https://{$SERVER_NAME:localhost} {
+https://{$SERVER_NAME} {
 	import main
 	import security
 	import static
@@ -107,55 +116,67 @@ https://{$SERVER_NAME:localhost} {
 	reverse_proxy website:3000
 }
 
-https://umami.{$SERVER_NAME:localhost} {
+https://umami.{$SERVER_NAME} {
+	@needAuth not {
+		path /script.js /api/send
+	}
+	import secure @needAuth
 	import main
 	import no-robots
+
 	reverse_proxy umami:3000
 }
 
-https://home.{$SERVER_NAME:localhost} {
+https://home.{$SERVER_NAME} {
+	import secure *
 	import main
 	import no-robots
 	reverse_proxy homepage:3000
 }
 
-https://wiki.{$SERVER_NAME:localhost} {
+https://wiki.{$SERVER_NAME} {
 	import main
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
 
-https://photo.{$SERVER_NAME:localhost} {
+https://photo.{$SERVER_NAME} {
 	import main
 	import no-robots
 	reverse_proxy immich:2283
 }
 
-https://admin.{$SERVER_NAME:localhost} {
+https://admin.{$SERVER_NAME} {
+	import secure *
 	import main
 	import no-robots
 	reverse_proxy directus:8055
 }
 
-https://music.{$SERVER_NAME:localhost} {
+https://music.{$SERVER_NAME} {
+	@needAuth not {
+		path /rest/*
+	}
+	import secure @needAuth
 	import main
 	import no-robots
 	reverse_proxy navidrome:4533
 }
 
-https://audiomuse.{$SERVER_NAME:localhost} {
+https://audiomuse.{$SERVER_NAME} {
 	import main
 	import no-robots
 	reverse_proxy audiomuse-ai-flask:8000
 }
 
-https://ollama.{$SERVER_NAME:localhost} {
+https://ollama.{$SERVER_NAME} {
 	import main
 	import no-robots
 	reverse_proxy ollama-webui:8080
 }
 
 https://monitor.{$SERVER_NAME} {
+	import secure *
 	import main
 	import no-robots
 	reverse_proxy glances:61208

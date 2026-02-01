@@ -1,47 +1,5 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
-	admin 0.0.0.0:2019
-	order authenticate before respond
-	order authorize before reverse_proxy
-
-	# Auth module configuration
-	security {
-		local identity store localdb {
-			realm local
-			path /data/caddy/.local/users.json
-		}
-
-		authentication portal myportal {
-			enable identity store localdb
-			crypto default token lifetime 86400
-			cookie lifetime 86400
-			crypto key verify from file /etc/gatekeeper/auth/jwt/sign_key.pem
-
-			ui {
-				links {
-					"Dashboard" https://home.{$SERVER_NAME} icon "las la-address-card"
-					"Admin" https://admin.{$SERVER_NAME} icon "las la-table"
-					"Wiki" https://wiki.{$SERVER_NAME} icon "las la-question"
-					"Umami" https://umami.{$SERVER_NAME} icon "las la-chart-pie"
-					"My Identity" "/whoami" icon "las la-user"
-				}
-			}
-		}
-
-		authorization policy users_policy {
-			set auth url https://auth.{$SERVER_NAME}
-			bypass uri exact /api/send
-			bypass uri prefix /script.js
-
-			# Verify signed key
-			crypto key sign-verify from file /etc/gatekeeper/auth/jwt/verify_key.pem
-
-			## Inject header to downstream
-			inject headers with claims
-			inject header "X-JWT-Assertion" from {http.request.cookie.access_token}
-			allow roles authp/admin authp/user
-		}
-	}
 }
 
 # Main logging configuration
@@ -114,6 +72,20 @@
 	}
 }
 
+(secure) {
+	forward_auth {args[0]} authelia:9091 {
+		uri /api/authz/forward-auth
+		copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+	}
+}
+
+https://auth.{$SERVER_NAME} {
+	import fail2ban-logging auth
+	import no-robots
+
+	reverse_proxy authelia:9091
+}
+
 https://v1.{$SERVER_NAME:localhost} {
 	import main
 	import security
@@ -123,7 +95,6 @@ https://v1.{$SERVER_NAME:localhost} {
 
 	# Handle API requests
 	handle /api* {
-		import security
 		reverse_proxy backend:3001
 	}
 
@@ -160,7 +131,6 @@ https://{$SERVER_NAME:localhost} {
 
 	# Handle API requests
 	handle /api* {
-		import security
 		reverse_proxy backend:3001
 	}
 
@@ -189,25 +159,22 @@ https://{$SERVER_NAME:localhost} {
 	}
 }
 
-https://auth.{$SERVER_NAME} {
-	import fail2ban-logging auth
-	import no-robots
-	authenticate with myportal
-}
-
 https://umami.{$SERVER_NAME} {
+	@needAuth not {
+		path /script.js /api/send
+	}
+	import secure @needAuth
 	import main
 	import fail2ban-logging umami
 	import no-robots
-	authorize with users_policy
 	reverse_proxy umami:3000
 }
 
 https://home.{$SERVER_NAME:} {
+	import secure *
 	import main
 	import fail2ban-logging home
 	import no-robots
-	authorize with users_policy
 	reverse_proxy homepage:3000
 }
 
@@ -226,14 +193,18 @@ https://photo.{$SERVER_NAME} {
 }
 
 https://admin.{$SERVER_NAME} {
+	import secure *
 	import main
 	import fail2ban-logging admin
 	import no-robots
-	authorize with users_policy
 	reverse_proxy directus:8055
 }
 
 https://music.{$SERVER_NAME:localhost} {
+	@needAuth not {
+		path /rest/*
+	}
+	import secure @needAuth
 	import main
 	import fail2ban-logging music
 	import no-robots
@@ -241,10 +212,10 @@ https://music.{$SERVER_NAME:localhost} {
 }
 
 https://monitor.{$SERVER_NAME} {
+	import secure *
 	import main
 	import fail2ban-logging monitor
 	import no-robots
-	authorize with users_policy
 	reverse_proxy glances:61208
 }
 

@@ -29,3 +29,4 @@ docker/caddy/data
 docker/immich
 docker/navidrome
 website/dest
+docker/authelia/config/secrets
