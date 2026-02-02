@@ -1,6 +1,6 @@
 services:
   docusaurus:
-    image: node:20-alpine
+    image: node:24-alpine
     container_name: docusaurus
     working_dir: /app
     restart: unless-stopped
