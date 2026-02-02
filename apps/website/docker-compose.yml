@@ -1,0 +1,13 @@
+services:
+  website:
+    image: node:lts-alpine
+    container_name: website
+    working_dir: /app
+    volumes:
+      - ./.env:/app/.env
+      - .:/app
+      - aboulbox-dist:/app/dest:rw
+
+volumes:
+  aboulbox-dist:
+    external: true

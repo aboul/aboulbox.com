@@ -1,0 +1,51 @@
+services:
+  authelia:
+    image: authelia/authelia:latest
+    restart: unless-stopped
+    container_name: authelia
+    env_file: .env
+    depends_on:
+      - db_authelia
+      - redis_authelia
+    volumes:
+      - ./config/configuration.yml:/config/configuration.yml:ro
+      - ${AUTH_SECRETS_PATH}:/secrets
+    environment:
+      X_AUTHELIA_CONFIG_FILTERS: template
+    networks:
+      - proxy-network
+
+  db_authelia:
+    image: postgres:16
+    container_name: db_authelia
+    restart: unless-stopped
+    volumes:
+      - authelia-postgres:/var/lib/postgresql/data
+      - ${AUTH_SECRETS_PATH}/STORAGE_PASSWORD:/STORAGE_PASSWORD
+    environment:
+      POSTGRES_USER: "authelia"
+      POSTGRES_PASSWORD_FILE: "/STORAGE_PASSWORD"
+    networks:
+      - proxy-network
+
+  redis_authelia:
+    image: redis:7
+    container_name: redis_authelia
+    restart: unless-stopped
+    volumes:
+      - authelia-redis:/data
+      - ${AUTH_SECRETS_PATH}/REDIS_PASSWORD:/data/REDIS_PASSWORD
+    environment:
+      REDIS_PASSWORD_FILE: /data/REDIS_PASSWORD
+    command: bash -c '[ "$$REDIS_PASSWORD_FILE" ] && ( cat "$$REDIS_PASSWORD_FILE" | xargs -0 redis-server --requirepass ) || redis-server'
+    networks:
+      - proxy-network
+
+volumes:
+  authelia-postgres:
+  authelia-redis:
+
+networks:
+  proxy-network:
+    driver: bridge
+    name: caddy_proxy-network

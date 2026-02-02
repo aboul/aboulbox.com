@@ -1,0 +1,45 @@
+services:
+  directus:
+    image: directus/directus:11
+    container_name: directus
+    restart: unless-stopped
+    environment:
+      PUBLIC_URL: "https://admin.${SERVER_NAME}"
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+      DB_CLIENT: "pg"
+      DB_HOST: ${POSTGRES_HOST}
+      DB_PORT: ${POSTGRES_PORT}
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      WEBSOCKETS_ENABLED: "true"
+      CORS_ENABLED: "true"
+      AUTH_DISABLE_DEFAULT: "true"
+      AUTH_PROVIDERS: openid
+      AUTH_OPENID_DRIVER: "openid"
+      AUTH_OPENID_CLIENT_ID: "5olbxXnqnqnWnGVumu3~-2qYkz4EOQgYz6vpeD2KjqTDsani.fGj4~qelj1GYIIX1uJsfj.H"
+      AUTH_OPENID_CLIENT_SECRET: "${AUTH_OPENID_DIRECTUS_CLIENT_SECRET}"
+      AUTH_OPENID_ISSUER_URL: https://auth.${SERVER_NAME}
+      AUTH_OPENID_IDENTIFIER_KEY: "email"
+      AUTH_OPENID_SCOPE: "openid profile email"
+      AUTH_OPENID_ICON: "openid"
+      AUTH_OPENID_LABEL: ${AUTH_OPENID_LABEL}
+    networks:
+      - proxy-network
+      - database-network
+
+volumes:
+  pgdata:
+
+networks:
+  proxy-network:
+    external: true
+    driver: bridge
+    name: caddy_proxy-network
+  database-network:
+    external: true
+    driver: bridge
+    name: aboulbox_database-network

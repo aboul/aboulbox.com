@@ -1,0 +1,8 @@
+services:
+  caddy:
+    environment:
+      CADDY_GLOBAL_OPTIONS: |
+        debug
+        local_certs
+    volumes:
+      - ./Caddyfile.dev:/etc/caddy/Caddyfile:ro

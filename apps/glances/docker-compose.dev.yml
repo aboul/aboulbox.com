@@ -1,0 +1,8 @@
+services:
+  glances:
+    volumes:
+      - ./conf/glances.dev.conf:/etc/glances/glances.conf:ro
+      - /media/HOME:/ssd:ro
+      - /media/HOMEBACK:/backups:ro
+    environment:
+      - "GLANCES_OPT=-w --debug"

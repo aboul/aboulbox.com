@@ -27,7 +27,6 @@ services:
       - audiomuse-temp-audio-flask:/app/temp_audio
     depends_on:
       - audiomuse-redis
-      - db
     deploy:
       resources:
         reservations:
@@ -38,7 +37,6 @@ services:
     networks:
       - proxy-network
       - database-network
-      - navidrome-network
       - audiomuse-network
 
   # AudioMuse-AI RQ Worker service
@@ -72,7 +70,6 @@ services:
       - audiomuse-temp-audio-worker:/app/temp_audio
     depends_on:
       - audiomuse-redis
-      - db
     deploy:
       resources:
         reservations:
@@ -82,7 +79,6 @@ services:
               capabilities: [gpu]
     networks:
       - database-network
-      - navidrome-network
       - audiomuse-network
 
   audiomuse-redis:
@@ -103,9 +99,12 @@ volumes:
 
 networks:
   proxy-network:
+    external: true
     driver: bridge
     name: caddy_proxy-network
-  audiomuse-network:
+  database-network:
+    external: true
     driver: bridge
-  navidrome-network:
+    name: aboulbox_database-network
+  audiomuse-network:
     driver: bridge

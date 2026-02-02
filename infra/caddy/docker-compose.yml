@@ -1,0 +1,28 @@
+services:
+  caddy:
+    build:
+      dockerfile: Dockerfile
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      SERVER_NAME: ${SERVER_NAME}
+    volumes:
+      - caddy-config:/config
+      - caddy-data:/data
+      - aboulbox-dist:/srv/site:ro
+    networks:
+      - proxy-network
+
+volumes:
+  caddy-config:
+  caddy-data:
+  aboulbox-dist:
+    external: true
+
+networks:
+  proxy-network:
+    driver: bridge
+    name: caddy_proxy-network

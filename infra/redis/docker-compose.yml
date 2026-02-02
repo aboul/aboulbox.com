@@ -1,0 +1,15 @@
+services:
+  redis:
+    image: docker.io/valkey/valkey:9@sha256:fb8d272e529ea567b9bf1302245796f21a2672b8368ca3fcb938ac334e613c8f
+    container_name: immich_redis
+    restart: unless-stopped
+    healthcheck:
+      test: redis-cli ping || exit 1
+    networks:
+      - immich-network
+
+networks:
+  immich-network:
+    external: true
+    driver: bridge
+    name: aboulbox_immich-network

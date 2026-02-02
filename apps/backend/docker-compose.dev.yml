@@ -1,0 +1,7 @@
+services:
+  backend:
+    volumes:
+      - .env:/app/.env
+    environment:
+      DEBUG: express:*
+    command: sh -c "npm install && node --watch app.js"
