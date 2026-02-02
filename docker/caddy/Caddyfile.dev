@@ -53,13 +53,6 @@
 	}
 }
 
-(secure) {
-	forward_auth {args[0]} authelia:9091 {
-		uri /api/authz/forward-auth
-		copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-	}
-}
-
 https://auth.{$SERVER_NAME} {
 	reverse_proxy authelia:9091
 }
@@ -117,10 +110,6 @@ https://{$SERVER_NAME} {
 }
 
 https://umami.{$SERVER_NAME} {
-	@needAuth not {
-		path /script.js /api/send
-	}
-	import secure @needAuth
 	import main
 	import no-robots
 
@@ -128,7 +117,6 @@ https://umami.{$SERVER_NAME} {
 }
 
 https://home.{$SERVER_NAME} {
-	import secure *
 	import main
 	import no-robots
 	reverse_proxy homepage:3000
@@ -147,17 +135,12 @@ https://photo.{$SERVER_NAME} {
 }
 
 https://admin.{$SERVER_NAME} {
-	import secure *
 	import main
 	import no-robots
 	reverse_proxy directus:8055
 }
 
 https://music.{$SERVER_NAME} {
-	@needAuth not {
-		path /rest/*
-	}
-	import secure @needAuth
 	import main
 	import no-robots
 	reverse_proxy navidrome:4533
@@ -176,7 +159,6 @@ https://ollama.{$SERVER_NAME} {
 }
 
 https://monitor.{$SERVER_NAME} {
-	import secure *
 	import main
 	import no-robots
 	reverse_proxy glances:61208

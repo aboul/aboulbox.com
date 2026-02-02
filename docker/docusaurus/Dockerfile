@@ -6,8 +6,9 @@ FROM node:lts-alpine
 RUN corepack enable
 
 USER node
+
 ## Set the working directory to `/opt/docusaurus`.
 WORKDIR /home/node/app
+
 # Copy the source code over
-COPY --chown=node:node ./docker/docusaurus/Wiki /home/node/app/
-COPY --chown=node:node ./docs/personal-site /home/node/app/docs/personal-site/
+COPY --chown=node:node ./docusaurus/wiki /home/node/app/

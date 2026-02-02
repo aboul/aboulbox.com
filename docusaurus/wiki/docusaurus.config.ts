@@ -39,6 +39,10 @@ const config: Config = {
     locales: ['fr'],
   },
 
+  markdown: {
+    mermaid: true
+  },
+
   presets: [
     [
       'classic',
@@ -81,6 +85,7 @@ const config: Config = {
   ],
 
   themes: [
+    '@docusaurus/theme-mermaid',
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {

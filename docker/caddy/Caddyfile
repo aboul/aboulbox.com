@@ -179,6 +179,7 @@ https://home.{$SERVER_NAME:} {
 }
 
 https://wiki.{$SERVER_NAME} {
+	import secure *
 	import main
 	import fail2ban-logging wiki
 	import no-robots
