@@ -1,11 +1,9 @@
+---
+description: Documentation de ma stack
+---
+
 # Docusaurus
 
 - Documentation interne de la stack
-- URL: https://docs.{$SERVER_NAME}
-- Pages :
-  - Stack overview
-  - Deployment
-  - Maintenance
-  - Adding services
-  - Troubleshooting
+- URL: `https://wiki.{$SERVER_NAME}`
 - Markdown + Mermaid pour diagrammes

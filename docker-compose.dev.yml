@@ -44,10 +44,6 @@ services:
     extra_hosts:
       - auth.${SERVER_NAME}:host-gateway
 
-  navidrome:
-    environment:
-      - ND_EXTAUTH_TRUSTEDSOURCES=172.20.0.8/16
-
   glances:
     volumes:
       - ${STORAGE_BASE_PATH}/glances/conf/glances.dev.conf:/etc/glances/glances.conf:ro

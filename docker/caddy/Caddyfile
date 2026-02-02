@@ -3,7 +3,7 @@
 }
 
 # Main logging configuration
-(main) {
+(main-log) {
 	log_skip /assets*
 	log {
 		output file /var/log/caddy/access.json {
@@ -72,7 +72,7 @@
 	}
 }
 
-(secure) {
+(authelia-auth) {
 	forward_auth {args[0]} authelia:9091 {
 		uri /api/authz/forward-auth
 		copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
@@ -86,8 +86,8 @@ https://auth.{$SERVER_NAME} {
 	reverse_proxy authelia:9091
 }
 
-https://v1.{$SERVER_NAME:localhost} {
-	import main
+https://v1.{$SERVER_NAME} {
+	import main-log
 	import security
 	import static
 	import fail2ban-logging aboulbox
@@ -123,8 +123,8 @@ https://v1.{$SERVER_NAME:localhost} {
 	reverse_proxy frontend:3000
 }
 
-https://{$SERVER_NAME:localhost} {
-	import main
+https://{$SERVER_NAME} {
+	import main-log
 	import security
 	import static
 	encode zstd gzip
@@ -163,65 +163,65 @@ https://umami.{$SERVER_NAME} {
 	@needAuth not {
 		path /script.js /api/send
 	}
-	import secure @needAuth
-	import main
+	import authelia-auth @needAuth
+	import main-log
 	import fail2ban-logging umami
 	import no-robots
 	reverse_proxy umami:3000
 }
 
-https://home.{$SERVER_NAME:} {
-	import secure *
-	import main
+https://home.{$SERVER_NAME} {
+	import authelia-auth *
+	import main-log
 	import fail2ban-logging home
 	import no-robots
 	reverse_proxy homepage:3000
 }
 
 https://wiki.{$SERVER_NAME} {
-	import secure *
-	import main
+	import authelia-auth *
+	import main-log
 	import fail2ban-logging wiki
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
 
 https://photo.{$SERVER_NAME} {
-	import main
+	import main-log
 	import fail2ban-logging photo
 	import no-robots
 	reverse_proxy immich:2283
 }
 
 https://admin.{$SERVER_NAME} {
-	import secure *
-	import main
+	import authelia-auth *
+	import main-log
 	import fail2ban-logging admin
 	import no-robots
 	reverse_proxy directus:8055
 }
 
-https://music.{$SERVER_NAME:localhost} {
+https://music.{$SERVER_NAME} {
 	@needAuth not {
 		path /rest/*
 	}
-	import secure @needAuth
-	import main
+	import authelia-auth @needAuth
+	import main-log
 	import fail2ban-logging music
 	import no-robots
 	reverse_proxy navidrome:4533
 }
 
 https://monitor.{$SERVER_NAME} {
-	import secure *
-	import main
+	import authelia-auth *
+	import main-log
 	import fail2ban-logging monitor
 	import no-robots
 	reverse_proxy glances:61208
 }
 
 https://agent.{$SERVER_NAME} {
-	import main
+	import main-log
 	import fail2ban-logging agent
 	import no-robots
 	reverse_proxy periphery:8120
