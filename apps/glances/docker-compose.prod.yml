@@ -1,0 +1,5 @@
+services:
+  glances:
+    volumes:
+      - ./conf/glances.conf:/etc/glances/glances.conf:ro
+      - ${STORAGE_BASE_PATH}:/ssd:ro

@@ -1,0 +1,65 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+title: Aboulbox Dash
+favicon: https://aboulbox.com/favicon.svg
+color: slate
+theme: dark
+fullWidth: true
+maxGroupColumns: 8
+headerStyle: boxed
+language: fr
+target: _blank
+hideVersion: true
+showStats: true
+statusStyle: "dot"
+instanceName: aboulbox
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+  provider: google
+useEqualHeights: true
+background:
+  image: /images/oiseau.png
+  blur: xs
+  brightness: 50
+  opacity: 50
+cardBlur: md
+iconStyle: theme
+disableCollapse: true
+layout:
+  Daily:
+    header: false
+    style: row
+    columns: 4
+    tab: Daily
+    Calendar:
+      header: false
+  Ressources:
+    header: false
+    style: row
+    columns: 4
+    tab: Monitor
+  Aboulbox:
+    icon: /images/logo-blanc.svg
+    style: row
+    columns: 3
+    tab: Monitor
+  Useful links:
+    header: false
+    style: row
+    columns: 3
+    tab: Usefull links
+    For coding:
+      icon: mdi-code-braces.svg
+    Du social:
+      icon: mdi-social-distance-6-feet.svg
+    Nice self-hosted repos:
+      icon: mdi-github.svg
+    Icons for Services:
+      icon: mdi-emoticon-excited-outline.svg
+    Config Helpers:
+      icon: mdi-wrench-outline.svg

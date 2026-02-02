@@ -1,0 +1,56 @@
+services:
+  immich:
+    image: ghcr.io/immich-app/immich-server:v2.4.1
+    container_name: immich
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+      UPLOAD_LOCATION: ${IMMICH_UPLOAD_LOCATION}
+      DB_DATA_LOCATION: ${IMMICH_DB_DATA_LOCATION}
+      DB_HOSTNAME: ${IMMICH_DB_HOSTNAME}
+      DB_PASSWORD: ${IMMICH_DB_PASSWORD}
+      DB_USERNAME: ${IMMICH_DB_USERNAME}
+      DB_DATABASE_NAME: ${IMMICH_DB_DATABASE_NAME}
+      # OIDC CONFIG
+      OAUTH_ENABLED: "true"
+      OAUTH_ISSUER_URL: "https://auth.${SERVER_NAME}"
+      OAUTH_CLIENT_ID: "NxNIVcjmRUqBJPrzXvoIAlKK_OPhqSG9bkWBvIL3z3pdRe4jmnl4hFrpo7X77X35aeyHH39V"
+      OAUTH_CLIENT_SECRET: "${AUTH_OPENID_IMMICH_CLIENT_SECRET}"
+      OAUTH_REDIRECT_URI: "https://photo.${SERVER_NAME}/auth/login"
+      OAUTH_TOKEN_ENDPOINT_AUTH_METHOD: client_secret_post
+      OAUTH_SCOPE: "openid profile email"
+      OAUTH_TOKEN_RESPONSE_ALG: "RS256"
+      OAUTH_USERINFO_SIGNED_RESPONSE_ALG: "none"
+      OAUTH_BUTTON_TEXT: ${AUTH_OPENID_LABEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${IMMICH_UPLOAD_LOCATION}:/data
+    cpus: "2"
+    mem_limit: 1.75g
+    mem_reservation: 1.5g
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 1.75g
+        reservations:
+          cpus: "2"
+          memory: 1.5g
+    networks:
+      - proxy-network
+      - database-network
+      - immich-network
+
+networks:
+  proxy-network:
+    external: true
+    driver: bridge
+    name: caddy_proxy-network
+  database-network:
+    external: true
+    driver: bridge
+    name: aboulbox_database-network
+  immich-network:
+    external: true
+    driver: bridge
+    name: aboulbox_immich-network

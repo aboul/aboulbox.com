@@ -1,0 +1,18 @@
+services:
+  docusaurus:
+    image: node:20-alpine
+    container_name: docusaurus
+    working_dir: /app
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ}
+    volumes:
+      - ./wiki:/app
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true
+    driver: bridge
+    name: caddy_proxy-network

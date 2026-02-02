@@ -1,0 +1,14 @@
+services:
+  website:
+    extra_hosts:
+      # Ensure that host.docker.internal is correctly defined on Linux
+      - host.docker.internal:host-gateway
+    networks:
+      - proxy-network
+    command: sh -c "npm install && npm run dev"
+
+networks:
+  proxy-network:
+    external: true
+    driver: bridge
+    name: caddy_proxy-network

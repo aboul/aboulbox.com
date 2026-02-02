@@ -1,0 +1,4 @@
+services:
+  homepage:
+    volumes:
+      - ${STORAGE_BASE_PATH}:/mnt/storage

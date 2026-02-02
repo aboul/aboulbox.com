@@ -1,0 +1,26 @@
+services:
+  db:
+    image: ghcr.io/immich-app/postgres:16-vectorchord0.5.3-pgvector0.8.1
+    container_name: db
+    restart: unless-stopped
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: "${POSTGRES_DB:-mydatabase}, umami, immich, audiomusedb"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: ${TZ}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./pgsql/init.sh:/docker-entrypoint-initdb.d/init.sh
+    networks:
+      - database-network
+
+volumes:
+  pgdata:
+
+networks:
+  database-network:
+    external: true
+    driver: bridge
+    name: aboulbox_database-network

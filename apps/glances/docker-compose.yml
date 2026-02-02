@@ -1,0 +1,23 @@
+services:
+  glances:
+    image: nicolargo/glances:4.4.1
+    container_name: glances
+    restart: unless-stopped
+    pid: host
+    expose:
+      - "61208"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/os-release:/etc/os-release:ro
+      - /:/rootfs:ro
+    environment:
+      - "GLANCES_OPT=-w"
+      - TZ=${TZ}
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true
+    driver: bridge
+    name: caddy_proxy-network

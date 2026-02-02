@@ -1,0 +1,23 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:v1.9.0 #v1.9.0
+    container_name: homepage
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./images:/app/public/images
+    environment:
+      TZ: ${TZ}
+      PUID: ${HOMEPAGE_PUID}
+      PGID: ${HOMEPAGE_PGID}
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
+      HOMEPAGE_VAR_ICAL_URL: ${HOMEPAGE_VAR_ICAL_URL}
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true
+    driver: bridge
+    name: caddy_proxy-network

@@ -1,0 +1,6 @@
+services:
+  directus:
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
+    extra_hosts:
+      - auth.${SERVER_NAME}:host-gateway

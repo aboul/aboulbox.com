@@ -1,0 +1,6 @@
+services:
+  homepage:
+    volumes:
+      - .env:/app/.env
+      - ./config/services.dev.yaml:/app/config/services.yaml:ro
+      - ./config/widgets.dev.yaml:/app/config/widgets.yaml:ro

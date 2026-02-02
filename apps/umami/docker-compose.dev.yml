@@ -1,0 +1,7 @@
+services:
+  umami:
+    environment:
+      DEBUG: umami:*
+      DISABLE_TELEMETRY: 1
+      DISABLE_LOGIN: 1
+      LOG_QUERY: 1
