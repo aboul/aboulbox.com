@@ -8,7 +8,6 @@ services:
       - ND_LASTFM_SECRET=${ND_LASTFM_SECRET}
       - ND_EXTAUTH_TRUSTEDSOURCES=${ND_EXTAUTH_TRUSTEDSOURCES}
     volumes:
-      - ./data:/data
       - ${ND_STORAGE_MUSIC}:/music:ro
     networks:
       - proxy-network
