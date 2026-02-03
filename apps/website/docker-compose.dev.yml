@@ -1,5 +1,6 @@
 services:
   website:
+    restart: unless-stopped
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
