@@ -7,29 +7,29 @@ const umamiScript =
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
     <script
       is:inline
       defer
       src={umamiScript}
       data-website-id={import.meta.env.UMAMI_WEBSITE_CODE}></script>
-    <meta name="generator" content={Astro.generator} />
+    <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
     <meta
-      name="description"
-      content="Abel BRIEN is Frontend Web Developer working on Magento E-Commerce since 15 years and creating others cool stuffs with React"
+      name='description'
+      content='Abel BRIEN is Frontend Web Developer working on Magento E-Commerce since 15 years and creating others cool stuffs with React'
     />
   </head>
   <body>
-    <div class="min-h-screen bg-teal-950">
-      <div class="min-h-screen bg-teal-950">
-        <BackgroundBeams className="fixed inset-0" />
+    <div class='min-h-screen bg-teal-950'>
+      <div class='min-h-screen bg-teal-950'>
+        <BackgroundBeams className='fixed inset-0' />
         <div
-          class="mx-auto min-h-screen flex flex-col justify-center max-w-(--breakpoint-xl) px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0 relative z-10"
+          class='mx-auto min-h-screen flex flex-col justify-center max-w-(--breakpoint-xl) px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0 relative z-10'
         >
           <slot />
         </div>
