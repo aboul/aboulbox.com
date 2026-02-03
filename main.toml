@@ -1,1 +1,427 @@
-## Add resources to get started
+[[server]]
+name = "Raspberry"
+tags = ["Raspberry"]
+[server.config]
+address = "https://192.168.1.13:8120"
+external_address = "https://agent.aboulbox.com"
+enabled = true
+auto_prune = false
+
+##
+
+[[stack]]
+name = "prod_apps_backend"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://aboulbox.com/api"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/backend"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+SERVER_NAME=[[SERVER_NAME]]
+ADMIN_EMAIL=[[ADMIN_EMAIL]]
+TZ='Europe/Paris'
+
+#### ALTCHA ####
+ALTCHA_HMAC_KEY=[[ALTCHA_HMAC_KEY]]
+
+#### MAILGUN CONFIGURATION ####
+MAILGUN_APIKEY=[[MAILGUN_APIKEY]]
+MAILGUN_DOMAIN=[[SERVER_NAME]]
+MAILGUN_FROM_WHO=[[MAILGUN_FROM_WHO]]
+MAILGUN_TO_WHO_NAME="Abel BRIEN"
+MAILGUN_TO_WHO=[[ADMIN_EMAIL]]
+
+#### POSTGRESQL CONFIGURATION ####
+POSTGRES_HOST=db
+POSTGRES_USER=[[POSTGRES_USER]]
+POSTGRES_PASSWORD=[[POSTGRES_PASSWORD]]
+POSTGRES_PORT=5432
+POSTGRES_DB=[[POSTGRES_DB]]
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_directus"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://admin.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/directus"
+file_paths = ["docker-compose.yml"]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+SERVER_NAME=[[SERVER_NAME]]
+ADMIN_EMAIL=[[ADMIN_EMAIL]]
+TZ='Europe/Paris'
+
+#### POSTGRESQL CONFIGURATION ####
+POSTGRES_HOST=db
+POSTGRES_USER=[[POSTGRES_USER]]
+POSTGRES_PASSWORD=[[POSTGRES_PASSWORD]]
+POSTGRES_PORT=5432
+POSTGRES_DB=[[POSTGRES_DB]]
+
+#### DIRECTUS CONFIGURATION ####
+DIRECTUS_KEY=[[DIRECTUS_KEY]]
+DIRECTUS_SECRET=[[DIRECTUS_SECRET]]
+DIRECTUS_ADMIN_PASSWORD=[[DIRECTUS_ADMIN_PASSWORD]]
+DIRECTUS_ADMIN_EMAIL=[[ADMIN_EMAIL]]
+AUTH_OPENID_DIRECTUS_CLIENT_SECRET=[[AUTH_OPENID_DIRECTUS_CLIENT_SECRET]]
+AUTH_OPENID_LABEL="Aboulbox.com"
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_glances"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://monitor.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/glances"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+TZ='Europe/Paris'
+
+#### GLOBAL STORAGE CONFIG ####
+STORAGE_BASE_PATH=[[STORAGE_BASE_PATH]]
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_homepage"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://home.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/homepage"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+SERVER_NAME=[[SERVER_NAME]]
+TZ='Europe/Paris'
+
+#### GLOBAL STORAGE CONFIG ####
+STORAGE_BASE_PATH=[[STORAGE_BASE_PATH]]
+
+#### HOMEPAGE ####
+HOMEPAGE_ALLOWED_HOSTS=home.${SERVER_NAME}
+HOMEPAGE_VAR_ICAL_URL=[[HOMEPAGE_VAR_ICAL_URL]]
+HOMEPAGE_PUID=[[HOMEPAGE_PUID]]
+HOMEPAGE_PGID=[[HOMEPAGE_PGID]]
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_immich"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://photo.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/immich"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+SERVER_NAME=[[SERVER_NAME]]
+TZ='Europe/Paris'
+
+#### DATABASE POSTGRES ####
+POSTGRES_HOST=db
+
+#### AUTHELIA ####
+AUTH_OPENID_IMMICH_CLIENT_SECRET=[[AUTH_OPENID_IMMICH_CLIENT_SECRET]]
+AUTH_OPENID_LABEL="Aboulbox.com"
+
+#### IMMICH ####
+IMMICH_DB_DATA_LOCATION=pgdata
+IMMICH_VERSION=v2.4.1
+IMMICH_UPLOAD_LOCATION=[[STORAGE_BASE_PATH]]/photos
+IMMICH_DB_HOSTNAME=${POSTGRES_HOST}
+IMMICH_DB_PASSWORD=[[POSTGRES_PASSWORD]]
+IMMICH_DB_USERNAME=[[POSTGRES_USER]]
+IMMICH_DB_DATABASE_NAME="immich"
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_navidrome"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://music.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/navidrome"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV="production"
+TZ='Europe/Paris'
+
+#### NAVIDROME ####
+ND_LASTFM_APIKEY=[[ND_LASTFM_APIKEY]]
+ND_LASTFM_SECRET=[[c04cfa90b221ed7e11250e84b89f4e28]]
+ND_STORAGE_DATA=[[STORAGE_BASE_PATH]]/navidrome/data
+ND_STORAGE_MUSIC=[[STORAGE_BASE_PATH]]/navidrome/music
+ND_EXTAUTH_TRUSTEDSOURCES=[[ND_EXTAUTH_TRUSTEDSOURCES]]
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_umami"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://umami.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/umami"
+file_paths = ["docker-compose.yml"]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+TZ='Europe/Paris'
+
+#### POSTGRESQL CONFIGURATION ####
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+#### UMAMI ####
+DATABASE_URL=postgresql://[[POSTGRES_USER]]:[[POSTGRES_PASSWORD]]@${POSTGRES_HOST}:${POSTGRES_PORT}/umami
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_v1_aboulbox"
+tags = ["deprecated", "Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://v1.aboulbox.com"]
+linked_repo = "v1.aboulbox-raspberry"
+clone_path = "/etc/komodo/repos/v1.aboulbox"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+SERVER_NAME=[[SERVER_NAME]]
+TZ='Europe/Paris'
+
+#### FRONTEND ####
+UMAMI_WEBSITE_CODE=[[UMAMI_WEBSITE_CODE]]
+"""
+
+##
+
+[[stack]]
+name = "prod_apps_website"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "apps/website"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+pre_deploy.command = """
+# Add multiple commands on new lines. Supports comments.
+docker compose --env-file .env -f docker-compose.yml -f docker-compose.prod.yml run --rm website
+"""
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+SERVER_NAME=[[SERVER_NAME]]
+ADMIN_EMAIL=[[ADMIN_EMAIL]]
+TZ='Europe/Paris'
+PUBLIC_SERVER_NAME=[[SERVER_NAME]]
+
+#### FRONTEND ####
+UMAMI_WEBSITE_CODE=[[UMAMI_WEBSITE_CODE]]
+"""
+
+##
+
+[[stack]]
+name = "prod_docs_docusaurus"
+tags = ["Raspberry", "Docs"]
+[stack.config]
+server = "Raspberry"
+links = ["https://wiki.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "docs/docusaurus"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV="production"
+TZ='Europe/Paris'
+"""
+
+##
+
+[[stack]]
+name = "prod_infra_authelia"
+tags = ["Raspberry", "Infra"]
+[stack.config]
+server = "Raspberry"
+links = ["https://auth.aboulbox.com"]
+linked_repo = "aboulbox-raspberry"
+run_directory = "infra/authelia"
+file_paths = ["docker-compose.yml"]
+environment = """
+#### GLOBAL CONFIGURATION ####
+SERVER_NAME=[[SERVER_NAME]]
+
+AUTH_SECRETS_PATH=[[AUTH_SECRETS_PATH]]
+AUTH_SMTP_USERNAME=[[MAILGUN_FROM_WHO]]
+AUTH_SMTP_PASSWORD=[[MAILGUN_SMTP_PASSWORD]]
+AUTH_SMTP_CHECK_EMAIL=[[ADMIN_EMAIL]]
+"""
+
+##
+
+[[stack]]
+name = "prod_infra_caddy"
+tags = ["Raspberry", "Infra"]
+[stack.config]
+server = "Raspberry"
+linked_repo = "aboulbox-raspberry"
+run_directory = "infra/caddy"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+SERVER_NAME=[[SERVER_NAME]]
+"""
+
+##
+
+[[stack]]
+name = "prod_infra_db"
+tags = ["Raspberry", "Infra"]
+[stack.config]
+server = "Raspberry"
+linked_repo = "aboulbox-raspberry"
+run_directory = "infra/database"
+file_paths = ["docker-compose.yml"]
+environment = """
+#### GLOBAL CONFIGURATION ####
+TZ='Europe/Paris'
+
+#### POSTGRESQL CONFIGURATION ####
+POSTGRES_USER=[[POSTGRES_USER]]
+POSTGRES_PASSWORD=[[POSTGRES_PASSWORD]]
+POSTGRES_PORT=5432
+POSTGRES_DB=[[POSTGRES_DB]]
+"""
+
+##
+
+[[stack]]
+name = "prod_infra_redis"
+tags = ["Raspberry", "Infra"]
+[stack.config]
+server = "Raspberry"
+linked_repo = "aboulbox-raspberry"
+run_directory = "infra/redis"
+file_paths = ["docker-compose.yml"]
+
+##
+
+[[repo]]
+name = "aboulbox-raspberry"
+tags = ["Raspberry"]
+[repo.config]
+server = "Raspberry"
+builder = "Raspberry"
+git_account = "aboul"
+repo = "aboul/aboulbox.com"
+path = "/etc/komodo/repos/aboulbox"
+
+##
+
+[[procedure]]
+name = "update-stack"
+tags = ["Raspberry"]
+config.webhook_enabled = false
+
+[[procedure.config.stage]]
+name = "Pull repo"
+enabled = true
+executions = [
+  { execution.type = "PullRepo", execution.params.repo = "aboulbox-raspberry", enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Redeploy changes"
+enabled = true
+executions = [
+  { execution.type = "DeployStackIfChanged", enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Redeploy Caddy"
+enabled = true
+executions = [
+  { execution.type = "RestartStack", execution.params.services = [], enabled = true }
+]
+
+##
+
+[[builder]]
+name = "Raspberry"
+tags = ["Raspberry"]
+[builder.config]
+type = "Server"
+params.server_id = "Raspberry"
+
+##
+
+[[resource_sync]]
+name = "Raspberry"
+tags = ["Raspberry"]
+[resource_sync.config]
+linked_repo = "aboulbox-raspberry"
+resource_path = ["main.toml"]
+managed = true
+match_tags = ["Raspberry"]
