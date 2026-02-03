@@ -380,6 +380,17 @@ path = "/etc/komodo/repos/aboulbox"
 
 ##
 
+[[repo]]
+name = "v1.aboulbox-raspberry"
+tags = ["Raspberry"]
+[repo.config]
+server = "Raspberry"
+builder = "Raspberry"
+git_account = "aboul"
+repo = "aboul/v1.aboulbox.com"
+
+##
+
 [[builder]]
 name = "Raspberry"
 tags = ["Raspberry"]
