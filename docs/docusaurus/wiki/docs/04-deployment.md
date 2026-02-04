@@ -4,9 +4,7 @@ J'utilise Komodo à la fois pour mon environnement de développement et mon envi
 Prenons la stack prod sur Komodo :
 
 - 1 Repos : aboul/aboulbox.com
-- 2 Stacks différentes pour chaque environnement (prod/dev) pour gérer Caddy/Authelia (+ db/redis Authelia) d'un côté puis tous les autres services de l'autre.
-  - caddy.compose.yml / caddy.compose.prod.yml caddy.compose.dev.yml
-  - docker-compose.yml / docker-compose.prod.yml / docker-compose.dev.yml
+- 1 Service = 1 Stack
 - 1 Procédure pour la prod
 
 ## Production

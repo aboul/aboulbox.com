@@ -8,10 +8,13 @@
 
 ### Directus
 - `INVALID_CREDENTIALS` → email OIDC ne correspond pas à un user existant
+
+  - Checker la table `directus_users` : le user doit avoir `provider` == `openid` et `external_identifier` == `<user_email>`
+
 - `/admin/login` loop → vérifier `AUTH_PROVIDERS` et `redirect_uri`
 
 ### Immich
-- Problèmes de certificat → vérifier NODE_TLS_REJECT_UNAUTHORIZED en dev
+- Problèmes de certificat → vérifier NODE_TLS_REJECT_UNAUTHORIZED=0 en dev
 
 ### Navidrome
 - `ND_EXTAUTH_TRUSTEDSOURCES` pour IP correcte

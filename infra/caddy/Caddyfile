@@ -3,6 +3,7 @@
 
 	admin 0.0.0.0:2019
 
+	# Global log (json)
 	log {
 		level INFO
 		output file /var/log/caddy/access.json {
@@ -14,11 +15,9 @@
 			time_format wall
 		}
 	}
-}
 
-# Fail2Ban logging
-(fail2ban-logging) {
-	log {
+	# Fail2Ban log (common_log)
+	log fail2ban {
 		output file /var/log/caddy/fail2ban.log {
 			roll_size 5mb
 			roll_keep 10
@@ -176,7 +175,6 @@ https://home.{$SERVER_NAME} {
 }
 
 https://wiki.{$SERVER_NAME} {
-	import authelia-auth *
 	import fail2ban-logging wiki
 	reverse_proxy docusaurus:3000
 }

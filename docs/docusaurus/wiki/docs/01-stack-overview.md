@@ -23,53 +23,63 @@
 flowchart TD
   %%{init: {
     "themeVariables": {
-      "fontSize": "32px"
+      "fontSize": "38px"
+    },
+    "flowchart": {
+      "curve": "linear"
     }
   }}%%
   %% ===== User =====
-  User["Utilisateur / Clients"]
+  User["Utilisateur&nbsp;/&nbsp;Clients"]
 
-  %% ===== Edge =====
-  subgraph EDGE["Edge"]
-    Caddy["Caddy<br/>Reverse Proxy<br/>TLS / Routing"]
-  end
+  %% ===== Proxy =====
+  PROXY["Caddy<br/>Reverse&nbsp;Proxy<br/>TLS&nbsp;/&nbsp;Routing"]
+
+  User --> PROXY
 
   %% ===== Auth =====
-  subgraph AUTH["Auth & Identity"]
-    Authelia["Authelia<br/>(OIDC / Forward Auth)"]
+  subgraph AUTH["Auth&nbsp;&&nbsp;OIDC"]
+    Authelia["Authelia<br/>(OIDC&nbsp;/&nbsp;Forward&nbsp;Auth)"]
     AutheliaRedis["Redis<br/>(Sessions)"]
     AutheliaDB["PostgreSQL"]
   end
 
+  PROXY <-- "forward_auth" --> AUTH
+
   %% ===== Applications =====
   subgraph APPS["Applications"]
-    Website["Website<br/>(Astro)"]
-    Backend["Backend<br/>(ExpressJS)"]
-    Immich["Immich<br/>(Photos)"]
-    Directus["Directus<br/>(CMS / Admin)"]
-    Navidrome["Navidrome<br/>(Music)"]
-    Umami["Umami<br/>(Analytics)"]
-    Docusaurus["Docusaurus<br/>(Docs)"]
-    Homepage["Homepage<br/>(Dashboard)"]
-    Glances["Glances"]
+    subgraph Padding[" "]
+      Website["Website<br/>(Astro)"]
+      Backend["Backend<br/>(ExpressJS)"]
+      Immich["Immich"]
+      Directus["Directus<br/>(Admin)"]
+      Navidrome["Navidrome<br/>(Music)"]
+      Umami["Umami<br/>(Analytics)"]
+      Docusaurus["Docusaurus<br/>(Docs)"]
+      Homepage["Homepage<br/>(Dashboard)"]
+      Glances["Glances"]
+    end
   end
 
   %% ===== Data Layer =====
   subgraph DATA["Data Layer"]
-    Postgres["PostgreSQL<br/>(single service)"]
-
-    subgraph DBS["Databases"]
-      DB_Immich["immich"]
-      DB_Umami["umami"]
-      DB_Main["backend<br/>(directus + backend)"]
+    subgraph PaddingDataLayer[" "]
+      Redis["Redis"]
+      subgraph DBS["Databases"]
+        subgraph PaddingDatabase[" "]
+        DB_Immich["immich"]
+        DB_Umami["umami"]
+        DB_Main["backend<br/> "]
+        end 
+      end
+      Postgres["PostgreSQL<br/>(single service)"]
     end
   end
 
   %% ===== Flows =====
-  User --> EDGE
 
-  EDGE <-- "forward_auth" --> AUTH
-  EDGE --> APPS
+
+  PROXY --> APPS
 
   Authelia --> AutheliaRedis
   Authelia --> AutheliaDB
@@ -78,6 +88,7 @@ flowchart TD
   AUTH <-- "OIDC" --> Directus
 
   Immich --> DB_Immich
+  Immich --> Redis
   Directus --> DB_Main
   Backend --> DB_Main
   Umami --> DB_Umami
@@ -96,15 +107,19 @@ flowchart TD
   classDef analytics fill:#8E7CC3,stroke:#000,color:#fff;
   classDef infra fill:#999999,stroke:#000,color:#fff;
   classDef db fill:#444444,stroke:#000,color:#fff;
+  classDef padding fill:none,stroke:none;
+  classDef monitoring fill:#8E7CC3,stroke:#000,color:#fff;
 
   class User user
-  class Caddy proxy
+  class PROXY proxy
   class Authelia auth
   class AutheliaRedis infra
   class AutheliaDB infra
   class Website app
   class Backend app
   class Immich media
+  class ImmichApp app
+  class ImmichRedis infra
   class Directus app
   class Navidrome media
   class Umami analytics
@@ -112,6 +127,10 @@ flowchart TD
   class Homepage app
   class Postgres infra
   class DB_Immich,DB_Umami,DB_Main db
-  class Glances infra
+  class Glances monitoring
+  class Redis infra
+  class Padding padding
+  class PaddingDataLayer padding
+  class PaddingDatabase padding
 
 ```
