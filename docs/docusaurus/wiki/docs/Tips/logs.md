@@ -80,7 +80,6 @@ jq '.' /var/log/authelia/authelia.json
 jq 'select(.level == "error")' /var/log/authelia/authelia.json
 ```
 
-
 ### 🔹 Voir les tentatives d’authentification échouées
 
 ```bash
@@ -122,13 +121,11 @@ tail -f /var/log/authelia/authelia.json | jq '.message'
 tail -n 100 /var/log/caddy/access.json | jq '.'
 ```
 
-
 ### 🔹 IP + route + status (Caddy)
 
 ```bash
 jq -r '[.request.remote_ip, .request.uri, .status] | @tsv' /var/log/caddy/access.json
 ```
-
 
 ### 🔹 Tentatives d’auth par IP (Authelia)
 

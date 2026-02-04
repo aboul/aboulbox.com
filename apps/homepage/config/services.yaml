@@ -10,7 +10,7 @@
           showTime: true
           integrations:
             - type: ical
-              url: { { HOMEPAGE_VAR_ICAL_URL } }
+              url: {{HOMEPAGE_VAR_ICAL_URL}}
               color: green
 
 - Ressources:
