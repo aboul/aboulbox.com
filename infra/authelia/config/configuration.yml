@@ -4,6 +4,7 @@ theme: auto
 
 log:
   keep_stdout: true
+  format: json
   file_path: /var/log/authelia/authelia.log
 
 identity_validation:
