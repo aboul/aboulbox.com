@@ -137,12 +137,14 @@ https://{$SERVER_NAME} {
 }
 
 https://umami.{$SERVER_NAME} {
+  log custom
 	import no-robots
 
 	reverse_proxy umami:3000
 }
 
 https://home.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy homepage:3000
 }
@@ -154,31 +156,37 @@ https://wiki.{$SERVER_NAME} {
 }
 
 https://photo.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy immich:2283
 }
 
 https://admin.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy directus:8055
 }
 
 https://music.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy navidrome:4533
 }
 
 https://audiomuse.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy audiomuse-ai-flask:8000
 }
 
 https://ollama.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy ollama-webui:8080
 }
 
 https://monitor.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy glances:61208
 }
