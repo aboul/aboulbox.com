@@ -80,7 +80,6 @@
 }
 
 https://auth.{$SERVER_NAME} {
-	import fail2ban-logging auth
 	import no-robots
 
 	reverse_proxy authelia:9091
@@ -89,7 +88,6 @@ https://auth.{$SERVER_NAME} {
 https://v1.{$SERVER_NAME} {
 	import security
 	import static
-	import fail2ban-logging aboulbox
 	encode zstd gzip
 
 	# Handle API requests
@@ -125,7 +123,6 @@ https://v1.{$SERVER_NAME} {
 https://{$SERVER_NAME} {
 	import security
 	import static
-	import fail2ban-logging aboulbox
 	encode zstd gzip
 
 	# Handle API requests
@@ -163,31 +160,26 @@ https://umami.{$SERVER_NAME} {
 		path /script.js /api/send
 	}
 	import authelia-auth @needAuth
-	import fail2ban-logging umami
 	import no-robots
 	reverse_proxy umami:3000
 }
 
 https://home.{$SERVER_NAME} {
 	import authelia-auth *
-	import fail2ban-logging home
 	reverse_proxy homepage:3000
 }
 
 https://wiki.{$SERVER_NAME} {
-	import fail2ban-logging wiki
 	reverse_proxy docusaurus:3000
 }
 
 https://photo.{$SERVER_NAME} {
-	import fail2ban-logging photo
 	import no-robots
 	reverse_proxy immich:2283
 }
 
 https://admin.{$SERVER_NAME} {
 	import authelia-auth *
-	import fail2ban-logging admin
 	import no-robots
 	reverse_proxy directus:8055
 }
@@ -197,20 +189,17 @@ https://music.{$SERVER_NAME} {
 		path /rest/*
 	}
 	import authelia-auth @needAuth
-	import fail2ban-logging music
 	import no-robots
 	reverse_proxy navidrome:4533
 }
 
 https://monitor.{$SERVER_NAME} {
 	import authelia-auth *
-	import fail2ban-logging monitor
 	import no-robots
 	reverse_proxy glances:61208
 }
 
 https://agent.{$SERVER_NAME} {
-	import fail2ban-logging agent
 	import no-robots
 	reverse_proxy periphery:8120
 }
