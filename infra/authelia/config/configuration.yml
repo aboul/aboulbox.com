@@ -2,6 +2,10 @@
 # Set also AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE
 theme: auto
 
+log:
+  keep_stdout: true
+  file_path: /var/log/authelia/authelia.log
+
 identity_validation:
   reset_password:
     jwt_secret: '{{ secret "/secrets/JWT_SECRET" }}'

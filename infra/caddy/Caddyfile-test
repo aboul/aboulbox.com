@@ -1,19 +1,23 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
 
-  admin 0.0.0.0:2019
-}
+	admin 0.0.0.0:2019
 
-(main) {
 	log_skip /assets*
 	log {
-		output file /var/log/caddy/access.json
+		level DEBUG
+		output file /var/log/caddy/access.json {
+			roll_size 10mb
+			roll_keep 20
+			roll_keep_for 720h
+		}
 		format json {
 			time_format wall
 		}
 	}
 }
 
+# Static caching for 5 days
 (static) {
 	@static {
 		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.json *.tsx
@@ -21,6 +25,7 @@
 	header @static ?Cache-Control "public, max-age=432000, must-revalidate"
 }
 
+# Disable robots.txt
 (no-robots) {
 	handle /robots.txt {
 		respond 200 {
@@ -60,7 +65,6 @@ https://auth.{$SERVER_NAME} {
 }
 
 https://v1.{$SERVER_NAME} {
-	import main
 	import security
 	import static
 	encode zstd gzip
@@ -97,7 +101,6 @@ https://v1.{$SERVER_NAME} {
 }
 
 https://{$SERVER_NAME} {
-	import main
 	import security
 	import static
 	encode zstd gzip
@@ -112,56 +115,47 @@ https://{$SERVER_NAME} {
 }
 
 https://umami.{$SERVER_NAME} {
-	import main
 	import no-robots
 
 	reverse_proxy umami:3000
 }
 
 https://home.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy homepage:3000
 }
 
 https://wiki.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
 
 https://photo.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy immich:2283
 }
 
 https://admin.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy directus:8055
 }
 
 https://music.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy navidrome:4533
 }
 
 https://audiomuse.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy audiomuse-ai-flask:8000
 }
 
 https://ollama.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy ollama-webui:8080
 }
 
 https://monitor.{$SERVER_NAME} {
-	import main
 	import no-robots
 	reverse_proxy glances:61208
 }

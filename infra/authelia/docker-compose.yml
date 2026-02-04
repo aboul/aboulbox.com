@@ -10,6 +10,7 @@ services:
     volumes:
       - ./config/configuration.yml:/config/configuration.yml:ro
       - ${AUTH_SECRETS_PATH}:/secrets
+      - /var/log/authelia:/var/log/authelia
     environment:
       X_AUTHELIA_CONFIG_FILTERS: template
     networks:
