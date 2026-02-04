@@ -84,19 +84,19 @@ jq 'select(.level == "error")' /var/log/authelia/authelia.log
 ### 🔹 Voir les tentatives d’authentification échouées
 
 ```bash
-jq 'select(.message | contains("Authentication failed"))' /var/log/authelia/authelia.log
+jq 'select(.msg | contains("Authentication failed"))' /var/log/authelia/authelia.log
 ```
 
 ### 🔹 Voir les échecs MFA / second facteur
 
 ```bash
-jq 'select(.message | contains("Second factor"))' /var/log/authelia/authelia.log
+jq 'select(.msg | contains("Second factor"))' /var/log/authelia/authelia.log
 ```
 
 ### 🔹 Voir les erreurs OIDC
 
 ```bash
-jq 'select(.message | contains("OIDC"))' /var/log/authelia/authelia.log
+jq 'select(.msg | contains("OIDC"))' /var/log/authelia/authelia.log
 ```
 
 ### 🔹 Voir les erreurs par utilisateur
@@ -133,7 +133,7 @@ jq -r '[.request.remote_ip, .request.uri, .status] | @tsv' /var/log/caddy/access
 ### 🔹 Tentatives d’auth par IP (Authelia)
 
 ```bash
-jq -r 'select(.message | contains("Authentication")) | .remote_ip' /var/log/authelia/authelia.log \
+jq -r 'select(.msg | contains("Authentication")) | .remote_ip' /var/log/authelia/authelia.log \
 | sort | uniq -c | sort -nr
 ```
 

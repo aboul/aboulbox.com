@@ -3,8 +3,15 @@
 
 	admin 0.0.0.0:2019
 
-  # Global log (json)
+  # Default logger
 	log {
+		format console {
+			time_format wall
+		}
+	}
+
+  # Global log (json)
+	log access {
 		level DEBUG
 		output file /var/log/caddy/access.json {
 			roll_size 10mb

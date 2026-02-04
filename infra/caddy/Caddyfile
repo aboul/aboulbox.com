@@ -3,6 +3,13 @@
 
 	admin 0.0.0.0:2019
 
+	# Default logger
+	log {
+		format console {
+			time_format wall
+		}
+	}
+
 	# Global log (json)
 	log access {
 		level INFO
