@@ -12,7 +12,7 @@
 
 	# Global log (json)
 	log access {
-		level INFO
+		include http.log.access.custom
 		output file /var/log/caddy/access.json {
 			roll_size 10mb
 			roll_keep 20
@@ -25,6 +25,7 @@
 
 	# Fail2Ban log (common_log)
 	log fail2ban {
+		include http.log.access.custom
 		output file /var/log/caddy/fail2ban.log {
 			roll_size 5mb
 			roll_keep 10
@@ -87,15 +88,17 @@
 }
 
 https://auth.{$SERVER_NAME} {
+	log custom
 	import no-robots
-
 	reverse_proxy authelia:9091
 }
 
 https://v1.{$SERVER_NAME} {
+	log custom
 	import security
 	import static
 	encode zstd gzip
+	log custom
 
 	# Handle API requests
 	handle /api* {
@@ -128,6 +131,7 @@ https://v1.{$SERVER_NAME} {
 }
 
 https://{$SERVER_NAME} {
+	log custom
 	import security
 	import static
 	encode zstd gzip
@@ -163,6 +167,7 @@ https://{$SERVER_NAME} {
 }
 
 https://umami.{$SERVER_NAME} {
+	log custom
 	@needAuth not {
 		path /script.js /api/send
 	}
@@ -172,26 +177,31 @@ https://umami.{$SERVER_NAME} {
 }
 
 https://home.{$SERVER_NAME} {
+	log custom
 	import authelia-auth *
 	reverse_proxy homepage:3000
 }
 
 https://wiki.{$SERVER_NAME} {
+	log custom
 	reverse_proxy docusaurus:3000
 }
 
 https://photo.{$SERVER_NAME} {
+	log custom
 	import no-robots
 	reverse_proxy immich:2283
 }
 
 https://admin.{$SERVER_NAME} {
+	log custom
 	import authelia-auth *
 	import no-robots
 	reverse_proxy directus:8055
 }
 
 https://music.{$SERVER_NAME} {
+	log custom
 	@needAuth not {
 		path /rest/*
 	}
@@ -201,16 +211,19 @@ https://music.{$SERVER_NAME} {
 }
 
 https://monitor.{$SERVER_NAME} {
+	log custom
 	import authelia-auth *
 	import no-robots
 	reverse_proxy glances:61208
 }
 
 https://agent.{$SERVER_NAME} {
+	log custom
 	import no-robots
 	reverse_proxy periphery:8120
 }
 
 https://ci.{$SERVER_NAME} {
+	log custom
 	reverse_proxy 192.168.1.19:9120
 }

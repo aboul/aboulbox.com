@@ -12,7 +12,7 @@
 
   # Global log (json)
 	log access {
-		level DEBUG
+    include http.log.access.custom
 		output file /var/log/caddy/access.json {
 			roll_size 10mb
 			roll_keep 20
@@ -21,6 +21,17 @@
 		format json {
 			time_format wall
 		}
+	}
+
+	# Fail2Ban log (common_log)
+	log fail2ban {
+    include http.log.access.custom
+		output file /var/log/caddy/fail2ban.log {
+			roll_size 5mb
+			roll_keep 10
+			roll_keep_for 720h
+		}
+		format transform "{common_log}"
 	}
 }
 
@@ -69,10 +80,12 @@
 }
 
 https://auth.{$SERVER_NAME} {
+  log custom
 	reverse_proxy authelia:9091
 }
 
 https://v1.{$SERVER_NAME} {
+  log custom
 	import security
 	import static
 	encode zstd gzip
@@ -109,6 +122,7 @@ https://v1.{$SERVER_NAME} {
 }
 
 https://{$SERVER_NAME} {
+  log custom
 	import security
 	import static
 	encode zstd gzip
@@ -134,6 +148,7 @@ https://home.{$SERVER_NAME} {
 }
 
 https://wiki.{$SERVER_NAME} {
+  log custom
 	import no-robots
 	reverse_proxy docusaurus:3000
 }
