@@ -3,7 +3,6 @@
 
 	admin 0.0.0.0:2019
 
-	log_skip /assets*
 	log {
 		level INFO
 		output file /var/log/caddy/access.json {
@@ -31,6 +30,7 @@
 
 # Static caching for 5 days
 (static) {
+	log_skip /assets*
 	@static {
 		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.json *.tsx
 	}
