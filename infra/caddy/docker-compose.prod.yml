@@ -7,3 +7,9 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - /var/log/caddy:/var/log/caddy
+      - aboulbox-dist:/srv/site:ro
+      - ../../docs/docusaurus/wiki/dist:/srv/docs:ro
+
+volumes: 
+  aboulbox-dist:
+    external: true

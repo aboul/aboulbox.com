@@ -183,7 +183,14 @@ https://home.{$SERVER_NAME} {
 
 https://wiki.{$SERVER_NAME} {
 	log custom
-	reverse_proxy docusaurus:3000
+	import security
+	import static
+	encode zstd gzip
+	
+  root * /srv/docs
+	try_files {path} index.html
+
+  file_server
 }
 
 https://photo.{$SERVER_NAME} {
