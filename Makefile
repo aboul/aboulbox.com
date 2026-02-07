@@ -1,22 +1,36 @@
-build: 
-	docker compose build --pull --no-cache
+# ==============================
+# Makefile for komodo monorepo
+# ==============================
 
-up:
-	docker compose --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml -f docker-compose.yml -f docker-compose.dev.yml up -d
+# Variables
+DOCKER_COMPOSE:=docker compose
+DOCS_SERVICE:=docusaurus
+REPO_PATH:=/etc/komodo/repos/aboulbox
+ENV_FILE:=.env.build
 
-up-build:
-	docker compose --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml -f docker-compose.yml -f docker-compose.dev.yml up -d --build --force-recreate
+# ------------------------------
+# Pre-commit (run fast checks / builds)
+# ------------------------------
+.PHONY: pre-commit
+pre-commit: fetch-env docs
+	@echo "✅ Pre-commit checks done"
 
-down:
-	docker compose --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml -f docker-compose.yml -f docker-compose.dev.yml down --remove-orphans
+.PHONY: fetch-env
+fetch-env:
+	@echo "📡 Fetching remote .env.build from Server..."
+	ssh rsp-server "cat $(REPO_PATH)/docs/docusaurus/.env" > ./docs/docusaurus/$(ENV_FILE)
+	@echo "✅ .env saved to $(ENV_FILE)"
 
-logs:
-	docker compose --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml -f docker-compose.yml -f docker-compose.dev.yml logs -f
+# ------------------------------
+# Documentation
+# ------------------------------
+.PHONY: docs
+docs: 
+	@echo "📘 Building Docusaurus docs..."
+	docker compose -p dev_docs_docusaurus stop && \
+	cd ./docs/docusaurus && \
+	$(DOCKER_COMPOSE) -f docker-compose.yml --env-file $(ENV_FILE) run --rm \
+	$(DOCS_SERVICE) sh -c "npm ci && npm run build-prod" && \
+	docker compose -p dev_docs_docusaurus start 
 
-bash: 
-	docker compose -p caddy --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml exec caddy sh
-
-reload-caddy:
-	docker compose -p caddy --env-file .env -f caddy.compose.yml -f caddy.compose.dev.yml exec caddy caddy reload --config /etc/caddy/Caddyfile
-
-restart: down up
+	@echo "✅ Docusaurus build complete!"

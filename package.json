@@ -1,0 +1,24 @@
+{
+  "name": "aboulbox",
+  "version": "1.0.0",
+  "description": "Homelab",
+  "homepage": "https://github.com/aboul/aboulbox.com#readme",
+  "bugs": {
+    "url": "https://github.com/aboul/aboulbox.com/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aboul/aboulbox.com.git"
+  },
+  "license": "ISC",
+  "author": "Abel BRIEN",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
