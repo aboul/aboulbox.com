@@ -85,11 +85,6 @@
         container: immich
         href: https://photo.aboulbox.com/
         showStats: true
-    - Immich Machine Learning:
-        icon: sh-immich-light.svg
-        server: my-docker
-        container: immich_machine_learning
-        showStats: true
     - Audiomuse Web:
         icon: sh-navidrome-light.svg
         server: my-docker

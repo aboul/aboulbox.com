@@ -1,0 +1,26 @@
+prod_apps_backend:
+  - 'apps/backend/**'
+prod_apps_directus: 
+  - 'apps/directus/**'
+prod_apps_glances: 
+  - 'apps/glances/**'
+prod_apps_homepage: 
+  - 'apps/homepage/**'
+prod_apps_immich: 
+  - 'apps/immich/**'
+prod_apps_navidrome:     
+  - 'apps/navidrome/**'
+prod_apps_umami:
+  - 'apps/umami/**'
+prod_apps_website:
+  - 'apps/website/**'
+prod_docs_docusaurus: 
+  - 'docs/docusaurus/**'
+prod_infra_authelia: 
+  - 'infra/authelia/**'
+prod_infra_caddy: 
+  - 'infra/caddy/**'
+prod_infra_database: 
+  - 'infra/database/**'
+prod_infra_redis: 
+  - 'infra/redis/**'

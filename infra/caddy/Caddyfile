@@ -216,12 +216,6 @@ https://monitor.{$SERVER_NAME} {
 	reverse_proxy glances:61208
 }
 
-https://agent.{$SERVER_NAME} {
-	log custom
-	import no-robots
-	reverse_proxy periphery:8120
-}
-
 https://ci.{$SERVER_NAME} {
 	log custom
 	reverse_proxy 192.168.1.19:9120
