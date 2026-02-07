@@ -14,8 +14,6 @@ prod_apps_umami:
   - 'apps/umami/**'
 prod_apps_website:
   - 'apps/website/**'
-prod_docs_docusaurus: 
-  - 'docs/docusaurus/**'
 prod_infra_authelia: 
   - 'infra/authelia/**'
 prod_infra_caddy: 
