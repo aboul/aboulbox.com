@@ -1,4 +1,0 @@
-services:
-  navidrome:
-    volumes:
-      - ./data:/data

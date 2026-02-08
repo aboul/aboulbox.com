@@ -12,14 +12,8 @@ ENV_FILE:=.env.build
 # Pre-commit (run fast checks / builds)
 # ------------------------------
 .PHONY: pre-commit
-pre-commit: fetch-env docs
+pre-commit: docs
 	@echo "✅ Pre-commit checks done"
-
-.PHONY: fetch-env
-fetch-env:
-	@echo "📡 Fetching remote .env.build from Server..."
-	ssh rsp-server "cat $(REPO_PATH)/docs/docusaurus/.env" > ./docs/docusaurus/$(ENV_FILE)
-	@echo "✅ .env saved to $(ENV_FILE)"
 
 # ------------------------------
 # Documentation

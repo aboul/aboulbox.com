@@ -1,5 +1,3 @@
 services:
   navidrome:
     user: 1000:985 # should be owner of volumes
-    volumes:
-      - ${ND_STORAGE_DATA}:/data
