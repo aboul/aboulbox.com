@@ -4,7 +4,7 @@ services:
       - ${IMMICH_UPLOAD_LOCATION}/external-library:/mnt/photos
 
   immich-machine-learning:
-    image: ghcr.io/immich-app/immich-machine-learning:v2.5.5
+    image: ghcr.io/immich-app/immich-machine-learning:v2.5.6
     container_name: immich_machine_learning
     restart: unless-stopped
     volumes:
