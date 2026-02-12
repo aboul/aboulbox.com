@@ -30,7 +30,7 @@ services:
       - proxy-network
 
   redis_authelia:
-    image: redis:7
+    image: redis:8
     container_name: redis_authelia
     restart: unless-stopped
     volumes:
