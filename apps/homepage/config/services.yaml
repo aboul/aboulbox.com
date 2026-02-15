@@ -12,6 +12,80 @@
             - type: ical
               url: {{HOMEPAGE_VAR_ICAL_URL}}
               color: green
+    - Useful links:
+      - For coding:
+          - Github:
+              icon: sh-github-light.svg
+              href: https://github.com/aboul
+          - Gandi domains:
+              icon: sh-gandi-light.svg
+              href: https://admin.gandi.net/domain/
+          - Mailgun:
+              icon: si-mailgun-#ffffff
+              href: https://app.eu.mailgun.com/
+          - ChatGPT:
+              icon: sh-chatgpt-light.svg
+              href: https://chatgpt.com/
+          - Netlify:
+              icon: sh-netlify-light.svg
+              href: https://app.netlify.com/teams/aboul/sites
+
+      - Du social:
+          - Discord:
+              icon: sh-discord-light.svg
+              href: https://discord.com/channels/
+          - Youtube channel:
+              icon: sh-youtube-light.svg
+              href: https://www.youtube.com/@abelbrien
+          - Facebook:
+              icon: sh-facebook-light.svg
+              href: https://facebook.com
+          - Reddit:
+              icon: sh-reddit-light.svg
+              href: https://www.reddit.com/r/france/new
+          - Instagram:
+              icon: sh-instagram-light.svg
+              href: https://www.instagram.com/
+
+      - Nice self-hosted repos:
+          - Self-hosted awesome:
+              href: https://github.com/awesome-selfhosted/awesome-selfhosted
+          - Self-hosted Sysadmin:
+              href: https://github.com/awesome-foss/awesome-sysadmin
+          - Awesome Datasets:
+              href: https://github.com/awesomedata/awesome-public-datasets
+
+      - Icons for Services:
+          - Dashboard icons:
+              icon: mdi-view-dashboard.svg
+              href: https://dashboardicons.com/
+          - Font Awesome:
+              icon: si-fontawesome-#ffffff
+              href: https://fontawesome.com/icons
+          - Selfh.st:
+              icon: sh-selfh-st-light.svg
+              href: https://selfh.st/icons/
+          - Material Design Icons:
+              icon: si-materialdesignicons-#ffffff
+              href: https://pictogrammers.com/library/mdi
+          - Simple Icons:
+              icon: si-simpleicons-#ffffff
+              href: https://simpleicons.org
+          - EmojiPedia:
+              icon: mdi-panda.svg
+              href: https://emojipedia.org
+
+      - Config Helpers:
+          - JSON Schema Example:
+              href: https://json-schema.app/view/%23?url=https%3A%2F%2Fjson.schemastore.org%2Fpackage
+          - JSON Config Validator:
+              href: https://www.jsonschemavalidator.net/s/JFUj7X9J
+          - JSON to YAML:
+              href: https://jsonformatter.org/json-to-yaml
+          - YAML to JSON:
+              href: https://jsonformatter.org/yaml-to-json
+    - Tools:        
+
 
 - Ressources:
     - Info:
@@ -66,13 +140,13 @@
         href: https://umami.aboulbox.com/
     - Docusaurus:
         icon: sh-wikipedia-light.svg
-        server: my-docker
+        server: https://wiki.aboulbox.com/
         container: docusaurus
         href: https://wiki.aboulbox.com/
     - Directus:
         icon: sh-directus-light.svg
         server: my-docker
-        container: docusaurus
+        container: directus
         href: https://admin.aboulbox.com/
     - Navidrome:
         icon: sh-navidrome-light.svg
@@ -101,75 +175,3 @@
         container: glances
         href: http://monitor.aboulbox.com/
 
-- Useful links:
-    - For coding:
-        - Github:
-            icon: sh-github-light.svg
-            href: https://github.com/aboul
-        - Gandi domains:
-            icon: sh-gandi-light.svg
-            href: https://admin.gandi.net/domain/
-        - Mailgun:
-            icon: si-mailgun-#ffffff
-            href: https://app.eu.mailgun.com/
-        - ChatGPT:
-            icon: sh-chatgpt-light.svg
-            href: https://chatgpt.com/
-        - Netlify:
-            icon: sh-netlify-light.svg
-            href: https://app.netlify.com/teams/aboul/sites
-
-    - Du social:
-        - Discord:
-            icon: sh-discord-light.svg
-            href: https://discord.com/channels/
-        - Youtube channel:
-            icon: sh-youtube-light.svg
-            href: https://www.youtube.com/@abelbrien
-        - Facebook:
-            icon: sh-facebook-light.svg
-            href: https://facebook.com
-        - Reddit:
-            icon: sh-reddit-light.svg
-            href: https://www.reddit.com/r/france/new
-        - Instagram:
-            icon: sh-instagram-light.svg
-            href: https://www.instagram.com/
-
-    - Nice self-hosted repos:
-        - Self-hosted awesome:
-            href: https://github.com/awesome-selfhosted/awesome-selfhosted
-        - Self-hosted Sysadmin:
-            href: https://github.com/awesome-foss/awesome-sysadmin
-        - Awesome Datasets:
-            href: https://github.com/awesomedata/awesome-public-datasets
-
-    - Icons for Services:
-        - Dashboard icons:
-            icon: mdi-view-dashboard.svg
-            href: https://dashboardicons.com/
-        - Font Awesome:
-            icon: si-fontawesome-#ffffff
-            href: https://fontawesome.com/icons
-        - Selfh.st:
-            icon: sh-selfh-st-light.svg
-            href: https://selfh.st/icons/
-        - Material Design Icons:
-            icon: si-materialdesignicons-#ffffff
-            href: https://pictogrammers.com/library/mdi
-        - Simple Icons:
-            icon: si-simpleicons-#ffffff
-            href: https://simpleicons.org
-        - EmojiPedia:
-            icon: mdi-panda.svg
-            href: https://emojipedia.org
-
-    - Config Helpers:
-        - JSON Schema Example:
-            href: https://json-schema.app/view/%23?url=https%3A%2F%2Fjson.schemastore.org%2Fpackage
-        - JSON Config Validator:
-            href: https://www.jsonschemavalidator.net/s/JFUj7X9J
-        - JSON to YAML:
-            href: https://jsonformatter.org/json-to-yaml
-        - YAML to JSON:
-            href: https://jsonformatter.org/yaml-to-json

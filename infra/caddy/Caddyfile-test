@@ -190,3 +190,11 @@ https://monitor.{$SERVER_NAME} {
 	import no-robots
 	reverse_proxy glances:61208
 }
+
+https://files.{$SERVER_NAME} {
+  log custom
+	import no-robots
+	
+  root * /srv/files
+  file_server browse
+}

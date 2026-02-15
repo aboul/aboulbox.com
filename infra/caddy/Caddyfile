@@ -227,3 +227,11 @@ https://ci.{$SERVER_NAME} {
 	log custom
 	reverse_proxy 192.168.1.19:9120
 }
+
+https://files.{$SERVER_NAME} {
+  log custom
+	import no-robots
+	
+  root * /srv/files
+  file_server browse
+}

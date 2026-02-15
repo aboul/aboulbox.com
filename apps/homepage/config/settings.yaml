@@ -34,10 +34,22 @@ layout:
   Daily:
     header: false
     style: row
-    columns: 4
+    columns: 1
     tab: Daily
-    Calendar:
+    Useful links:
       header: false
+      style: row
+      columns: 3
+      For coding:
+        icon: mdi-code-braces.svg
+      Du social:
+        icon: mdi-social-distance-6-feet.svg
+      Nice self-hosted repos:
+        icon: mdi-github.svg
+      Icons for Services:
+        icon: mdi-emoticon-excited-outline.svg
+      Config Helpers:
+        icon: mdi-wrench-outline.svg
   Ressources:
     header: false
     style: row
@@ -48,18 +60,4 @@ layout:
     style: row
     columns: 3
     tab: Monitor
-  Useful links:
-    header: false
-    style: row
-    columns: 3
-    tab: Usefull links
-    For coding:
-      icon: mdi-code-braces.svg
-    Du social:
-      icon: mdi-social-distance-6-feet.svg
-    Nice self-hosted repos:
-      icon: mdi-github.svg
-    Icons for Services:
-      icon: mdi-emoticon-excited-outline.svg
-    Config Helpers:
-      icon: mdi-wrench-outline.svg
+  

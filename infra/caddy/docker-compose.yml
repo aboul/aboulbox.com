@@ -13,6 +13,7 @@ services:
       - caddy-config:/config
       - caddy-data:/data
       - aboulbox-dist:/srv/site:ro
+      - ./files:/srv/files:ro
       - ../../docs/docusaurus/wiki/dist:/srv/docs:ro
     networks:
       - proxy-network
