@@ -210,6 +210,7 @@ https://music.{$SERVER_NAME} {
 	log custom
 	@needAuth not {
 		path /rest/*
+		path /share/*
 	}
 	import authelia-auth @needAuth
 	import no-robots
