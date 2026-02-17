@@ -10,6 +10,7 @@ services:
       - ND_PLUGINS_ENABLED=true
       - ND_PLUGINS_AUTORELOAD=true
       - ND_AGENTS=audiomuseai
+      - ND_ENABLESHARING=true
     volumes:
       - ${ND_STORAGE_MUSIC}:/music:ro
       - ${ND_STORAGE_DATA}:/data
