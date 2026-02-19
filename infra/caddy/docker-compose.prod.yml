@@ -9,6 +9,7 @@ services:
       - /var/log/caddy:/var/log/caddy
       - aboulbox-dist:/srv/site:ro
       - ../../docs/docusaurus/wiki/dist:/srv/docs:ro
+      - ${FILES_STORAGE_DATA}:/srv/files:ro
 
 volumes: 
   aboulbox-dist:

@@ -6,3 +6,4 @@ services:
         local_certs
     volumes:
       - ./Caddyfile-test:/etc/caddy/Caddyfile:ro
+      - ./files:/srv/files:ro
