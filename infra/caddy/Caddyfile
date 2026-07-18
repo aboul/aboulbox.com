@@ -215,7 +215,10 @@ https://music.{$SERVER_NAME} {
 	import authelia-auth @needAuth
 	import no-robots
 	reverse_proxy navidrome:4533 {
-		header_down -X-Frame-Options
+		header -X-Frame-Options "ALLOW-FROM https://the-refuge.forumactif.com/"
+		header Content-Security-Policy "frame-ancestors https://the-refuge.forumactif.com/;"
+
+
 	}
 }
 
