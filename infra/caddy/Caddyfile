@@ -214,7 +214,9 @@ https://music.{$SERVER_NAME} {
 	}
 	import authelia-auth @needAuth
 	import no-robots
-	reverse_proxy navidrome:4533
+	reverse_proxy navidrome:4533 {
+		header_downstream -X-Frame-Options
+	}
 }
 
 https://monitor.{$SERVER_NAME} {
@@ -234,5 +236,8 @@ https://files.{$SERVER_NAME} {
 	import no-robots
 	
   root * /srv/files
-  file_server browse
+  file_server 
+  handle_errors 4xx 5xx {
+    redir https://{$SERVER_NAME}/404
+  }
 }
