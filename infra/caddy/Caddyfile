@@ -215,7 +215,7 @@ https://music.{$SERVER_NAME} {
 	import authelia-auth @needAuth
 	import no-robots
 	reverse_proxy navidrome:4533 {
-		header_downstream -X-Frame-Options
+		header_down -X-Frame-Options
 	}
 }
 
