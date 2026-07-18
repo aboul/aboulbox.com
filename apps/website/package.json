@@ -20,7 +20,7 @@
     "altcha": "^2.3.0",
     "astro": "^5.16.15",
     "class-variance-authority": "^0.7.1",
-    "framer-motion": "^12.29.0",
+    "motion": "^12.29.0",
     "lucide-react": "^0.563.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
