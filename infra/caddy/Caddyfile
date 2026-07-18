@@ -76,7 +76,7 @@
 		# and tell browser to block detected attacks
 		#Content-Security-Policy "default-src 'self' *.{$SERVER_NAME}; style-src 'self'; script-src 'self' *.{$SERVER_NAME}; font-src 'self'; img-src 'self'; form-action 'self'; connect-src 'self'; frame-ancestors 'none';"
 		# prevent clickjacking
-		X-Frame-Options: DENY
+		X-Frame-Options: ALLOW-FROM https://the-refuge.forumactif.com
 	}
 }
 

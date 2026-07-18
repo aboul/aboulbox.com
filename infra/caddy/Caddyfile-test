@@ -198,3 +198,13 @@ https://files.{$SERVER_NAME} {
   root * /srv/files
   file_server browse
 }
+
+https://fractal.dev.local {
+  handle /api/* {
+    reverse_proxy fractal-backend:3000
+  }
+
+  handle {
+    reverse_proxy fractal-frontend:5173
+  }
+}
