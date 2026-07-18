@@ -216,7 +216,7 @@ https://music.{$SERVER_NAME} {
 	import no-robots
 	reverse_proxy navidrome:4533 {
 		header_down -X-Frame-Options "ALLOW-FROM https://the-refuge.forumactif.com/"
-		header-down Content-Security-Policy "frame-ancestors https://the-refuge.forumactif.com/;"
+		header_down Content-Security-Policy "frame-ancestors https://the-refuge.forumactif.com/;"
 
 
 	}
