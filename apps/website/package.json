@@ -17,7 +17,7 @@
     "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
     "@types/umami": "^2.10.1",
-    "altcha": "^2.3.0",
+    "altcha": "^3.0.0",
     "astro": "^5.16.15",
     "class-variance-authority": "^0.7.1",
     "motion": "^14.0.0",
