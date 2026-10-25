@@ -1,6 +1,6 @@
 services:
   directus:
-    image: directus/directus:11
+    image: directus/directus:12
     container_name: directus
     restart: unless-stopped
     environment:
