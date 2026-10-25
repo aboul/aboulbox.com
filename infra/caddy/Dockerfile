@@ -1,9 +1,9 @@
-FROM caddy:2.11.4-builder-alpine AS builder
+FROM caddy:2.11.7-builder-alpine AS builder
 
 RUN xcaddy build \
     --with github.com/caddyserver/transform-encoder
 
-FROM caddy:2.11.4-alpine
+FROM caddy:2.11.7-alpine
 
 RUN apk --update --no-cache add nano
 
