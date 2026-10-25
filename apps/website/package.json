@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aboulbox/vite-plugin-rolling-release": "^1.0.0",
-    "@astrojs/react": "^4.4.2",
+    "@astrojs/react": "^7.0.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/vite": "^4.1.18",
@@ -18,7 +18,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/umami": "^2.10.1",
     "altcha": "^3.0.0",
-    "astro": "^5.16.15",
+    "astro": "^7.0.0",
     "class-variance-authority": "^0.7.1",
     "motion": "^14.0.0",
     "lucide-react": "^0.577.0",
