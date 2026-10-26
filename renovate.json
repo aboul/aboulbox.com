@@ -2,12 +2,10 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "assignees": ["aboul"],
-  "docker-compose": {
-    "hostRules": [
-      {
-        "matchHost": "docker.io",
-        "concurrentRequestLimit": 2
-      }
-    ]
-  }
+  "hostRules": [
+    {
+      "matchHost": "docker.io",
+      "concurrentRequestLimit": 2
+    }
+  ]
 }

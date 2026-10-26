@@ -368,6 +368,34 @@ file_paths = ["docker-compose.yml"]
 
 ##
 
+[[stack]]
+name = "prod_apps_fractal"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://fract-tools.sbs"]
+clone_path = "/etc/komodo/repos/fractal-pdp"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+TZ='Europe/Paris'
+
+#### POSTGRESQL CONFIGURATION ####
+POSTGRES_HOST=fractal-db
+POSTGRES_USER=[[POSTGRES_USER]]
+POSTGRES_PASSWORD=[[POSTGRES_PASSWORD]]
+POSTGRES_PORT=5432
+
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/fractal
+ADMIN_PASSWORD=[[FRACTOOLS_ADMIN_PASSWORD]]
+"""
+
+##
+
 [[repo]]
 name = "aboulbox-raspberry"
 tags = ["Raspberry"]
@@ -388,6 +416,18 @@ server = "Raspberry"
 builder = "Raspberry"
 git_account = "aboul"
 repo = "aboul/v1.aboulbox.com"
+
+##
+
+[[repo]]
+name = "fractal-pdp-raspberry"
+tags = ["Raspberry"]
+[repo.config]
+server = "Raspberry"
+builder = "Raspberry"
+git_account = "aboul"
+repo = "aboul/fractal-pdp"
+path = "/etc/komodo/repos/fractal-pdp"
 
 ##
 

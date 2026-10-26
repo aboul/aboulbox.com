@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwiki=self.webpackChunkwiki||[]).push([["182"],{2325(e,k,c){c.d(k,{createPacketServices:()=>i.$});var i=c(3858);c(7342)}}]);
