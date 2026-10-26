@@ -1,6 +1,8 @@
 ---
 import Nav from "./Nav";
-import { Github, Linkedin } from "lucide-react";
+import { Github } from "simple-icons-astro";
+import { LinkedInLogo } from "@/components/ui/Linkedin";
+import { GithubLogo } from "@/components/ui/Github";
 ---
 
 <header
@@ -36,7 +38,7 @@ import { Github, Linkedin } from "lucide-react";
         title='Github'
       >
         <span class='sr-only'>Github</span>
-        <Github className='h-6 w-6' />
+        <GithubLogo className='h-6 w-6' />
       </a>
     </li>
     <li class='mr-5 shrink-0 text-xs'>
@@ -49,7 +51,7 @@ import { Github, Linkedin } from "lucide-react";
         title='LinkedIn'
       >
         <span class='sr-only'>LinkedIn</span>
-        <Linkedin className='h-6 w-6' />
+        <LinkedInLogo className='h-6 w-6' />
       </a>
     </li>
   </ul>
