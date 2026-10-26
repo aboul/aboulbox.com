@@ -83,6 +83,35 @@ AUTH_OPENID_LABEL="Aboulbox.com"
 ##
 
 [[stack]]
+name = "prod_apps_fractal"
+tags = ["Raspberry", "Apps"]
+[stack.config]
+server = "Raspberry"
+links = ["https://fract-tools.sbs"]
+linked_repo = "fractal-pdp-raspberry"
+clone_path = "/etc/komodo/repos/fractal-pdp"
+file_paths = [
+  "docker-compose.yml",
+  "docker-compose.prod.yml"
+]
+environment = """
+#### GLOBAL CONFIGURATION ####
+NODE_ENV=production
+TZ='Europe/Paris'
+
+#### POSTGRESQL CONFIGURATION ####
+POSTGRES_HOST=fractal-db
+POSTGRES_USER=[[POSTGRES_USER]]
+POSTGRES_PASSWORD=[[POSTGRES_PASSWORD]]
+POSTGRES_PORT=5432
+
+DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/fractal
+ADMIN_PASSWORD=[[FRACTOOLS_ADMIN_PASSWORD]]
+"""
+
+##
+
+[[stack]]
 name = "prod_apps_glances"
 tags = ["Raspberry", "Apps"]
 [stack.config]
@@ -263,6 +292,7 @@ pre_deploy.command = """
 # Add multiple commands on new lines. Supports comments.
 docker compose --env-file .env -f docker-compose.yml -f docker-compose.prod.yml run --rm website
 """
+pre_deploy.shell_mode = false
 environment = """
 #### GLOBAL CONFIGURATION ####
 NODE_ENV=production
@@ -273,26 +303,6 @@ PUBLIC_SERVER_NAME=[[SERVER_NAME]]
 
 #### FRONTEND ####
 UMAMI_WEBSITE_CODE=[[UMAMI_WEBSITE_CODE]]
-"""
-
-##
-
-[[stack]]
-name = "prod_docs_docusaurus"
-tags = ["Raspberry", "Docs"]
-[stack.config]
-server = "Raspberry"
-links = ["https://wiki.aboulbox.com"]
-linked_repo = "aboulbox-raspberry"
-run_directory = "docs/docusaurus"
-file_paths = [
-  "docker-compose.yml",
-  "docker-compose.prod.yml"
-]
-environment = """
-#### GLOBAL CONFIGURATION ####
-NODE_ENV="production"
-TZ='Europe/Paris'
 """
 
 ##
@@ -368,34 +378,6 @@ file_paths = ["docker-compose.yml"]
 
 ##
 
-[[stack]]
-name = "prod_apps_fractal"
-tags = ["Raspberry", "Apps"]
-[stack.config]
-server = "Raspberry"
-links = ["https://fract-tools.sbs"]
-clone_path = "/etc/komodo/repos/fractal-pdp"
-file_paths = [
-  "docker-compose.yml",
-  "docker-compose.prod.yml"
-]
-environment = """
-#### GLOBAL CONFIGURATION ####
-NODE_ENV=production
-TZ='Europe/Paris'
-
-#### POSTGRESQL CONFIGURATION ####
-POSTGRES_HOST=fractal-db
-POSTGRES_USER=[[POSTGRES_USER]]
-POSTGRES_PASSWORD=[[POSTGRES_PASSWORD]]
-POSTGRES_PORT=5432
-
-DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/fractal
-ADMIN_PASSWORD=[[FRACTOOLS_ADMIN_PASSWORD]]
-"""
-
-##
-
 [[repo]]
 name = "aboulbox-raspberry"
 tags = ["Raspberry"]
@@ -405,17 +387,6 @@ builder = "Raspberry"
 git_account = "aboul"
 repo = "aboul/aboulbox.com"
 path = "/etc/komodo/repos/aboulbox"
-
-##
-
-[[repo]]
-name = "v1.aboulbox-raspberry"
-tags = ["Raspberry"]
-[repo.config]
-server = "Raspberry"
-builder = "Raspberry"
-git_account = "aboul"
-repo = "aboul/v1.aboulbox.com"
 
 ##
 
@@ -431,12 +402,23 @@ path = "/etc/komodo/repos/fractal-pdp"
 
 ##
 
+[[repo]]
+name = "v1.aboulbox-raspberry"
+tags = ["Raspberry"]
+[repo.config]
+server = "Raspberry"
+builder = "Raspberry"
+git_account = "aboul"
+repo = "aboul/v1.aboulbox.com"
+
+##
+
 [[builder]]
 name = "Raspberry"
 tags = ["Raspberry"]
 [builder.config]
 type = "Server"
-params.server_id = "Raspberry"
+params.servers = ["Raspberry"]
 
 ##
 
