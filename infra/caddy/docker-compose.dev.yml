@@ -1,5 +1,6 @@
 services:
   caddy:
+    image: dev-infra-caddy:latest
     environment:
       CADDY_GLOBAL_OPTIONS: |
         debug

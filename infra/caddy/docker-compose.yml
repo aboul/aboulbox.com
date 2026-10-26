@@ -1,7 +1,7 @@
 services:
   caddy:
-    build:
-      dockerfile: Dockerfile
+    image: prod-infra-caddy:latest
+    pull_policy: never
     container_name: caddy
     restart: unless-stopped
     ports:
