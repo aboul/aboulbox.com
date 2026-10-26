@@ -27,6 +27,7 @@ services:
       AUTH_OPENID_SCOPE: "openid profile email"
       AUTH_OPENID_ICON: "openid"
       AUTH_OPENID_LABEL: ${AUTH_OPENID_LABEL}
+      LICENSE_KEY: ""
     networks:
       - proxy-network
       - database-network
