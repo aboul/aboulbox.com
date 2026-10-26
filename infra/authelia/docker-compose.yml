@@ -17,7 +17,7 @@ services:
       - proxy-network
 
   db_authelia:
-    image: postgres:18
+    image: postgres:16
     container_name: db_authelia
     restart: unless-stopped
     volumes:
