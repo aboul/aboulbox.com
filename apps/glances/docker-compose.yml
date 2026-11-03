@@ -7,16 +7,35 @@ services:
     expose:
       - "61208"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - /etc/os-release:/etc/os-release:ro
       - /:/rootfs:ro
     environment:
       - "GLANCES_OPT=-w"
       - TZ=${TZ}
+      - DOCKER_HOST=tcp://docker-proxy:2375
+    depends_on:
+      - docker-proxy
     networks:
       - proxy-network
+      - docker-socket-network
+
+  # Read-only filtered access to the Docker API (containers only, no POST)
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy:v0.4.1
+    restart: unless-stopped
+    environment:
+      CONTAINERS: 1
+      VERSION: 1
+      INFO: 1
+      POST: 0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - docker-socket-network
 
 networks:
+  docker-socket-network:
+    internal: true
   proxy-network:
     external: true
     driver: bridge

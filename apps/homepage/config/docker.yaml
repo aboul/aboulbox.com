@@ -3,4 +3,5 @@
 # https://gethomepage.dev/configs/docker/
 
 my-docker:
-  socket: /var/run/docker.sock
+  host: docker-proxy
+  port: 2375

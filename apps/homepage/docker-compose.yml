@@ -5,7 +5,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./config:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock
       - ./images:/app/public/images
     environment:
       TZ: ${TZ}
@@ -13,10 +12,27 @@ services:
       PGID: ${HOMEPAGE_PGID}
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
       HOMEPAGE_VAR_ICAL_URL: ${HOMEPAGE_VAR_ICAL_URL}
+    depends_on:
+      - docker-proxy
     networks:
       - proxy-network
+      - docker-socket-network
+
+  # Read-only filtered access to the Docker API (containers only, no POST)
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy:v0.4.1
+    restart: unless-stopped
+    environment:
+      CONTAINERS: 1
+      POST: 0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - docker-socket-network
 
 networks:
+  docker-socket-network:
+    internal: true
   proxy-network:
     external: true
     driver: bridge
