@@ -1,7 +1,7 @@
 {
 	{$CADDY_GLOBAL_OPTIONS}
 
-	admin 0.0.0.0:2019
+	admin off
 
 	# Default logger
 	log {
