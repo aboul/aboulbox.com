@@ -1,4 +1,5 @@
 import "altcha";
+import type {} from "altcha/types/react";
 
 const Altcha: React.FC = () => {
   interface captchaPropsInterface {
@@ -16,17 +17,15 @@ const Altcha: React.FC = () => {
 
   return (
     <altcha-widget
-      id="altcha"
-      style={{
-        "--altcha-color-border": "var(--color-gray-600)",
-        "--altcha-color-base": "var(--color-teal-950)",
-        "--altcha-border-radius": "var(--radius)",
-        "--altcha-color-text": "var(--color-gray-400)",
-      }}
-      hidelogo
-      hidefooter
-      challengeurl="api/altcha"
-      {...captchaProps}
+      id='altcha'
+      theme='cyberpunk'
+      configuration={JSON.stringify({
+        type: "switch",
+        hideLogo: true,
+        hideFooter: true,
+        ...captchaProps,
+      })}
+      challenge='api/altcha'
     ></altcha-widget>
   );
 };

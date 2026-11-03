@@ -1,18 +1,29 @@
-import { createChallenge, verifySolution } from "altcha-lib";
+import { createChallenge, randomInt, verifySolution } from "altcha-lib";
+import { deriveKey } from "altcha-lib/algorithms/pbkdf2";
 import { ALTCHA_HMAC_KEY } from "../config.js";
 
 export async function challenge(req, res) {
   // Create a new challenge and send it to the client:
   const challenge = await createChallenge({
-    hmacKey: ALTCHA_HMAC_KEY,
-    maxNumber: 100000, // the maximum random number
+    algorithm: "PBKDF2/SHA-256",
+    cost: 2000,
+    counter: randomInt(5_000, 10_000),
+    deriveKey,
+    hmacSignatureSecret: ALTCHA_HMAC_KEY,
+    hmacKeySignatureSecret: ALTCHA_HMAC_KEY,
   });
 
   return res.status(200).json(challenge);
 }
 
-export function verify(captcha) {
-  const ok = verifySolution(captcha, "ALTCHA_HMAC_KEY");
+export function verify(payload) {
+  const result = verifySolution({
+    challenge: payload.challenge,
+    solution: payload.solution,
+  });
 
-  return ok;
+  if (result.verified) {
+    return true;
+  }
+  return false;
 }

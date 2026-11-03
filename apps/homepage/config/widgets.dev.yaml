@@ -4,6 +4,7 @@
 
 - glances:
     url: http://glances:61208
+    href: https://monitor.abel-brien.dev.local
     version: 4 # required only if running glances v4 or higher, defaults to 3
     cputemp: true # disabled by default
     uptime: true # disabled by default
@@ -38,3 +39,11 @@
     format:
       dateStyle: short
       timeStyle: short
+
+- customapi:
+    url: https://api.ipify.org?format=json
+    refreshInterval: 10000 # optional - in milliseconds, defaults to 10s
+    method: GET
+    mappings:
+      - field: 'ip'
+        format: text
