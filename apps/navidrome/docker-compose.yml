@@ -147,7 +147,7 @@ services:
       Subsonic__AutoDetectDownloadPath: "false"
       Library__DownloadPath: /music
       # slskd existant
-      Soulseek__BaseUrl: http://slskd:5030
+      Soulseek__BaseUrl: http://slskd:50300
       Soulseek__Username: ${SLSKD_USERNAME}
       Soulseek__Password: ${SLSKD_PASSWORD}
 
