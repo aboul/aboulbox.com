@@ -1,6 +1,6 @@
 services:
   authelia:
-    image: authelia/authelia:latest
+    image: authelia/authelia:4.39.28
     restart: unless-stopped
     container_name: authelia
     env_file: .env

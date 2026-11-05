@@ -1,3 +1,14 @@
 services:
   navidrome:
-    user: 1000:985 # should be owner of volumes
+    user: 1000:985 
+    
+  slskd:
+    user: 1000:985
+    environment:
+      - SLSKD_HEADLESS=true
+
+  # soulsync:
+  #   user: 1000:985
+  #   environment:
+  #     PUID: 1000
+  #     PGID: 985

@@ -11,11 +11,212 @@ services:
       - ND_PLUGINS_AUTORELOAD=true
       - ND_AGENTS=audiomuseai
       - ND_ENABLESHARING=true
+      - ND_SCANNER_PURGEMISSING=always
     volumes:
       - ${ND_STORAGE_MUSIC}:/music:ro
       - ${ND_STORAGE_DATA}:/data
+#      - ./aurral/data/downloads/aurral:/data/downloads/aurral
     networks:
       - proxy-network
+  
+  slskd:
+    image: slskd/slskd
+    container_name: slskd
+    restart: unless-stopped
+    user: "1000:1000"
+    ports:
+      - "127.0.0.1:5030:5030"
+      - "127.0.0.1:50300:50300"
+    environment:
+      - SLSKD_INSTANCE_NAME="Aboulbox"
+      - SLSKD_REMOTE_CONFIGURATION=true
+      - SLSKD_USERNAME=${SLSKD_USERNAME}
+      - SLSKD_PASSWORD=${SLSKD_PASSWORD}
+      - SLSKD_SLSK_USERNAME=${SLSKD_SLSK_USERNAME}
+      - SLSKD_SLSK_PASSWORD=${SLSKD_SLSK_PASSWORD}
+      - SLSKD_API_KEY=${SLSKD_API_KEY}
+      - SLSKD_UMASK=022
+      - SLSKD_REMOTE_FILE_MANAGEMENT=true
+      - SLSKD_SHARED_DIR=/shared
+      - SLSKD_DOWNLOADS_DIR=/music
+    volumes:
+      - ./slskd:/app
+      - ${ND_STORAGE_MUSIC}:/shared:ro
+      - ${ND_STORAGE_MUSIC}:/music:rw
+    networks:
+      - proxy-network
+    
+  # lidarr:
+  #   image: lscr.io/linuxserver/lidarr:nightly
+  #   container_name: lidarr
+  #   restart: unless-stopped
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Etc/UTC
+  #   volumes:
+  #     - ./lidarr/config:/config
+  #     - ./lidarr/data:/data
+  #     - ${ND_STORAGE_MUSIC}:/music
+  #     - ./slskd/downloads:/app/downloads
+  #   ports:
+  #     - "8686:8686"
+  #   networks:
+  #     - proxy-network
+  
+  # aurral:
+  #   image: ghcr.io/lklynet/aurral:latest
+  #   container_name: aurral
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3003:3003"
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - DOWNLOAD_FOLDER=/data/downloads/aurral
+  #   volumes:
+  #     - ./aurral/config:/config
+  #     - ./aurral/data:/data
+  #     - ./slskd/downloads:/app/downloads
+  #     - ${ND_STORAGE_MUSIC}:/music
+  #   networks:
+  #     - proxy-network
+  
+  # soulsync:
+  #   image: boulderbadgedad/soulsync:3.6.2
+  #   container_name: soulsync
+  #   environment:
+  #     # User/Group ID configuration
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - UMASK=022
+  #     - PYTHONPATH=/app
+  #     # Optional: Configure through environment variables
+  #     - SOULSYNC_CONFIG_PATH=/app/config/config.json
+  #     # Set timezone (change to your timezone)
+  #     - TZ=${TZ}
+  #   ports:
+  #     - "127.0.0.1:8008:8008"   # Main web app
+  #   volumes:
+  #     # Persistent data volumes
+  #     - ./soulsync/config:/app/config
+  #     - ./soulsync/logs:/app/logs
+  #     - ./slskd/downloads:/app/downloads
+  #     - ${ND_STORAGE_MUSIC}:/app/Transfer
+  #     - ./soulsync/Staging:/app/Staging
+  #     - ./soulsync/MusicVideos:/app/MusicVideos
+  #     - ./soulsync/scripts:/app/scripts
+  #     - ./soulsync/Playlists:/app/Playlists
+  #     - soulsync_database:/app/data
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: [ "CMD", "curl", "-f", "--max-time", "5", "https://soulsync.${SERVER_NAME}/api/startup-status" ]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+  #     start_period: 60s
+  #   # Resource limits (adjust as needed)
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2.0'
+  #         memory: 2G
+  #       reservations:
+  #         cpus: '0.5'
+  #         memory: 512M
+  #   networks:
+  #     - proxy-network
+  
+
+  octo:
+    image: ghcr.io/winters27/octo:${OCTO_IMAGE_TAG:-latest}
+    container_name: octo
+    restart: unless-stopped
+
+    ports:
+      - "5274:5274"
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      TZ: ${TZ}
+      # Navidrome existant
+      Subsonic__Url: ${SUBSONIC_URL}
+      # On utilise directement le chemin partagé
+      Subsonic__AutoDetectDownloadPath: "false"
+      Library__DownloadPath: /music
+      # slskd existant
+      Soulseek__BaseUrl: http://slskd:5030
+      Soulseek__Username: ${SLSKD_USERNAME}
+      Soulseek__Password: ${SLSKD_PASSWORD}
+
+      # Aperçus musicaux
+      YouTube__ShimUrl: http://yt-dlp-shim:8080
+
+      # Analyse audio
+      RadioSources__SonicUrl: http://octo-sonic:8080
+    volumes:
+      - ${ND_STORAGE_MUSIC}:/music
+      - ./octo-config:/app/config
+    depends_on:
+      - slskd
+      - yt-dlp-shim
+    networks:
+      - proxy-network
+
+  yt-dlp-shim:
+    image: ghcr.io/winters27/octo-yt-dlp-shim:${OCTO_IMAGE_TAG:-latest}
+    container_name: yt-dlp-shim
+    restart: unless-stopped
+    environment:
+      SHIM_THREADS: "128"
+      MAX_CONCURRENT_YTDLP: "5"
+      GATE_RESERVE_INTERACTIVE: "2"
+      DOWNLOAD_ROOT: /music
+      YTDLP_PATH: /opt/ytdlp/yt-dlp
+      META_DB_PATH: /var/lib/ytshim/meta.db
+    volumes:
+      - ${ND_STORAGE_MUSIC}:/music
+      - ytdlp-cache:/root/.cache/yt-dlp
+      - ytshim-cache:/var/lib/ytshim
+      - ytdlp-bin:/opt/ytdlp
+    expose:
+      - "8080"
+    networks:
+      - proxy-network
+
+  octo-sonic:
+    image: ghcr.io/winters27/octo-sonic:${OCTO_IMAGE_TAG:-latest}
+    container_name: octo-sonic
+    restart: unless-stopped
+    init: true
+    environment:
+      MUSIC_ROOT: /music
+      ANALYSE_CONCURRENCY: "1"
+      SONIC_ENABLED: "true"
+    volumes:
+      - ${ND_STORAGE_MUSIC}:/music:ro
+    expose:
+      - "8080"
+    cpus: 1
+    mem_limit: 2g
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy-network
+
+volumes:
+  soulsync_database:
+    driver: local
+  ytdlp-cache:
+  ytshim-cache:
+  ytdlp-bin:
 
 networks:
   proxy-network:

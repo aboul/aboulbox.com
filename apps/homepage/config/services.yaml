@@ -137,8 +137,8 @@
         href: https://umami.aboulbox.com/
     - Docusaurus:
         icon: sh-wikipedia-light.svg
-        server: https://wiki.aboulbox.com/
-        container: docusaurus
+        server: my-docker
+        container: caddy
         href: https://wiki.aboulbox.com/
     - Directus:
         icon: sh-directus-light.svg
@@ -149,6 +149,20 @@
         icon: sh-navidrome-light.svg
         server: my-docker
         container: navidrome
+        href: https://music.aboulbox.com/
+    - Octo:
+        icon: sh-navidrome-light.svg
+        server: my-docker
+        container: octo
+        href: https://octo.aboulbox.com/
+    - Octo Sonic:
+        icon: sh-navidrome-light.svg
+        server: my-docker
+        container: octo-sonic
+    - Slskd:
+        icon: sh-slskd-light.svg
+        server: my-docker
+        container: slskd
         href: https://music.aboulbox.com/
     - Immich:
         icon: sh-immich-light.svg

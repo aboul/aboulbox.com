@@ -179,6 +179,24 @@ https://audiomuse.{$SERVER_NAME} {
 	reverse_proxy audiomuse-ai-flask:8000
 }
 
+#https://soulsync.{$SERVER_NAME} {
+#  log custom
+#  import no-robots
+#  reverse_proxy soulsync:8008
+#}
+
+https://slskd.{$SERVER_NAME} {
+  log custom
+  import no-robots
+  reverse_proxy slskd:5030
+}
+
+https://octo.{$SERVER_NAME} {
+  log custom
+  import no-robots
+  reverse_proxy octo:8080
+}
+
 https://ollama.{$SERVER_NAME} {
   log custom
 	import no-robots

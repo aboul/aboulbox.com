@@ -151,12 +151,20 @@
         server: my-docker
         container: navidrome
         href: https://music.aboulbox.com/
-    - Immich:
-        icon: sh-immich-light.svg
+    - Octo:
+        icon: sh-navidrome-light.svg
         server: my-docker
-        container: immich
-        href: https://photo.aboulbox.com/
-        showStats: true
+        container: octo
+        href: https://octo.aboulbox.com/
+    - Octo Sonic:
+        icon: sh-navidrome-light.svg
+        server: my-docker
+        container: octo-sonic
+    - Slskd:
+        icon: sh-slskd-light.svg
+        server: my-docker
+        container: slskd
+        href: https://music.aboulbox.com/
     - Audiomuse Web:
         icon: sh-navidrome-light.svg
         server: my-docker
@@ -166,6 +174,12 @@
         icon: sh-navidrome-light.svg
         server: my-docker
         container: audiomuse-ai-worker-instance
+    - Immich:
+        icon: sh-immich-light.svg
+        server: my-docker
+        container: immich
+        href: https://photo.aboulbox.com/
+        showStats: true
     - ollama Server:
         icon: sh-ollama-light.svg
         server: my-docker

@@ -27,3 +27,12 @@ dist-ssr
 .env*
 *.env
 .continue/
+
+apps/navidrome/aurral/artwork
+apps/navidrome/aurral/cache
+apps/navidrome/aurral/config/*
+apps/navidrome/lidarr/*
+apps/navidrome/slskd/*
+apps/navidrome/octo-config/*
+
+apps/navidrome/soulsync/*
