@@ -4,8 +4,6 @@ services:
     
   slskd:
     user: 1000:985
-    environment:
-      - SLSKD_HEADLESS=true
 
   # soulsync:
   #   user: 1000:985
