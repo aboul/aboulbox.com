@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     user: "1000:1000"
     ports:
-      - "5030:5030"
+      - "127.0.0.1:5030:5030"
       - "50300:50300"
     environment:
       - SLSKD_INSTANCE_NAME="Aboulbox"
@@ -46,23 +46,23 @@ services:
     networks:
       - proxy-network
     
-  # lidarr:
-  #   image: lscr.io/linuxserver/lidarr:nightly
-  #   container_name: lidarr
-  #   restart: unless-stopped
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #   volumes:
-  #     - ./lidarr/config:/config
-  #     - ./lidarr/data:/data
-  #     - ${ND_STORAGE_MUSIC}:/music
-  #     - ./slskd/downloads:/app/downloads
-  #   ports:
-  #     - "8686:8686"
-  #   networks:
-  #     - proxy-network
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:nightly
+    container_name: lidarr
+    restart: unless-stopped
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: ${TZ}
+    volumes:
+      - ./lidarr/config:/config
+      - ./lidarr/data:/data
+      - ${ND_STORAGE_MUSIC}:/music
+      - ./slskd/downloads:/app/downloads
+    ports:
+      - "127.0.0.1:8686:8686"
+    networks:
+      - proxy-network
   
   # aurral:
   #   image: ghcr.io/lklynet/aurral:latest
