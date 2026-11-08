@@ -57,7 +57,7 @@ services:
     volumes:
       - ./lidarr/config:/config
       - ./lidarr/data:/data
-      - ${ND_STORAGE_MUSIC}:/music
+      - ${ND_STORAGE_MUSIC}:/music:rw
       - ./slskd/downloads:/app/downloads
     ports:
       - "127.0.0.1:8686:8686"
