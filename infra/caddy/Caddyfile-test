@@ -179,11 +179,11 @@ https://audiomuse.{$SERVER_NAME} {
 	reverse_proxy audiomuse-ai-flask:8000
 }
 
-#https://soulsync.{$SERVER_NAME} {
-#  log custom
-#  import no-robots
-#  reverse_proxy soulsync:8008
-#}
+https://lidarr.{$SERVER_NAME} {
+  log custom
+  import no-robots
+  reverse_proxy lidarr:8686
+}
 
 https://slskd.{$SERVER_NAME} {
   log custom
