@@ -168,7 +168,8 @@ https://{$SERVER_NAME} {
 https://umami.{$SERVER_NAME} {
 	log custom
 	@needAuth not {
-		path /script.js /api/send
+		path /script.js 
+		path/api/send
 	}
 	import authelia-auth @needAuth
 	import no-robots
