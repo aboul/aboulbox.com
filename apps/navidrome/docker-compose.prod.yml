@@ -1,12 +1,12 @@
 services:
   navidrome:
-    user: 1000:985 
+    user: 1000:1000 
     
   slskd:
-    user: 1000:985
+    user: 1000:1000
 
   # soulsync:
-  #   user: 1000:985
+  #   user: 1000:1000
   #   environment:
   #     PUID: 1000
-  #     PGID: 985
+  #     PGID: 1000

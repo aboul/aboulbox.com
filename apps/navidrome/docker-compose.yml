@@ -60,7 +60,7 @@ services:
       - ./lidarr/config:/config
       - ./lidarr/data:/data
       - ${ND_STORAGE_MUSIC}:/music:rw
-      - ${ND_STORAGE_DOWNLOADS}:/downloads/complete
+      - ${ND_STORAGE_DOWNLOADS}:/downloads
     ports:
       - "127.0.0.1:8686:8686"
     networks:
