@@ -38,8 +38,8 @@ services:
       - SLSKD_UMASK=022
       - SLSKD_REMOTE_FILE_MANAGEMENT=true
       - SLSKD_SHARED_DIR=/shared
-      - SLSKD_DOWNLOADS_DIR=/music/downloads/slskd/complete
-      - SLSKD_INCOMPLETE_DIR=/music/downloads/slskd/incomplete
+      - SLSKD_DOWNLOADS_DIR=/music/.downloads/slskd/complete
+      - SLSKD_INCOMPLETE_DIR=/music/.downloads/slskd/incomplete
     volumes:
       - ./slskd:/app
       - ${ND_STORAGE_MUSIC}:/shared:ro
@@ -60,7 +60,7 @@ services:
       - ./lidarr/config:/config
       - ./lidarr/data:/data
       - ${ND_STORAGE_MUSIC}:/music:rw
-      - ./slskd/downloads:/music/downloads
+      - ./slskd/downloads:/music/.downloads
     ports:
       - "127.0.0.1:8686:8686"
     networks:
