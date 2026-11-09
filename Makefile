@@ -21,10 +21,10 @@ pre-commit: docs
 .PHONY: docs
 docs: 
 	@echo "📘 Building Docusaurus docs..."
-	docker compose -p dev_docs_docusaurus stop && \
-	cd ./docs/docusaurus && \
-	$(DOCKER_COMPOSE) -f docker-compose.yml --env-file $(ENV_FILE) run --rm \
-	$(DOCS_SERVICE) sh -c "npm ci && npm run build-prod" && \
-	docker compose -p dev_docs_docusaurus start 
+# 	docker compose -p dev_docs_docusaurus stop && \
+# 	cd ./docs/docusaurus && \
+# 	$(DOCKER_COMPOSE) -f docker-compose.yml --env-file $(ENV_FILE) run --rm \
+# 	$(DOCS_SERVICE) sh -c "npm ci && npm run build-prod" && \
+# 	docker compose -p dev_docs_docusaurus start 
 
-	@echo "✅ Docusaurus build complete!"
+# 	@echo "✅ Docusaurus build complete!"

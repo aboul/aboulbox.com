@@ -15,7 +15,6 @@ services:
     volumes:
       - ${ND_STORAGE_MUSIC}:/music:ro
       - ${ND_STORAGE_DATA}:/data
-#      - ./aurral/data/downloads/aurral:/data/downloads/aurral
     networks:
       - proxy-network
   
@@ -37,12 +36,12 @@ services:
       - SLSKD_API_KEY=${SLSKD_API_KEY}
       - SLSKD_UMASK=022
       - SLSKD_REMOTE_FILE_MANAGEMENT=true
-      - SLSKD_SHARED_DIR=/shared
+      - SLSKD_SHARED_DIR=/share
       - SLSKD_DOWNLOADS_DIR=/downloads/complete
       - SLSKD_INCOMPLETE_DIR=/downloads/incomplete
     volumes:
       - ./slskd:/app
-      - ${ND_STORAGE_MUSIC}:/shared:ro
+      - ${ND_STORAGE_MUSIC}:/share:ro
       - ${ND_STORAGE_MUSIC}:/music:rw
       - ${ND_STORAGE_DOWNLOADS}:/downloads
     networks:
@@ -61,77 +60,11 @@ services:
       - ./lidarr/config:/config
       - ./lidarr/data:/data
       - ${ND_STORAGE_MUSIC}:/music:rw
-      - ${ND_STORAGE_DOWNLOADS}:/downloads
+      - ${ND_STORAGE_DOWNLOADS}:/downloads/complete
     ports:
       - "127.0.0.1:8686:8686"
     networks:
       - proxy-network
-  
-  # aurral:
-  #   image: ghcr.io/lklynet/aurral:latest
-  #   container_name: aurral
-  #   restart: unless-stopped
-  #   ports:
-  #     - "3003:3003"
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - DOWNLOAD_FOLDER=/data/downloads/aurral
-  #   volumes:
-  #     - ./aurral/config:/config
-  #     - ./aurral/data:/data
-  #     - ./slskd/downloads:/app/downloads
-  #     - ${ND_STORAGE_MUSIC}:/music
-  #   networks:
-  #     - proxy-network
-  
-  # soulsync:
-  #   image: boulderbadgedad/soulsync:3.6.2
-  #   container_name: soulsync
-  #   environment:
-  #     # User/Group ID configuration
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - UMASK=022
-  #     - PYTHONPATH=/app
-  #     # Optional: Configure through environment variables
-  #     - SOULSYNC_CONFIG_PATH=/app/config/config.json
-  #     # Set timezone (change to your timezone)
-  #     - TZ=${TZ}
-  #   ports:
-  #     - "127.0.0.1:8008:8008"   # Main web app
-  #   volumes:
-  #     # Persistent data volumes
-  #     - ./soulsync/config:/app/config
-  #     - ./soulsync/logs:/app/logs
-  #     - ./slskd/downloads:/app/downloads
-  #     - ${ND_STORAGE_MUSIC}:/app/Transfer
-  #     - ./soulsync/Staging:/app/Staging
-  #     - ./soulsync/MusicVideos:/app/MusicVideos
-  #     - ./soulsync/scripts:/app/scripts
-  #     - ./soulsync/Playlists:/app/Playlists
-  #     - soulsync_database:/app/data
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
-  #   restart: unless-stopped
-  #   healthcheck:
-  #     test: [ "CMD", "curl", "-f", "--max-time", "5", "https://soulsync.${SERVER_NAME}/api/startup-status" ]
-  #     interval: 30s
-  #     timeout: 10s
-  #     retries: 3
-  #     start_period: 60s
-  #   # Resource limits (adjust as needed)
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpus: '2.0'
-  #         memory: 2G
-  #       reservations:
-  #         cpus: '0.5'
-  #         memory: 512M
-  #   networks:
-  #     - proxy-network
-  
 
   octo:
     image: ghcr.io/winters27/octo:${OCTO_IMAGE_TAG:-latest}
