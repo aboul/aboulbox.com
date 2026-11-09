@@ -38,7 +38,8 @@ services:
       - SLSKD_UMASK=022
       - SLSKD_REMOTE_FILE_MANAGEMENT=true
       - SLSKD_SHARED_DIR=/shared
-      - SLSKD_DOWNLOADS_DIR=/downloads
+      - SLSKD_DOWNLOADS_DIR=/downloads/complete
+      - SLSKD_INCOMPLETE_DIR=/downloads/incomplete
     volumes:
       - ./slskd:/app
       - ${ND_STORAGE_MUSIC}:/shared:ro
