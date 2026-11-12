@@ -2,7 +2,7 @@ services:
   caddy:
     environment:
       CADDY_GLOBAL_OPTIONS: |
-        debug
+        grace_period 10s
         default_sni ${SERVER_NAME}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
