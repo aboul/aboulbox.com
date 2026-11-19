@@ -1,6 +1,6 @@
 services:
   redis:
-    image: docker.io/valkey/valkey:9@sha256:418652cfb58ef879d4978c33553735d7147016032d5aefaa14c828e611eb9dfd
+    image: docker.io/valkey/valkey:9@sha256:13010f40f0623c52f0d3527a48bbf059870e6864b4eee642cdabad3f5e240e69
     container_name: immich_redis
     restart: unless-stopped
     healthcheck:
